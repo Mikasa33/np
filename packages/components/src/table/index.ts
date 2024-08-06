@@ -1,1 +1,2 @@
-export { default as ProTable } from './components/ProTable.vue'
+export { default as NpTable } from './components/NpTable.vue'
+export type { NpTableProps } from './types/props'
