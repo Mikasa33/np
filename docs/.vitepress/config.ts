@@ -3,8 +3,6 @@ import { defineConfig } from 'vitepress'
 
 const fileAndStyles: Record<string, string> = {}
 
-console.log(process.env.NODE_ENV)
-
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'NP',
