@@ -36,7 +36,7 @@ const formProps = reactiveOmit(props, 'defaultValues', 'grid', 'items', 'model')
 function initFormItemGiProps(item: NpFormItemProps) {
   return {
     // 栅格占据的列数，默认为 24
-    span: props.giSpan,
+    span: item.span ?? props.giSpan,
     ...omit(item, ...['component', 'props'] as const),
   }
 }
