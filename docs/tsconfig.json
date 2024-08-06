@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@rezero/np": ["../packages/components/src"],
+      "@vitepress/*": ["./.vitepress/*"]
+    }
+  },
+  "include": [
+    "**/*",
+    ".vitepress/**/*"
+  ],
+  "exclude": ["node_modules"]
+}

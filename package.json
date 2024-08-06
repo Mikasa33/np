@@ -1,0 +1,42 @@
+{
+  "name": "@rezero/np",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.6.0",
+  "description": "Naive UI Pro",
+  "author": "Mikasa33",
+  "license": "MIT",
+  "homepage": "https://rezero.cc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rezero-dev/np"
+  },
+  "keywords": [
+    "naive-ui",
+    "component library",
+    "ui framework",
+    "ui",
+    "vue"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.11.0",
+    "lodash-es": "^4.17.21",
+    "naive-ui": "^2.39.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.24.1",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.1.0",
+    "@unocss/eslint-plugin": "^0.61.9",
+    "eslint": "9.5.0",
+    "eslint-plugin-format": "^0.1.2",
+    "taze": "^0.16.3",
+    "typescript": "^5.5.4",
+    "unocss": "^0.61.9",
+    "vite": "^5.3.5"
+  }
+}

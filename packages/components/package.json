@@ -1,0 +1,65 @@
+{
+  "name": "@rezero/np",
+  "type": "module",
+  "version": "0.0.11",
+  "packageManager": "pnpm@9.6.0",
+  "description": "Naive UI Pro",
+  "author": "Mikasa33",
+  "license": "MIT",
+  "homepage": "https://rezero.cc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rezero-dev/np/packages/components"
+  },
+  "keywords": [
+    "naive-ui",
+    "component library",
+    "ui framework",
+    "ui",
+    "vue"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js"
+    },
+    "./resolver": {
+      "types": "./es/resolver.d.ts",
+      "import": "./es/resolver.js"
+    }
+  },
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "files": [
+    "README.md",
+    "es"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "release": "pnpm build && pnpm publish"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.11.0",
+    "lodash-es": "^4.17.21",
+    "naive-ui": "^2.39.0",
+    "vue": "^3.4.35"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.1.0",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "typescript": "^5.5.4",
+    "unocss": "^0.61.9",
+    "unplugin-vue-components": "^0.27.3",
+    "vite": "^5.3.5",
+    "vite-plugin-dts": "3.9.1",
+    "vue-tsc": "^2.0.29"
+  }
+}

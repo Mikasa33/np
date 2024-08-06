@@ -1,0 +1,23 @@
+{
+  "name": "@rezero/np-docs",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@vicons/ionicons5": "^0.12.0",
+    "naive-ui": "^2.39.0",
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@css-render/vue3-ssr": "^0.15.14",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "vitepress": "^1.3.1"
+  }
+}
