@@ -18,7 +18,7 @@ import { Basic, DefaultValue, Grid, Slot, Component } from './demos'
 
 ### 默认值
 
-设置表单默认值
+设置表单默认值，`item.defaultValue` > `form.defaultValues`
 
 <DefaultValue />
 
@@ -28,7 +28,7 @@ import { Basic, DefaultValue, Grid, Slot, Component } from './demos'
 
 ### 栅格布局
 
-设置表单布局
+设置表单布局，`item.span` > `form.giSpan`
 
 <Grid />
 

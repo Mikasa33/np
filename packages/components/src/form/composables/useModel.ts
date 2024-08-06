@@ -9,12 +9,13 @@ import type { NpFormItemProps, NpFormProps } from '../types/props'
  * @param items 表单项
  */
 export function useModel(props: NpFormProps, model: Ref<any>, items: MaybeRefOrGetter<NpFormItemProps[]>) {
-  // 默认数据，item.defaultValue > props.defaultValues
+  // 默认数据
   const defaultValues = computed<any>(() => {
     // 表单数据
     const defaultValues = toRef(props, 'defaultValues', {})
     const values: Record<string, any> = {}
     for (const item of toValue(items)) {
+      // item.defaultValue > props.defaultValues
       values[item.path!] = item.defaultValue ?? defaultValues[item.path] ?? null
     }
     return values
