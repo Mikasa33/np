@@ -3,7 +3,7 @@
     "target": "ESNext",
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["ESNext"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
@@ -11,14 +11,11 @@
       "vite/client",
       "naive-ui/volar"
     ],
-    "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
-    "noUnusedLocals": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
+    "skipDefaultLibCheck": true,
     "skipLibCheck": true
   }
 }
