@@ -1,6 +1,9 @@
+import process from 'node:process'
 import { defineConfig } from 'vitepress'
 
 const fileAndStyles: Record<string, string> = {}
+
+console.log(process.env.NODE_ENV)
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -101,6 +104,6 @@ export default defineConfig({
     }
   },
 
-  base: '/np-docs/',
+  base: process.env.NODE_ENV === 'production' ? '/np-docs/' : '/',
   outDir: '../../np-docs',
 })
