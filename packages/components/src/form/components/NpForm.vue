@@ -27,7 +27,7 @@ const model = defineModel<any>('model', { default: ref({}) })
 const items = useArrayFilter(props.items, (item: NpFormItemProps) => !isUndefined(item.path) && !isNull(item.path))
 const { resetModel } = useModel(props, model, items)
 const formRef = ref<FormInst>()
-const formProps = reactiveOmit(props, 'defaultValues', 'grid', 'items', 'model')
+const formProps = reactiveOmit(props, 'defaultValues', 'gridProps', 'items', 'model')
 /**
  * 初始化表单项 props
  * @param item 表单项 props
@@ -37,7 +37,7 @@ function initFormItemGiProps(item: NpFormItemProps) {
   return {
     // 栅格占据的列数，默认为 24
     span: item.span ?? props.giSpan,
-    ...omit(item, ...['component', 'props'] as const),
+    ...omit(item, ...['component', 'componentProps'] as const),
   }
 }
 /**
@@ -71,7 +71,7 @@ defineExpose({
     v-bind="formProps"
     :model
   >
-    <NGrid v-bind="grid">
+    <NGrid v-bind="gridProps">
       <NFormItemGi
         v-for="item in items"
         :key="item.path"
@@ -82,6 +82,7 @@ defineExpose({
           v-if="$slots[`item-${item.path}`]"
           :name="`item-${item.path}`"
           :props="item"
+          :path="item.path!"
           :model
         />
         <!-- 表单项组件 -->
@@ -89,7 +90,7 @@ defineExpose({
           :is="renderComponent(item)"
           v-else
           v-model:value="model[item.path!]"
-          v-bind="item.props"
+          v-bind="item.componentProps"
         />
       </NFormItemGi>
     </NGrid>

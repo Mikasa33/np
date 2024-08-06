@@ -1,4 +1,4 @@
-import type { FormItemGiProps, GridProps, ResponsiveDescription } from 'naive-ui'
+import type { FormItemGiProps, FormRules, GridProps } from 'naive-ui'
 import type { Component } from 'vue'
 
 /**
@@ -16,11 +16,11 @@ export interface NpFormProps {
   /**
    * 栅格 props
    */
-  grid?: GridProps
+  gridProps?: GridProps
   /**
    * 表单项
    */
-  items?: ProFormItemProps[]
+  items?: NpFormItemProps[]
   /**
    * 标签的宽度，在 label-placement 是 'left' 的时候可能会有用，'auto' 意味着 label width 会被自动调整
    */
@@ -36,7 +36,11 @@ export interface NpFormProps {
   /**
    * 获取表项中收集到的值的对象
    */
-  model?: any
+  model?: Recrod<string, any>
+  /**
+   * 验证表项的规则
+   */
+  rules?: FormRules
 }
 
 /**
@@ -44,13 +48,17 @@ export interface NpFormProps {
  */
 export interface NpFormItemProps {
   /**
-   * 表单项组件
+   * 组件
    */
-  component?: NAutoComplete | NCascader | NColorPicker | NDynamicInput | NInput | NInputNumber | NSelect | NSlider | NSwitch | NTimePicker | NTreeSelect | Component
+  component?: NpFormItemComponentType
   /**
    * 默认值
    */
   defaultValue?: any
+  /**
+   * 标签信息
+   */
+  label?: string
   /**
    * 栅格左侧的间隔格数
    */
@@ -62,7 +70,7 @@ export interface NpFormItemProps {
   /**
    * 表单项组件 props
    */
-  props?: any
+  componentProps?: any
   /**
    * 栅格占据的列数，为 0 的时候会隐藏
    */
@@ -72,3 +80,20 @@ export interface NpFormItemProps {
    */
   suffix?: boolean
 }
+
+/**
+ * 表单项组件类型
+ */
+export type NpFormItemComponentType =
+  | 'NAutoComplete'
+  | 'NCascader'
+  | 'NColorPicker'
+  | 'NDynamicInput'
+  | 'NInput'
+  | 'NInputNumber'
+  | 'NSelect'
+  | 'NSlider'
+  | 'NSwitch'
+  | 'NTimePicker'
+  | 'NTreeSelect'
+  | Component

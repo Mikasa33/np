@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { NpFormProps } from '@rezero/np'
 import { NpForm } from '@rezero/np'
-import { NButton, NFlex, NInput, NSelect } from 'naive-ui'
-import { markRaw, ref } from 'vue'
+import { NButton, NFlex } from 'naive-ui'
+import { ref } from 'vue'
 
 const formRef = ref()
-const formModel = ref({})
+const formModel = ref({
+  textarea: '多行文本框默认值',
+})
 const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
   v => ({
     label: v,
@@ -24,11 +26,12 @@ const formProps = ref<NpFormProps>({
       path: 'input',
       label: '输入框',
       component: 'NInput',
+      defaultValue: '输入框默认值',
     },
     {
       path: 'textarea',
       label: '多行文本框',
-      component: markRaw(NInput),
+      component: 'NInput',
       componentProps: {
         type: 'textarea',
       },
@@ -36,7 +39,7 @@ const formProps = ref<NpFormProps>({
     {
       path: 'select',
       label: '下拉框',
-      component: markRaw(NSelect),
+      component: 'NSelect',
       componentProps: {
         options: formOptions,
       },
@@ -52,6 +55,9 @@ const formProps = ref<NpFormProps>({
     v-model:model="formModel"
   />
   <NFlex justify="end">
+    <NButton @click="formRef.reset()">
+      重置数据
+    </NButton>
     <NButton @click="formRef.restoreValidation()">
       清空验证
     </NButton>

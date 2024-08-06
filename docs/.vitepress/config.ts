@@ -45,7 +45,7 @@ export default defineConfig({
 
     footer: {
       message: '',
-      copyright: `版权所有 © 2023-${new Date().getFullYear()} Yoze`,
+      copyright: `版权所有 © 2024-${new Date().getFullYear()} Re:Zero`,
     },
 
     docFooter: {
@@ -56,6 +56,11 @@ export default defineConfig({
     outline: {
       label: '页面导航',
       level: [2, 3],
+    },
+
+    editLink: {
+      pattern: 'https://github.com/rezero-dev/np/tree/main/docs/:path',
+      text: '在 GitHub 上编辑此页面',
     },
 
     lastUpdated: {
@@ -95,4 +100,7 @@ export default defineConfig({
       return code.replace(/<\/head>/, `${style}</head>`)
     }
   },
+
+  base: '/np-docs/',
+  outDir: '../../np-docs',
 })
