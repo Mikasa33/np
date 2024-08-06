@@ -1,4 +1,4 @@
-import type { FormItemGiProps, GridProps } from 'naive-ui'
+import type { FormItemGiProps, GridProps, ResponsiveDescription } from 'naive-ui'
 import type { Component } from 'vue'
 
 /**
@@ -9,6 +9,10 @@ export interface NpFormProps {
    * 默认值
    */
   defaultValues?: Recrod<string, any>
+  /**
+   * 栅格占据的列数，为 0 的时候会隐藏
+   */
+  giSpan?: number | string
   /**
    * 栅格 props
    */
@@ -48,6 +52,10 @@ export interface NpFormItemProps {
    */
   defaultValue?: any
   /**
+   * 栅格左侧的间隔格数
+   */
+  offset?: number | string
+  /**
    * 将值收集到外层表单 model 对象的路径
    */
   path?: string
@@ -55,4 +63,12 @@ export interface NpFormItemProps {
    * 表单项组件 props
    */
   props?: any
+  /**
+   * 栅格占据的列数，为 0 的时候会隐藏
+   */
+  span?: number | string
+  /**
+   * 栅格后缀
+   */
+  suffix?: boolean
 }

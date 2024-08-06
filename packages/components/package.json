@@ -1,7 +1,7 @@
 {
   "name": "@rezero/np",
   "type": "module",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "packageManager": "pnpm@9.6.0",
   "description": "Naive UI Pro",
   "author": "Mikasa33",

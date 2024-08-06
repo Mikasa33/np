@@ -11,6 +11,10 @@ import { useModel } from '../composables/useModel'
 
 const props = withDefaults(defineProps<NpFormProps>(), {
   /**
+   * 栅格占据的列数，默认 24
+   */
+  giSpan: 24,
+  /**
    * 表单项，默认空数组
    */
   items: () => [],
@@ -32,7 +36,7 @@ const formProps = reactiveOmit(props, 'defaultValues', 'grid', 'items', 'model')
 function initFormItemGiProps(item: NpFormItemProps) {
   return {
     // 栅格占据的列数，默认为 24
-    span: 24,
+    span: props.giSpan,
     ...omit(item, ...['component', 'props'] as const),
   }
 }
