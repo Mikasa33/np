@@ -27,7 +27,7 @@ const model = defineModel<any>('model', { default: ref({}) })
 const items = useArrayFilter(props.items, (item: NpFormItemProps) => !isUndefined(item.path) && !isNull(item.path))
 const { resetModel } = useModel(props, model, items)
 const formRef = ref<FormInst>()
-const formProps = reactiveOmit(props, 'defaultValues', 'gridProps', 'items', 'model')
+const formProps = reactiveOmit(props, 'defaultValues', 'giSpan', 'gridProps', 'items', 'model')
 /**
  * 初始化表单项 props
  * @param item 表单项 props
@@ -48,13 +48,24 @@ function initFormItemGiProps(item: NpFormItemProps) {
 function renderComponent(item: NpFormItemProps) {
   return isString(item.component) ? components[item.component] : item.component
 }
+/**
+ * 重置表单数据和校验状态
+ */
 function reset() {
   resetModel()
   restoreValidation()
 }
+/**
+ * 验证表单
+ * @param callback
+ * @param shouldRuleBeApplied
+ */
 function validate(callback?: FormValidateCallback, shouldRuleBeApplied?: ShouldRuleBeApplied) {
   return formRef.value?.validate(callback, shouldRuleBeApplied)
 }
+/**
+ * 还原到未校验的状态
+ */
 function restoreValidation() {
   return formRef.value?.restoreValidation()
 }

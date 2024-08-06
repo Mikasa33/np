@@ -1,5 +1,5 @@
 import type { MaybeRefOrGetter, Ref } from 'vue'
-import { computed, onMounted, toRef, toValue } from 'vue'
+import { computed, onMounted, toValue } from 'vue'
 import type { NpFormItemProps, NpFormProps } from '../types/props'
 
 /**
@@ -11,16 +11,17 @@ import type { NpFormItemProps, NpFormProps } from '../types/props'
 export function useModel(props: NpFormProps, model: Ref<any>, items: MaybeRefOrGetter<NpFormItemProps[]>) {
   // 默认数据
   const defaultValues = computed<any>(() => {
-    // 表单数据
-    const defaultValues = toRef(props, 'defaultValues', {})
+    const defaultValues = props.defaultValues ?? {}
     const values: Record<string, any> = {}
     for (const item of toValue(items)) {
       // item.defaultValue > props.defaultValues
-      values[item.path!] = item.defaultValue ?? defaultValues[item.path] ?? null
+      values[item.path!] = item.defaultValue ?? defaultValues[item.path!] ?? null
     }
     return values
   })
-  // 表单数据
+  /**
+   * 初始化表单数据
+   */
   function initModel() {
     for (const item of toValue(items)) {
       if (!model.value[item.path!]) {
@@ -28,12 +29,16 @@ export function useModel(props: NpFormProps, model: Ref<any>, items: MaybeRefOrG
       }
     }
   }
+  /**
+   * 重置表单值
+   */
   function resetModel() {
     for (const item of toValue(items)) {
       model.value[item.path!] = defaultValues.value[item.path!] ?? null
     }
   }
   onMounted(() => {
+    // 初始化表单数据
     initModel()
   })
   return {

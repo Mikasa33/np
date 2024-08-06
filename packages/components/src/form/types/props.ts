@@ -1,4 +1,4 @@
-import type { FormItemGiProps, FormRules, GridProps } from 'naive-ui'
+import type { FormRules, GridProps } from 'naive-ui'
 import type { Component } from 'vue'
 
 /**
@@ -8,7 +8,7 @@ export interface NpFormProps {
   /**
    * 默认值
    */
-  defaultValues?: Recrod<string, any>
+  defaultValues?: Record<string, any>
   /**
    * 栅格占据的列数，为 0 的时候会隐藏
    */
@@ -36,7 +36,7 @@ export interface NpFormProps {
   /**
    * 获取表项中收集到的值的对象
    */
-  model?: Recrod<string, any>
+  model?: Record<string, any>
   /**
    * 验证表项的规则
    */
@@ -88,6 +88,7 @@ export type NpFormItemComponentType =
   | 'NAutoComplete'
   | 'NCascader'
   | 'NColorPicker'
+  | 'NDatePicker'
   | 'NDynamicInput'
   | 'NInput'
   | 'NInputNumber'
