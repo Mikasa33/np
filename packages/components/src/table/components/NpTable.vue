@@ -27,13 +27,13 @@ const props = withDefaults(defineProps<NpTableProps>(), {
   totalField: 'total',
 })
 const slots = defineSlots<NpTableSlots>()
+const tableProps = reactiveOmit(props, 'checkedRowKeys', 'columns', 'dataField', 'immediate', 'loading', 'pagination', 'rowKey', 'totalField', 'onRequest')
+const checkedRowKeys = defineModel<Array<number | string>>('checkedRowKeys', { default: reactive([]) })
+const loading = defineModel<boolean>('loading', { default: false })
+const data = ref<any[]>([])
 const columnSlotKeys = computed(() => {
   return Object.keys(slots).filter(key => !['header'].includes(key))
 })
-const loading = defineModel<boolean>('loading', { default: false })
-const checkedRowKeys = defineModel<Array<number | string>>('checkedRowKeys', { default: reactive([]) })
-const tableProps = reactiveOmit(props, 'checkedRowKeys', 'columns', 'dataField', 'immediate', 'loading', 'pagination', 'rowKey', 'totalField', 'onRequest')
-const data = ref<any[]>([])
 const columns = computed(() => {
   const columns = cloneDeep(props.columns)
   for (const column of columns) {
@@ -118,12 +118,12 @@ const requestParams = computed(() => {
 })
 /**
  * 请求数据
- * @param request 请求参数
+ * @param params 请求参数
  */
-async function request(request?: Record<string, any>) {
+async function request(params?: Record<string, any>) {
   loading.value = true
   try {
-    const res: any = await props.onRequest?.({ ...requestParams.value, ...request })
+    const res: any = await props.onRequest?.({ ...requestParams.value, ...params })
     if (isArray(res)) {
       data.value = res
     }

@@ -37,10 +37,18 @@ export interface NpTableProps {
    */
   totalField?: string
   /**
-   * 异步请求数据的回调
+   * checked-row-keys 值改变时触发的回调函数
+   */
+  onUpdateCheckedRowKeys?: (keys: Array<number | string>) => void
+  /**
+   * 异步请求数据的回调函数
    * @param params 请求参数
    */
   onRequest?: (params?: Record<string, any>) => Promise<any>
+  /**
+   * loading 状态改变时触发的回调函数
+   */
+  onUpdateLoading?: (loading: boolean) => void
 }
 
 /**

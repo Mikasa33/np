@@ -41,6 +41,10 @@ export interface NpFormProps {
    * 验证表项的规则
    */
   rules?: FormRules
+  /**
+   * 表项中收集到的值的对象改变时触发的回调函数
+   */
+  onUpdateModel?: (model: any) => void
 }
 
 /**

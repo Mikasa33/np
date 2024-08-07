@@ -5,6 +5,7 @@ import type { NpViewTimeProps } from '../types/props'
 
 const props = withDefaults(defineProps<NpViewTimeProps>(), {
   format: 'YYYY-MM-DD HH:mm:ss',
+  value: () => new Date(),
 })
 
 const view = computed(() => {
