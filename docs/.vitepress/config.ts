@@ -80,6 +80,13 @@ export default defineConfig({
     darkModeSwitchTitle: '切换到深色模式',
   },
 
+  markdown: {
+    theme: {
+      dark: 'vitesse-dark',
+      light: 'vitesse-light',
+    },
+  },
+
   postRender(context) {
     const styleRegex = /<css-render-style>(([\s\S])+)<\/css-render-style>/
     const vitepressPathRegex = /<vitepress-path>(.+)<\/vitepress-path>/
