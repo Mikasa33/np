@@ -2,7 +2,7 @@
 import type { FormInst } from 'naive-ui'
 import type { FormValidateCallback, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
 import { isNull, isString, isUndefined, omit } from 'lodash-es'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { NForm, NFormItemGi, NGrid } from 'naive-ui'
 import { reactiveOmit, useArrayFilter } from '@vueuse/core'
 import type { NpFormItemProps, NpFormProps } from '../types/props'
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<NpFormProps>(), {
    */
   labelPlacement: 'left',
 })
-const model = defineModel<any>('model', { default: ref({}) })
+const model = defineModel<any>('model', { default: reactive({}) })
 const items = useArrayFilter(props.items, (item: NpFormItemProps) => !isUndefined(item.path) && !isNull(item.path))
 const { resetModel } = useModel(props, model, items)
 const formRef = ref<FormInst>()
@@ -69,10 +69,21 @@ function validate(callback?: FormValidateCallback, shouldRuleBeApplied?: ShouldR
 function restoreValidation() {
   return formRef.value?.restoreValidation()
 }
+/**
+ * 获取表项中收集到的值的对象
+ * @param path 将值收集到外层表单 model 对象的路径
+ */
+function getModel(path?: string) {
+  if (path) {
+    return model.value[path]
+  }
+  return model.value
+}
 defineExpose({
   reset,
   validate,
   restoreValidation,
+  getModel,
 })
 </script>
 

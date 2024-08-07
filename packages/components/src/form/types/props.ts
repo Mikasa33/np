@@ -52,6 +52,10 @@ export interface NpFormItemProps {
    */
   component?: NpFormItemComponentType
   /**
+   * 表单项组件 props
+   */
+  componentProps?: any
+  /**
    * 默认值
    */
   defaultValue?: any
@@ -67,10 +71,6 @@ export interface NpFormItemProps {
    * 将值收集到外层表单 model 对象的路径
    */
   path?: string
-  /**
-   * 表单项组件 props
-   */
-  componentProps?: any
   /**
    * 栅格占据的列数，为 0 的时候会隐藏
    */
