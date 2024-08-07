@@ -9,6 +9,5 @@
   "include": [
     "**/*",
     ".vitepress/**/*"
-  ],
-  "exclude": ["node_modules"]
+  ]
 }
