@@ -29,7 +29,11 @@ export default defineConfig({
         },
         {
           text: '数据展示组件',
-          items: [{ text: '表格 Table', link: '/components/table/' }],
+          items: [
+            { text: '表格 Table', link: '/components/table/' },
+            { text: '树 Tree', link: '/components/tree/' },
+            { text: '展示 View', link: '/components/view/' },
+          ],
         },
       ],
       '/blog/': [
