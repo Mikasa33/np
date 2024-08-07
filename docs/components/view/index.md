@@ -28,4 +28,4 @@ import { Time } from './demos'
 | 名称   | 说明       | 类型                                      | 默认值                |
 | ------ | ---------- | ----------------------------------------- | --------------------- |
 | format | 格式化规则 | `string`                                  | `YYYY-MM-DD HH:mm:ss` |
-| value  | 值         | `number \| string \| Date \| dayjs.Dayjs` | `data`                |
+| value  | 值         | `number \| string \| Date \| dayjs.Dayjs` | `new Date()`          |
