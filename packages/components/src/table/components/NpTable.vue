@@ -118,11 +118,12 @@ const requestParams = computed(() => {
 })
 /**
  * 请求数据
+ * @param request 请求参数
  */
-async function request() {
+async function request(request?: Record<string, any>) {
   loading.value = true
   try {
-    const res: any = await props.onRequest?.(requestParams.value)
+    const res: any = await props.onRequest?.({ ...requestParams.value, ...request })
     if (isArray(res)) {
       data.value = res
     }
@@ -137,9 +138,10 @@ async function request() {
 }
 /**
  * 刷新
+ * @param params 请求参数
  */
-function refresh() {
-  request()
+function refresh(params?: Record<string, any>) {
+  request(params)
 }
 /**
  * 获取被选中的行的 key
@@ -166,10 +168,10 @@ onMounted(() => {
   }
 })
 defineExpose({
-  refresh,
   getCheckedRowKeys,
   getLoading,
   getPagination,
+  refresh,
 })
 </script>
 

@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { NButton, NFlex, NInput, NInputGroup } from 'naive-ui'
 import type { NpTableProps } from '@rezero/np'
 import { NpTable } from '@rezero/np'
 
+const tableRef = ref()
 const tableProps = reactive<NpTableProps>({
   immediate: true,
-  onRequest: (): Promise<any> => {
+  onRequest: (params?: Record<string, any>): Promise<any> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -14,7 +15,7 @@ const tableProps = reactive<NpTableProps>({
             { id: 1, name: '张三', age: 18, birthday: 1072886400000 },
             { id: 2, name: '李四', age: 19, birthday: 1041350400000 },
             { id: 3, name: '王五', age: 20, birthday: 1009814400000 },
-          ],
+          ].filter((item: any) => !params?.keyword || item.name.includes(params.keyword)),
           total: 3,
         })
       }, 1000)
@@ -35,10 +36,14 @@ const tableProps = reactive<NpTableProps>({
     },
   ],
 })
+const keyword = ref('')
 </script>
 
 <template>
-  <NpTable v-bind="tableProps">
+  <NpTable
+    ref="tableRef"
+    v-bind="tableProps"
+  >
     <template #header>
       <NFlex
         align="center"
@@ -51,8 +56,14 @@ const tableProps = reactive<NpTableProps>({
         </NButton>
         <div>
           <NInputGroup>
-            <NInput placeholder="请输入搜索关键词" />
-            <NButton>搜索</NButton>
+            <NInput
+              v-model:value="keyword"
+              placeholder="请输入搜索关键词"
+              clearable
+            />
+            <NButton @click="tableRef.refresh({ keyword })">
+              搜索
+            </NButton>
           </NInputGroup>
         </div>
       </NFlex>

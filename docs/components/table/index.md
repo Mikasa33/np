@@ -103,14 +103,14 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 
 支持 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Props) 除 `remote` 外的所有属性。
 
-| 名称        | 说明                                                 | 类型                             | 默认值      |
-| ----------- | ---------------------------------------------------- | -------------------------------- | ----------- |
-| data-field  | 替代请求数据中的 data 字段名                         | `string`                         | `data`      |
-| immediate   | 是否立即请求数据                                     | `boolean`                        | `false`     |
-| pagination  | 是否显示分页，支持传入对象自定义分页配置             | `boolean \| NPaginationProps`    | `true`      |
-| row-key     | 通过行数据创建行的 key（如果你不想给每一行加上 key） | `(row: any) => number \| string` | `row.id`    |
-| total-field | 替代请求数据中的 total 字段名                        | `string`                         | `total`     |
-| on-request  | 异步请求数据的回调                                   | `(params: any) => Promise<any>`  | `undefined` |
+| 名称        | 说明                                                 | 类型                                            | 默认值      |
+| ----------- | ---------------------------------------------------- | ----------------------------------------------- | ----------- |
+| data-field  | 替代请求数据中的 data 字段名                         | `string`                                        | `data`      |
+| immediate   | 是否立即请求数据                                     | `boolean`                                       | `false`     |
+| pagination  | 是否显示分页，支持传入对象自定义分页配置             | `boolean \| NPaginationProps`                   | `true`      |
+| row-key     | 通过行数据创建行的 key（如果你不想给每一行加上 key） | `(row: any) => number \| string`                | `row.id`    |
+| total-field | 替代请求数据中的 total 字段名                        | `string`                                        | `total`     |
+| on-request  | 异步请求数据的回调                                   | `(params: Record<string, any>) => Promise<any>` | `undefined` |
 
 ### TableColumn Props
 
@@ -135,11 +135,12 @@ type NpTableColumnComponentType =
 
 支持 [NTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Methods) 所有方法。
 
-| 名称              | 说明                      | 类型                            |
-| ----------------- | ------------------------- | ------------------------------- |
-| getCheckedRowKeys | 获取被选中的行的 key      | `() => Array<number \| string>` |
-| getLoading        | 获取是否显示 loading 状态 | `() => boolean`                 |
-| getPagination     | 获取分页数据              | `() => NPaginationProps`        |
+| 名称              | 说明                      | 类型                                     |
+| ----------------- | ------------------------- | ---------------------------------------- |
+| getCheckedRowKeys | 获取被选中的行的 key      | `() => Array<number \| string>`          |
+| getLoading        | 获取是否显示 loading 状态 | `() => boolean`                          |
+| getPagination     | 获取分页数据              | `() => NPaginationProps`                 |
+| refresh           | 刷新表格数据              | `(params?: Record<string, any>) => void` |
 
 ### Table Slots
 

@@ -80,10 +80,10 @@ function getModel(path?: string) {
   return model.value
 }
 defineExpose({
-  reset,
-  validate,
-  restoreValidation,
   getModel,
+  reset,
+  restoreValidation,
+  validate,
 })
 </script>
 

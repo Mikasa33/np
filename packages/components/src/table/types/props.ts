@@ -40,7 +40,7 @@ export interface NpTableProps {
    * 异步请求数据的回调
    * @param params 请求参数
    */
-  onRequest?: (params?: any) => Promise<any>
+  onRequest?: (params?: Record<string, any>) => Promise<any>
 }
 
 /**
