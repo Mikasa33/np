@@ -2,7 +2,7 @@
 import type { NpFormProps } from '@rezero/np'
 import { NpForm } from '@rezero/np'
 import { NButton, NFlex, NInput, NSelect } from 'naive-ui'
-import { markRaw, ref } from 'vue'
+import { markRaw, reactive, ref } from 'vue'
 
 const formRef = ref()
 const formModel = ref({})
@@ -12,7 +12,7 @@ const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
     value: v,
   }),
 )
-const formProps = ref<NpFormProps>({
+const formProps = reactive<NpFormProps>({
   labelWidth: 100,
   rules: {
     input: { required: true, message: '请输入输入框值', trigger: ['blur', 'input'] },

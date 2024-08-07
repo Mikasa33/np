@@ -2,10 +2,13 @@
 
 收集、验证信息。
 
+> [!WARNING]
+> 目前 NaiveUI 的组件属性没有完全支持，工作量有点大，持续完善中...
+
 ## 演示
 
 <script setup lang="ts">
-import { Basic, DefaultValue, Grid, Slot, Component } from './demos'
+import { Basic, DefaultValue, Grid, Component, SlotItem } from './demos'
 </script>
 
 ### 基础
@@ -38,16 +41,6 @@ import { Basic, DefaultValue, Grid, Slot, Component } from './demos'
 <<< ./demos/DefaultValue.vue
 :::
 
-### 插槽
-
-使用插槽，自定义表单项。
-
-<Slot />
-
-::: details 查看代码
-<<< ./demos/Slot.vue
-:::
-
 ### 自定义组件
 
 使用组件，自定义表单项。
@@ -58,22 +51,32 @@ import { Basic, DefaultValue, Grid, Slot, Component } from './demos'
 <<< ./demos/Component.vue
 :::
 
+### 表单项插槽
+
+使用表单项插槽，自定义表单项。
+
+<SlotItem />
+
+::: details 查看代码
+<<< ./demos/SlotItem.vue
+:::
+
 ## API
 
 ### Form Props
 
-接受 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Props) 所有属性
+支持 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Props) 所有属性。
 
 | 名称           | 说明                                               | 类型               | 默认值      |
 | -------------- | -------------------------------------------------- | ------------------ | ----------- |
 | default-values | 默认值                                             | `object`           | `{}`        |
 | gi-span        | 栅格占据的列数，为 0 的时候会隐藏                  | `number \| string` | `24`        |
-| grid-props     | 栅格 props                                         | `GridProps`        | `undefined` |
+| grid-props     | 栅格 props                                         | `NGridProps`       | `undefined` |
 | items          | 表单项，属性参考 [FormItem Props](#formitem-props) | `NpFormItemProps`  | `[]`        |
 
 ### FormItem Props
 
-接受 [NFormItem && NFormItemGi](https://www.naiveui.com/zh-CN/light/components/form#FormItem-Props) 所有属性
+支持 [NFormItem && NFormItemGi](https://www.naiveui.com/zh-CN/light/components/form#FormItem-Props) 所有属性。
 
 | 名称            | 说明                                                                       | 类型                      | 默认值      |
 | --------------- | -------------------------------------------------------------------------- | ------------------------- | ----------- |
@@ -104,11 +107,12 @@ type NpFormItemComponentType =
 
 ### Form Methods
 
-| 名称              | 说明                   | 类型                                                                  |
-| ----------------- | ---------------------- | --------------------------------------------------------------------- |
-| validate          | 验证表单               | `(validateCallback?: any, shouldRuleBeApplied?: any) => Promise<any>` |
-| restoreValidation | 还原到未校验的状态     | `() => void`                                                          |
-| reset             | 重置表单数据和校验状态 | `() => void`                                                          |
+支持 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Methods) 所有方法。
+
+| 名称     | 说明                                                                   | 类型                     |
+| -------- | ---------------------------------------------------------------------- | ------------------------ |
+| reset    | 重置表单数据和校验状态                                                 | `() => void`             |
+| getModel | 获取表项中收集到的值的对象，如果传递了 `path` 则获取对象中对应路径的值 | `(path?: string) => any` |
 
 ### Form Slots
 

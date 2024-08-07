@@ -1,0 +1,61 @@
+<script lang="ts" setup>
+import { reactive } from 'vue'
+import { NButton, NFlex, NInput, NInputGroup } from 'naive-ui'
+import type { NpTableProps } from '@rezero/np'
+import { NpTable } from '@rezero/np'
+
+const tableProps = reactive<NpTableProps>({
+  immediate: true,
+  onRequest: (): Promise<any> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: [
+            { id: 1, name: '张三', age: 18, birthday: 1072886400000 },
+            { id: 2, name: '李四', age: 19, birthday: 1041350400000 },
+            { id: 3, name: '王五', age: 20, birthday: 1009814400000 },
+          ],
+          total: 3,
+        })
+      }, 1000)
+    })
+  },
+  columns: [
+    {
+      key: 'name',
+      title: '姓名',
+    },
+    {
+      key: 'age',
+      title: '年龄',
+    },
+    {
+      key: 'birthday',
+      title: '出生日期',
+    },
+  ],
+})
+</script>
+
+<template>
+  <NpTable v-bind="tableProps">
+    <template #header>
+      <NFlex
+        align="center"
+        justify="space-between"
+        :wrap="false"
+        class="w-full"
+      >
+        <NButton type="primary">
+          新增
+        </NButton>
+        <div>
+          <NInputGroup>
+            <NInput placeholder="请输入搜索关键词" />
+            <NButton>搜索</NButton>
+          </NInputGroup>
+        </div>
+      </NFlex>
+    </template>
+  </NpTable>
+</template>

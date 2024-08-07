@@ -1,13 +1,16 @@
 # 表格 Table
 
-数据表格用来显示一些格式化信息。
+数据表格用来获取异步请求的数据，并展示在表格中。
 
 如果只是想渲染一个表格，建议直接使用 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table) 或 [NTable](https://www.naiveui.com/zh-CN/light/components/table)。
+
+> [!WARNING]
+> 目前 NaiveUI 的组件属性没有完全支持，工作量有点大，持续完善中...
 
 ## 演示
 
 <script setup lang="ts">
-import { Basic } from './demos'
+import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColumn, SlotHeader } from './demos'
 </script>
 
 ### 基础
@@ -22,14 +25,125 @@ import { Basic } from './demos'
 <<< ./demos/Basic.vue
 :::
 
+### 选中行
+
+可以通过把第一列的类型设为 `selection` 来让行变成可选的，同时支持设置 `multiple=false` 来变成单选模式。
+
+::: raw
+<CheckedRow />
+:::
+
+::: details 查看代码
+<<< ./demos/CheckedRow.vue
+:::
+
+### 分页
+
+可通过设置 `pagination` 自定义分页。
+
+::: raw
+<Pagination />
+:::
+
+::: details 查看代码
+<<< ./demos/Pagination.vue
+:::
+
+### 禁用分页
+
+设置 `pagination` 为 `false` 禁用分页，异步请求数据可直接返回数组。
+
+::: raw
+<DisabledPagination />
+:::
+
+::: details 查看代码
+<<< ./demos/DisabledPagination.vue
+:::
+
+### 自定义组件
+
+使用组件，自定义表格列。
+
+::: raw
+<Component />
+:::
+
+::: details 查看代码
+<<< ./demos/Component.vue
+:::
+
+### 列插槽
+
+使用列插槽，自定义表格列。
+
+::: raw
+<SlotColumn />
+:::
+
+::: details 查看代码
+<<< ./demos/SlotColumn.vue
+:::
+
+### 头部插槽
+
+使用头部插槽，添加操作按钮、搜索框等。
+
+::: raw
+<SlotHeader />
+:::
+
+::: details 查看代码
+<<< ./demos/SlotHeader.vue
+:::
+
 ## API
 
 ### Table Props
 
-接受 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Props) 除 `remote` 外的所有属性
+支持 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Props) 除 `remote` 外的所有属性。
 
-| 名称       | 说明                         | 类型                            | 默认值      |
-| ---------- | ---------------------------- | ------------------------------- | ----------- |
-| dataField  | 替代请求数据中的 data 字段名 | `string`                        | `data`      |
-| immediate  | 是否立即请求数据             | `boolean`                       | `false`     |
-| on-request | 异步请求数据的回调           | `(params: any) => Promise<any>` | `undefined` |
+| 名称        | 说明                                                 | 类型                             | 默认值      |
+| ----------- | ---------------------------------------------------- | -------------------------------- | ----------- |
+| data-field  | 替代请求数据中的 data 字段名                         | `string`                         | `data`      |
+| immediate   | 是否立即请求数据                                     | `boolean`                        | `false`     |
+| pagination  | 是否显示分页，支持传入对象自定义分页配置             | `boolean \| NPaginationProps`    | `true`      |
+| row-key     | 通过行数据创建行的 key（如果你不想给每一行加上 key） | `(row: any) => number \| string` | `row.id`    |
+| total-field | 替代请求数据中的 total 字段名                        | `string`                         | `total`     |
+| on-request  | 异步请求数据的回调                                   | `(params: any) => Promise<any>`  | `undefined` |
+
+### TableColumn Props
+
+支持 [NDataTableColumn](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Props) 所有属性。
+
+| 名称            | 说明                                                                          | 类型                         | 默认值      |
+| --------------- | ----------------------------------------------------------------------------- | ---------------------------- | ----------- |
+| component       | 组件或组件名称，类型参考 [TableColumnComponent Type](#formitemcomponent-type) | `NpTableColumnComponentType` | `undefined` |
+| component-props | 组件 props                                                                    | `any`                        | `undefined` |
+
+### TableColumnComponent Type
+
+```ts
+import type { Component } from 'vue'
+
+type NpTableColumnComponentType =
+  | 'NpViewTime'
+  | Component
+```
+
+### Table Methods
+
+支持 [NTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Methods) 所有方法。
+
+| 名称              | 说明                      | 类型                            |
+| ----------------- | ------------------------- | ------------------------------- |
+| getCheckedRowKeys | 获取被选中的行的 key      | `() => Array<number \| string>` |
+| getLoading        | 获取是否显示 loading 状态 | `() => boolean`                 |
+| getPagination     | 获取分页数据              | `() => NPaginationProps`        |
+
+### Table Slots
+
+| 名称           | 说明       | 参数                                     |
+| -------------- | ---------- | ---------------------------------------- |
+| header         | 头部内容   | `()`                                     |
+| column-\{key\} | 表格列内容 | `(key: string, row: any, index: number)` |

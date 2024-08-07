@@ -2,10 +2,10 @@
 import type { NpFormProps } from '@rezero/np'
 import { NpForm } from '@rezero/np'
 import { NInputNumber } from 'naive-ui'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 const formModel = ref({})
-const formProps = ref<NpFormProps>({
+const formProps = reactive<NpFormProps>({
   labelWidth: 100,
   items: [
     {

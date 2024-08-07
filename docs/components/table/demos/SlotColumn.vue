@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { NButton } from 'naive-ui'
+import { reactive } from 'vue'
 import type { NpTableProps } from '@rezero/np'
 import { NpTable } from '@rezero/np'
 
-const tableRef = ref()
 const tableProps = reactive<NpTableProps>({
   immediate: true,
   onRequest: (): Promise<any> => {
@@ -12,9 +10,9 @@ const tableProps = reactive<NpTableProps>({
       setTimeout(() => {
         resolve({
           data: [
-            { id: 1, name: '张三', age: 18, address: '北京市' },
-            { id: 2, name: '李四', age: 20, address: '上海市' },
-            { id: 3, name: '王五', age: 22, address: '广州市' },
+            { id: 1, name: '张三', age: 18, birthday: 1072886400000 },
+            { id: 2, name: '李四', age: 19, birthday: 1041350400000 },
+            { id: 3, name: '王五', age: 20, birthday: 1009814400000 },
           ],
           total: 3,
         })
@@ -31,21 +29,17 @@ const tableProps = reactive<NpTableProps>({
       title: '年龄',
     },
     {
-      key: 'address',
-      title: '地址',
+      key: 'birthday',
+      title: '出生日期',
     },
   ],
 })
 </script>
 
 <template>
-  <div class="mb-8px">
-    <NButton @click="tableRef.refresh()">
-      刷新
-    </NButton>
-  </div>
-  <NpTable
-    ref="tableRef"
-    v-bind="tableProps"
-  />
+  <NpTable v-bind="tableProps">
+    <template #column-birthday="{ key, row }">
+      {{ row[key] }}
+    </template>
+  </NpTable>
 </template>

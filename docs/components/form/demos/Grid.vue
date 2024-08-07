@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { NpFormProps } from '@rezero/np'
 import { NpForm } from '@rezero/np'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 const formModel = ref({})
 const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
@@ -10,7 +10,7 @@ const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
     value: v,
   }),
 )
-const formProps = ref<NpFormProps>({
+const formProps = reactive<NpFormProps>({
   labelWidth: 100,
   items: [
     {

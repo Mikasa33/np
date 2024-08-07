@@ -2,10 +2,10 @@
 import type { NpFormProps } from '@rezero/np'
 import { NpForm } from '@rezero/np'
 import { NDatePicker, NTimePicker } from 'naive-ui'
-import { defineComponent, h, markRaw, ref } from 'vue'
+import { defineComponent, h, markRaw, reactive, ref } from 'vue'
 
 const formModel = ref({})
-const formProps = ref<NpFormProps>({
+const formProps = reactive<NpFormProps>({
   labelWidth: 100,
   items: [
     {
