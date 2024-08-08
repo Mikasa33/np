@@ -7,7 +7,6 @@ const props = withDefaults(defineProps<NpViewTimeProps>(), {
   format: 'YYYY-MM-DD HH:mm:ss',
   value: () => new Date(),
 })
-
 const view = computed(() => {
   if (!props.value) {
     return null

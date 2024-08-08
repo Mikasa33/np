@@ -97,5 +97,13 @@ export interface NpTableColumnProps {
  * 表格列组件类型
  */
 export type NpTableColumnComponentType =
+  | 'NpViewTag'
   | 'NpViewTime'
   | Component
+
+/**
+ * 表格搜索 props
+ */
+export interface NpTableSearchProps {
+
+}

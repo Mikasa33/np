@@ -1,5 +1,6 @@
 import type { TreeOption } from 'naive-ui'
 import type { TreeNodeProps } from 'naive-ui/es/tree/src/interface'
+import type { VNodeChild } from 'vue'
 
 /**
  * 树 props
@@ -57,6 +58,10 @@ export interface NpTreeProps {
    * 替代 TreeOption 中的 label 字段名
    */
   labelField?: string
+  /**
+   * 节点内容的渲染函数
+   */
+  renderLabel?: (info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild
   /**
    * 是否显示 loading 状态
    */

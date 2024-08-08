@@ -1,6 +1,7 @@
 import type { Component } from 'vue'
-import { NpViewTime } from '../../view'
+import { NpViewTag, NpViewTime } from '../../view'
 
 export const components: Record<string, Component> = {
+  NpViewTag,
   NpViewTime,
 }

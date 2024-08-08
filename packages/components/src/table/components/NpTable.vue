@@ -7,6 +7,7 @@ import { reactiveOmit } from '@vueuse/core'
 import type { NpTableColumnProps, NpTableProps } from '../types/props'
 import { components } from '../configs/components'
 import type { NpTableSlots } from '../types/slots'
+import { useSlotsFilter } from '../../_composables/useSlot'
 
 const props = withDefaults(defineProps<NpTableProps>(), {
   /**
@@ -31,9 +32,8 @@ const tableProps = reactiveOmit(props, 'checkedRowKeys', 'columns', 'dataField',
 const checkedRowKeys = defineModel<Array<number | string>>('checkedRowKeys', { default: reactive([]) })
 const loading = defineModel<boolean>('loading', { default: false })
 const data = ref<any[]>([])
-const columnSlotKeys = computed(() => {
-  return Object.keys(slots).filter(key => !['header'].includes(key))
-})
+const { slotKeys } = useSlotsFilter((key: string) => key.includes('column-'))
+
 const columns = computed(() => {
   const columns = cloneDeep(props.columns)
   for (const column of columns) {
@@ -41,14 +41,15 @@ const columns = computed(() => {
     if (!key) {
       continue
     }
+    const slotKey: string = `column-${key}`
+    // 插槽，优先级最高
+    if (slotKeys.value.includes(slotKey)) {
+      column.render = (row: any, index: number) => (slots as any)[slotKey]?.({ key, row, index })
+      continue
+    }
     // 自定义组件
     if (component) {
       column.render = (row: any) => renderComponent(column, row)
-    }
-    // 插槽
-    const slotKey: string = `column-${key}`
-    if (columnSlotKeys.value.includes(slotKey)) {
-      column.render = (row: any, index: number) => (slots as any)[slotKey]?.({ key, row, index })
     }
   }
   return columns as DataTableColumns
@@ -98,7 +99,7 @@ const pagination = computed(() => {
     onUpdatePageSize(pageSize: number) {
       props.pagination.onUpdatePageSize?.(pageSize)
       paginationRef.value.pageSize = pageSize
-      refresh()
+      reload()
     },
   }
 })
@@ -137,10 +138,17 @@ async function request(params?: Record<string, any>) {
   }
 }
 /**
- * 刷新
+ * 刷新表格数据
+ */
+function refresh() {
+  request()
+}
+/**
+ * 重置页码，根据条件加载表格数据
  * @param params 请求参数
  */
-function refresh(params?: Record<string, any>) {
+function reload(params?: Record<string, any>) {
+  paginationRef.value.page = 1
   request(params)
 }
 /**
@@ -172,15 +180,16 @@ defineExpose({
   getLoading,
   getPagination,
   refresh,
+  reload,
 })
 </script>
 
 <template>
   <div>
+    <!-- 头部插槽 -->
     <NFlex
       v-if="slots.header"
       align="center"
-      justify="space-between"
       class="mb-12px"
     >
       <slot name="header" />

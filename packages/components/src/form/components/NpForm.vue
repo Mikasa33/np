@@ -93,13 +93,14 @@ defineExpose({
     v-bind="formProps"
     :model
   >
+    <!-- TODO: inline mode -->
     <NGrid v-bind="gridProps">
       <NFormItemGi
         v-for="item in items"
         :key="item.path"
         v-bind="initFormItemGiProps(item)"
       >
-        <!-- 表单项插槽 -->
+        <!-- 表单项插槽，优先级最高 -->
         <slot
           v-if="$slots[`item-${item.path}`]"
           :name="`item-${item.path}`"

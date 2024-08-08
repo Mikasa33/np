@@ -17,6 +17,7 @@ export interface NpFormProps {
    * 栅格 props
    */
   gridProps?: GridProps
+  inline?: boolean
   /**
    * 表单项
    */
