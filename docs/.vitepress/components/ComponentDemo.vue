@@ -5,7 +5,7 @@ import ConfigProvider from './ConfigProvider.vue'
 
 <template>
   <ConfigProvider>
-    <NCard>
+    <NCard :theme-overrides="{ borderRadius: '8px' }">
       <slot />
     </NCard>
   </ConfigProvider>
