@@ -27,6 +27,10 @@ const tableProps = reactive<NpTableProps>({
     {
       key: 'age',
       title: '年龄',
+      component: 'NpViewTag',
+      componentProps: {
+        type: 'success',
+      },
     },
     {
       key: 'birthday',

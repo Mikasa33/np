@@ -1,9 +1,6 @@
-# 展示 View
+# 展示时间 View Time
 
-一些展示数据的小组件。
-
-> [!WARNING]
-> 目前 NaiveUI 的组件属性没有完全支持，工作量有点大，持续完善中...
+一个格式化并展示时间的小组件。
 
 ## 演示
 
@@ -11,7 +8,7 @@
 import { Time } from './demos'
 </script>
 
-### 时间 ViewTime
+### 基础
 
 格式化并展示时间。
 

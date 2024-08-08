@@ -39,7 +39,7 @@ const tableProps = reactive<NpTableProps>({
 </script>
 
 <template>
-  <div class="mb-8px">
+  <div class="mb-12px">
     <NButton @click="tableRef.refresh()">
       刷新
     </NButton>

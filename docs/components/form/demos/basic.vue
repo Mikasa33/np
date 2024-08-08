@@ -13,6 +13,7 @@ const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
   }),
 )
 const formProps = reactive<NpFormProps>({
+  inline: true,
   labelWidth: 100,
   rules: {
     input: { required: true, message: '请输入输入框值', trigger: ['blur', 'input'] },

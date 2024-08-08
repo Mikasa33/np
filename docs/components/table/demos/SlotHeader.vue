@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { NButton, NFlex, NInput, NInputGroup } from 'naive-ui'
+import { NButton, NInput, NInputGroup } from 'naive-ui'
 import type { NpTableProps } from '@rezero/np'
-import { NpTable } from '@rezero/np'
+import { NpFlex1, NpTable } from '@rezero/np'
 
 const tableRef = ref()
 const tableProps = reactive<NpTableProps>({
@@ -45,28 +45,22 @@ const keyword = ref('')
     v-bind="tableProps"
   >
     <template #header>
-      <NFlex
-        align="center"
-        justify="space-between"
-        :wrap="false"
-        class="w-full"
-      >
-        <NButton type="primary">
-          新增
-        </NButton>
-        <div>
-          <NInputGroup>
-            <NInput
-              v-model:value="keyword"
-              placeholder="请输入搜索关键词"
-              clearable
-            />
-            <NButton @click="tableRef.refresh({ keyword })">
-              搜索
-            </NButton>
-          </NInputGroup>
-        </div>
-      </NFlex>
+      <NButton type="primary">
+        新增
+      </NButton>
+      <NpFlex1 />
+      <div>
+        <NInputGroup>
+          <NInput
+            v-model:value="keyword"
+            placeholder="请输入搜索关键词"
+            clearable
+          />
+          <NButton @click="tableRef?.reload({ keyword })">
+            搜索
+          </NButton>
+        </NInputGroup>
+      </div>
     </template>
   </NpTable>
 </template>

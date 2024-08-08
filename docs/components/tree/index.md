@@ -10,7 +10,7 @@
 ## 演示
 
 <script setup lang="ts">
-import { Basic } from './demos'
+import { Basic, SlotLabel } from './demos'
 </script>
 
 ### 基础
@@ -21,6 +21,16 @@ import { Basic } from './demos'
 
 ::: details 查看代码
 <<< ./demos/Basic.vue
+:::
+
+### 节点内容插槽
+
+使用节点内容插槽，自定义节点列。优先级 `slot` > `renderLabel` > `label`。
+
+<SlotLabel />
+
+::: details 查看代码
+<<< ./demos/SlotLabel.vue
 :::
 
 ## API
@@ -47,6 +57,7 @@ import { Basic } from './demos'
 | loading                              | 是否显示 `loading` 状态                                     | `boolean`                                                                                                     | `false`     |
 | node-props                           | 节点的 HTML 属性                                            | `(info: { option: NTreeOption }) => HTMLAttributes`                                                           | `undefined` |
 | override-default-node-click-behavior | 覆盖默认的节点点击行为                                      | `(info: { option: NTreeOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` |
+| render-label                         | 节点内容的渲染函数                                          | `(info: { option: NTreeOption, checked: boolean, selected: boolean }) => VNodeChild`                          | `undefined` |
 | selectable                           | 节点是否可以被选中                                          | `boolean`                                                                                                     | `true`      |
 | show-line                            | 是否显示连接线                                              | `boolean`                                                                                                     | `false`     |
 | on-request                           | 异步请求数据的回调函数                                      | `(params: Record<string, any>) => Promise<NTreeOption[]>`                                                     | `undefined` |
@@ -56,3 +67,11 @@ import { Basic } from './demos'
 | on-request                           | 异步请求数据的回调函数                                      | `(params: Record<string, any>) => Promise<any>`                                                               | `undefined` |
 | on-update:loading                    | `loading` 状态改变时触发的回调函数                          | `(loading: boolean) => void`                                                                                  | `undefined` |
 | on-update:selected-keys              | 节点选中项发生变化时的回调函数                              | `(keys: Array<number \| string>) => void`                                                                     | `undefined` |
+
+### Table Slots
+
+支持 [NTree](https://www.naiveui.com/zh-CN/light/components/tree#Tree-Slots) 所有插槽。
+
+| 名称           | 说明     | 参数                                                            |
+| -------------- | -------- | --------------------------------------------------------------- |
+| label-$\{key\} | 节点内容 | `({ option: TreeOption, checked: boolean, selected: boolean })` |

@@ -41,9 +41,9 @@ import { Basic, DefaultValue, Grid, Component, SlotItem } from './demos'
 <<< ./demos/DefaultValue.vue
 :::
 
-### 自定义组件
+### 表单项组件
 
-使用组件，自定义表单项。
+使用组件自定义表单项。
 
 <Component />
 
@@ -53,7 +53,7 @@ import { Basic, DefaultValue, Grid, Component, SlotItem } from './demos'
 
 ### 表单项插槽
 
-使用表单项插槽，自定义表单项。
+使用插槽自定义表单项。优先级 `slot` > `component`。
 
 <SlotItem />
 
@@ -117,6 +117,6 @@ type NpFormItemComponentType =
 
 ### Form Slots
 
-| 名称          | 说明       | 参数                                                                 |
-| ------------- | ---------- | -------------------------------------------------------------------- |
-| item-\{path\} | 表单项内容 | `(props: NpFormItemProps, path: string, model: Record<string, any>)` |
+| 名称           | 说明       | 参数                                                                     |
+| -------------- | ---------- | ------------------------------------------------------------------------ |
+| item-$\{path\} | 表单项内容 | `({ props: NpFormItemProps, path: string, model: Record<string, any> })` |

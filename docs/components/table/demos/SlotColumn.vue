@@ -31,6 +31,8 @@ const tableProps = reactive<NpTableProps>({
     {
       key: 'birthday',
       title: '出生日期',
+      // 优先级低于插槽
+      component: 'NpViewTime',
     },
   ],
 })
@@ -39,7 +41,7 @@ const tableProps = reactive<NpTableProps>({
 <template>
   <NpTable v-bind="tableProps">
     <template #column-birthday="{ key, row }">
-      {{ row[key] }}
+      {{ row.birthday === 1041350400000 ? '列插槽' : '' }} {{ row[key] }}
     </template>
   </NpTable>
 </template>

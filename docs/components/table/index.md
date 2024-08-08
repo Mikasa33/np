@@ -61,9 +61,9 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 <<< ./demos/DisabledPagination.vue
 :::
 
-### 自定义组件
+### 列组件
 
-使用组件，自定义表格列。
+使用组件自定义表格列。
 
 ::: raw
 <Component />
@@ -75,7 +75,7 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 
 ### 列插槽
 
-使用列插槽，自定义表格列。
+使用插槽自定义表格列。优先级 `slot` > `component`。
 
 ::: raw
 <SlotColumn />
@@ -87,7 +87,7 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 
 ### 头部插槽
 
-使用头部插槽，添加操作按钮、搜索框等。
+使用插槽自定义表格头部。
 
 ::: raw
 <SlotHeader />
@@ -129,6 +129,7 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 import type { Component } from 'vue'
 
 type NpTableColumnComponentType =
+  | 'NpViewTag'
   | 'NpViewTime'
   | Component
 ```
@@ -137,16 +138,17 @@ type NpTableColumnComponentType =
 
 支持 [NTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Methods) 所有方法。
 
-| 名称              | 说明                        | 类型                                     |
-| ----------------- | --------------------------- | ---------------------------------------- |
-| getCheckedRowKeys | 获取被选中的行的 key        | `() => Array<number \| string>`          |
-| getLoading        | 获取是否显示 `loading` 状态 | `() => boolean`                          |
-| getPagination     | 获取分页数据                | `() => NPaginationProps`                 |
-| refresh           | 刷新表格                    | `(params?: Record<string, any>) => void` |
+| 名称              | 说明                           | 类型                                     |
+| ----------------- | ------------------------------ | ---------------------------------------- |
+| getCheckedRowKeys | 获取被选中的行的 key           | `() => Array<number \| string>`          |
+| getLoading        | 获取是否显示 `loading` 状态    | `() => boolean`                          |
+| getPagination     | 获取分页数据                   | `() => NPaginationProps`                 |
+| refresh           | 刷新表格数据                   | `() => void`                             |
+| reload            | 重置页码，根据条件加载表格数据 | `(params?: Record<string, any>) => void` |
 
 ### Table Slots
 
-| 名称           | 说明       | 参数                                     |
-| -------------- | ---------- | ---------------------------------------- |
-| header         | 头部内容   | `()`                                     |
-| column-\{key\} | 表格列内容 | `(key: string, row: any, index: number)` |
+| 名称            | 说明       | 参数                                         |
+| --------------- | ---------- | -------------------------------------------- |
+| header          | 头部内容   | `()`                                         |
+| column-$\{key\} | 表格列内容 | `({ key: string, row: any, index: number })` |

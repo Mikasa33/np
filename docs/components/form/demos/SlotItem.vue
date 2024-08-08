@@ -16,6 +16,8 @@ const formProps = reactive<NpFormProps>({
     {
       path: 'slot',
       label: '插槽',
+      // 优先级低于插槽
+      component: 'NSelect',
     },
   ],
 })

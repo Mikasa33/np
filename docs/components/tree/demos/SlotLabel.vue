@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { h, reactive } from 'vue'
 import type { TreeOption } from 'naive-ui'
 import type { NpTreeProps } from '@rezero/np'
 import { NpTree } from '@rezero/np'
@@ -31,9 +31,17 @@ const treeProps = reactive<NpTreeProps>({
       }, 1000)
     })
   },
+  // 优先级低于插槽
+  renderLabel: ({ option }: { option: TreeOption }) => {
+    return h('span', option.key !== '2' ? option.label : 'renderLabel')
+  },
 })
 </script>
 
 <template>
-  <NpTree v-bind="treeProps" />
+  <NpTree v-bind="treeProps">
+    <template #label-1>
+      <span>slot</span>
+    </template>
+  </NpTree>
 </template>
