@@ -7,7 +7,7 @@ function NpResolver(): ComponentResolver {
       if (name.match(/^(N[A-Z]|n-[a-z])/))
         return { name, from: 'naive-ui' }
       else if (name.match(/^Np.+/))
-        return { name, from: '@rezero/np' }
+        return { name, from: '@mikasa33/np' }
     },
   }
 }

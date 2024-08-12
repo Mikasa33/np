@@ -12,6 +12,7 @@ const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
 )
 const formProps = reactive<NpFormProps>({
   labelWidth: 100,
+  giSpan: 12,
   items: [
     {
       path: 'input',
@@ -43,6 +44,5 @@ const formProps = reactive<NpFormProps>({
   <NpForm
     v-bind="formProps"
     v-model:model="formModel"
-    :gi-span="12"
   />
 </template>

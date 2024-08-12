@@ -14,10 +14,13 @@ export interface NpFormProps {
    */
   giSpan?: number | string
   /**
+   * 栅格后缀占据的列数，为 0 的时候会隐藏
+   */
+  giSuffixSpan?: number | string
+  /**
    * 栅格 props
    */
   gridProps?: GridProps
-  inline?: boolean
   /**
    * 表单项
    */
@@ -77,13 +80,13 @@ export interface NpFormItemProps {
    */
   path?: string
   /**
+   * 插槽名称
+   */
+  slot?: string
+  /**
    * 栅格占据的列数，为 0 的时候会隐藏
    */
   span?: number | string
-  /**
-   * 栅格后缀
-   */
-  suffix?: boolean
 }
 
 /**

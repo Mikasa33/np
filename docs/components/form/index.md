@@ -8,7 +8,7 @@
 ## 演示
 
 <script setup lang="ts">
-import { Basic, DefaultValue, Grid, Component, SlotItem } from './demos'
+import { Basic, DefaultValue, Grid, Component, SlotItem, Collapse } from './demos'
 </script>
 
 ### 基础
@@ -39,6 +39,16 @@ import { Basic, DefaultValue, Grid, Component, SlotItem } from './demos'
 
 ::: details 查看代码
 <<< ./demos/DefaultValue.vue
+:::
+
+### 折叠
+
+折叠表单项。
+
+<Collapse />
+
+::: details 查看代码
+<<< ./demos/Collapse.vue
 :::
 
 ### 表单项组件
@@ -84,6 +94,7 @@ import { Basic, DefaultValue, Grid, Component, SlotItem } from './demos'
 | component       | 组件或组件名称，类型参考 [FormItemComponent Type](#formitemcomponent-type) | `NpFormItemComponentType` | `undefined` |
 | default-value   | 默认值                                                                     | `any`                     | `null`      |
 | component-props | 组件 props                                                                 | `any`                     | `undefined` |
+| slot            | 插槽名称，优先级小于 `path` 属性对应的插槽                                 | `string`                  | `undefined` |
 
 ### FormItemComponent Type
 
@@ -117,6 +128,7 @@ type NpFormItemComponentType =
 
 ### Form Slots
 
-| 名称           | 说明       | 参数                                                                     |
-| -------------- | ---------- | ------------------------------------------------------------------------ |
-| item-$\{path\} | 表单项内容 | `({ props: NpFormItemProps, path: string, model: Record<string, any> })` |
+| 名称                 | 说明         | 参数                                                                     |
+| -------------------- | ------------ | ------------------------------------------------------------------------ |
+| item-$\{path\|slot\} | 表单项内容   | `({ props: NpFormItemProps, path: string, model: Record<string, any> })` |
+| gi-suffix            | 栅格后缀内容 | `({ overflow: boolean })`                                                |

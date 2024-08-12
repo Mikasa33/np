@@ -3,7 +3,7 @@ import type { FormInst } from 'naive-ui'
 import type { FormValidateCallback, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
 import { isNull, isString, isUndefined, omit } from 'lodash-es'
 import { reactive, ref } from 'vue'
-import { NForm, NFormItemGi, NGrid } from 'naive-ui'
+import { NForm, NFormItemGi, NGi, NGrid } from 'naive-ui'
 import { reactiveOmit, useArrayFilter } from '@vueuse/core'
 import type { NpFormItemProps, NpFormProps } from '../types/props'
 import { components } from '../configs/components'
@@ -24,8 +24,9 @@ const props = withDefaults(defineProps<NpFormProps>(), {
   labelPlacement: 'left',
 })
 const model = defineModel<any>('model', { default: reactive({}) })
-const items = useArrayFilter(props.items, (item: NpFormItemProps) => !isUndefined(item.path) && !isNull(item.path))
-const { resetModel } = useModel(props, model, items)
+const formItems = useArrayFilter(props.items, (item: NpFormItemProps) => item.path)
+const slotItems = useArrayFilter(props.items, (item: NpFormItemProps) => item.path || item.slot)
+const { resetModel } = useModel(props, model, formItems)
 const formRef = ref<FormInst>()
 const formProps = reactiveOmit(props, 'defaultValues', 'giSpan', 'gridProps', 'items', 'model')
 /**
@@ -96,14 +97,22 @@ defineExpose({
     <!-- TODO: inline mode -->
     <NGrid v-bind="gridProps">
       <NFormItemGi
-        v-for="item in items"
+        v-for="item in slotItems"
         :key="item.path"
         v-bind="initFormItemGiProps(item)"
       >
-        <!-- 表单项插槽，优先级最高 -->
+        <!-- 表单项 path 属性插槽，优先级最高 -->
         <slot
           v-if="$slots[`item-${item.path}`]"
           :name="`item-${item.path}`"
+          :props="item"
+          :path="item.path!"
+          :model
+        />
+        <!-- 表单项 slot 属性插槽 -->
+        <slot
+          v-else-if="$slots[`item-${item.slot}`]"
+          :name="`item-${item.slot}`"
           :props="item"
           :path="item.path!"
           :model
@@ -116,6 +125,18 @@ defineExpose({
           v-bind="item.componentProps"
         />
       </NFormItemGi>
+      <!-- 栅格后缀插槽 -->
+      <NGi
+        v-if="$slots['gi-suffix']"
+        :span="giSuffixSpan ?? giSpan"
+        suffix
+        #="{ overflow }"
+      >
+        <slot
+          name="gi-suffix"
+          :overflow
+        />
+      </NGi>
     </NGrid>
   </NForm>
 </template>
