@@ -1,15 +1,15 @@
 {
-  "name": "@rezero/np",
+  "name": "@mikasa33/np",
   "type": "module",
-  "version": "0.0.12",
+  "version": "0.0.15",
   "packageManager": "pnpm@9.6.0",
   "description": "Naive UI Pro",
   "author": "Mikasa33",
   "license": "MIT",
-  "homepage": "https://rezero.cc",
+  "homepage": "https://github.com/mikasa33/np",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rezero-dev/np/packages/components"
+    "url": "https://github.com/mikasa33/np/packages/components"
   },
   "keywords": [
     "naive-ui",
