@@ -24,8 +24,8 @@ const props = withDefaults(defineProps<NpFormProps>(), {
   labelPlacement: 'left',
 })
 const model = defineModel<any>('model', { default: reactive({}) })
-const formItems = useArrayFilter(props.items, (item: NpFormItemProps) => item.path)
-const slotItems = useArrayFilter(props.items, (item: NpFormItemProps) => item.path || item.slot)
+const formItems = useArrayFilter(props.items, (item: NpFormItemProps) => !!item.path)
+const slotItems = useArrayFilter(props.items, (item: NpFormItemProps) => !!item.path || !!item.slot)
 const { resetModel } = useModel(props, model, formItems)
 const formRef = ref<FormInst>()
 const formProps = reactiveOmit(props, 'defaultValues', 'giSpan', 'gridProps', 'items', 'model')
