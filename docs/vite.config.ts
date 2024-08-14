@@ -15,11 +15,12 @@ export default defineConfig({
       ],
     },
   },
+
   plugins: [VueJsx(), UnoCSS()],
 
   resolve: {
     alias: {
-      '@rezero/np': fileURLToPath(
+      '@np': fileURLToPath(
         new URL('../packages/components/src', import.meta.url),
       ),
       '@vitepress': fileURLToPath(new URL('./.vitepress', import.meta.url)),

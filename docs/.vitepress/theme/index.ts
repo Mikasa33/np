@@ -3,6 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import { NConfigProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
 import { useRoute } from 'vitepress'
+import { registerComponents } from '../components'
 import 'virtual:uno.css'
 
 const { Layout } = DefaultTheme
@@ -49,6 +50,7 @@ export default {
   extends: DefaultTheme,
   Layout: NaiveUIProvider,
   enhanceApp: ({ app }: any) => {
+    registerComponents(app)
     if (import.meta.env.SSR) {
       const { collect } = setup(app)
       app.provide('css-render-collect', collect)

@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { NButton } from 'naive-ui'
-import type { NpTableProps } from '@rezero/np'
-import { NpTable } from '@rezero/np'
+import type { NpTableProps } from '..'
+import { NpTable } from '..'
 
-const tableRef = ref()
+const checkedRowKeys = ref<number[]>([])
 const tableProps = reactive<NpTableProps>({
   immediate: true,
   onRequest: (): Promise<any> => {
@@ -23,6 +22,9 @@ const tableProps = reactive<NpTableProps>({
   },
   columns: [
     {
+      type: 'selection',
+    },
+    {
       key: 'name',
       title: '姓名',
     },
@@ -39,13 +41,9 @@ const tableProps = reactive<NpTableProps>({
 </script>
 
 <template>
-  <div class="mb-12px">
-    <NButton @click="tableRef.refresh()">
-      刷新
-    </NButton>
-  </div>
   <NpTable
-    ref="tableRef"
     v-bind="tableProps"
+    v-model:checked-row-keys="checkedRowKeys"
   />
+  <pre>{{ checkedRowKeys }}</pre>
 </template>

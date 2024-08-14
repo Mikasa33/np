@@ -7,68 +7,64 @@
 
 ## 演示
 
-<script setup lang="ts">
-import { Basic, DefaultValue, Grid, Component, SlotItem, Collapse } from './demos'
-</script>
-
 ### 基础
 
 基础表单。
 
-<Basic />
+<FormBasic />
 
 ::: details 查看代码
-<<< ./demos/Basic.vue
+<<< @/../packages/components/src/form/demos/Basic.vue
 :::
 
 ### 默认值
 
 设置表单默认值，优先级 `item.defaultValue` > `form.defaultValues`。
 
-<DefaultValue />
+<FormDefaultValue />
 
 ::: details 查看代码
-<<< ./demos/DefaultValue.vue
+<<< @/../packages/components/src/form/demos/DefaultValue.vue
 :::
 
 ### 栅格布局
 
 设置表单布局，优先级 `item.span` > `form.giSpan`。
 
-<Grid />
+<FormGrid />
 
 ::: details 查看代码
-<<< ./demos/DefaultValue.vue
+<<< @/../packages/components/src/form/demos/DefaultValue.vue
 :::
 
 ### 折叠
 
 折叠表单项。
 
-<Collapse />
+<FormCollapse />
 
 ::: details 查看代码
-<<< ./demos/Collapse.vue
+<<< @/../packages/components/src/form/demos/Collapse.vue
 :::
 
 ### 表单项组件
 
 使用组件自定义表单项。
 
-<Component />
+<FormComponent />
 
 ::: details 查看代码
-<<< ./demos/Component.vue
+<<< @/../packages/components/src/form/demos/Component.vue
 :::
 
 ### 表单项插槽
 
 使用插槽自定义表单项。优先级 `slot` > `component`。
 
-<SlotItem />
+<FormSlotItem />
 
 ::: details 查看代码
-<<< ./demos/SlotItem.vue
+<<< @/../packages/components/src/form/demos/SlotItem.vue
 :::
 
 ## API

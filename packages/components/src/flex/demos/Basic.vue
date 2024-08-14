@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NButton, NFlex } from 'naive-ui'
-import { NpFlex1 } from '@rezero/np'
+import { NpFlex1 } from '..'
 </script>
 
 <template>

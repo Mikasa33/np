@@ -9,20 +9,16 @@
 
 ## 演示
 
-<script setup lang="ts">
-import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColumn, SlotHeader } from './demos'
-</script>
-
 ### 基础
 
 基础表格。
 
 ::: raw
-<Basic />
+<TableBasic />
 :::
 
 ::: details 查看代码
-<<< ./demos/Basic.vue
+<<< @/../packages/components/src/table/demos/Basic.vue
 :::
 
 ### 选中行
@@ -30,11 +26,11 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 可以通过把第一列的类型设为 `selection` 来让行变成可选的，同时支持设置 `multiple=false` 来变成单选模式。
 
 ::: raw
-<CheckedRow />
+<TableCheckedRow />
 :::
 
 ::: details 查看代码
-<<< ./demos/CheckedRow.vue
+<<< @/../packages/components/src/table/demos/CheckedRow.vue
 :::
 
 ### 分页
@@ -42,11 +38,11 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 可通过设置 `pagination` 自定义分页。
 
 ::: raw
-<Pagination />
+<TablePagination />
 :::
 
 ::: details 查看代码
-<<< ./demos/Pagination.vue
+<<< @/../packages/components/src/table/demos/Pagination.vue
 :::
 
 ### 禁用分页
@@ -54,11 +50,11 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 设置 `pagination=false` 禁用分页，异步请求数据可直接返回数组。
 
 ::: raw
-<DisabledPagination />
+<TableDisabledPagination />
 :::
 
 ::: details 查看代码
-<<< ./demos/DisabledPagination.vue
+<<< @/../packages/components/src/table/demos/DisabledPagination.vue
 :::
 
 ### 列组件
@@ -66,11 +62,11 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 使用组件自定义表格列。
 
 ::: raw
-<Component />
+<TableComponent />
 :::
 
 ::: details 查看代码
-<<< ./demos/Component.vue
+<<< @/../packages/components/src/table/demos/Component.vue
 :::
 
 ### 列插槽
@@ -78,11 +74,11 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 使用插槽自定义表格列。优先级 `slot` > `component`。
 
 ::: raw
-<SlotColumn />
+<TableSlotColumn />
 :::
 
 ::: details 查看代码
-<<< ./demos/SlotColumn.vue
+<<< @/../packages/components/src/table/demos/SlotColumn.vue
 :::
 
 ### 头部插槽
@@ -90,11 +86,11 @@ import { Basic, CheckedRow, Pagination, DisabledPagination, Component, SlotColum
 使用插槽自定义表格头部。
 
 ::: raw
-<SlotHeader />
+<TableSlotHeader />
 :::
 
 ::: details 查看代码
-<<< ./demos/SlotHeader.vue
+<<< @/../packages/components/src/table/demos/SlotHeader.vue
 :::
 
 ## API

@@ -5,3 +5,13 @@
 ## 演示
 
 ### 基础
+
+基础表格搜索。
+
+::: raw
+<TableSearchBasic />
+:::
+
+::: details 查看代码
+<<< @/../packages/components/src/table/demos/SearchBasic.vue
+:::

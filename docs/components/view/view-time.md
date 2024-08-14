@@ -4,18 +4,14 @@
 
 ## 演示
 
-<script setup lang="ts">
-import { Time } from './demos'
-</script>
-
 ### 基础
 
 格式化并展示时间。
 
-<Time />
+<ViewTime />
 
 ::: details 查看代码
-<<< ./demos/Time.vue
+<<< @/../packages/components/src/view/demos/Time.vue
 :::
 
 ## API

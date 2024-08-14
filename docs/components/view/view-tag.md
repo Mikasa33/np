@@ -4,18 +4,14 @@
 
 ## 演示
 
-<script setup lang="ts">
-import { Tag } from './demos'
-</script>
-
 ### 基础
 
 格式化并展示标签。
 
-<Tag />
+<ViewTag />
 
 ::: details 查看代码
-<<< ./demos/Tag.vue
+<<< @/../packages/components/src/view/demos/Tag.vue
 :::
 
 ## API

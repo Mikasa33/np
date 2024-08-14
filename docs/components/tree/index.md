@@ -9,28 +9,24 @@
 
 ## 演示
 
-<script setup lang="ts">
-import { Basic, SlotLabel } from './demos'
-</script>
-
 ### 基础
 
 基础树。
 
-<Basic />
+<TreeBasic />
 
 ::: details 查看代码
-<<< ./demos/Basic.vue
+<<< @/../packages/components/src/tree/demos/Basic.vue
 :::
 
 ### 节点内容插槽
 
 使用节点内容插槽，自定义节点列。优先级 `slot` > `renderLabel` > `label`。
 
-<SlotLabel />
+<TreeSlotLabel />
 
 ::: details 查看代码
-<<< ./demos/SlotLabel.vue
+<<< @/../packages/components/src/tree/demos/SlotLabel.vue
 :::
 
 ## API

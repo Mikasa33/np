@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { NButton, NInput, NInputGroup } from 'naive-ui'
-import type { NpTableProps } from '@rezero/np'
-import { NpFlex1, NpTable } from '@rezero/np'
+import type { NpTableProps } from '..'
+import { NpTable } from '..'
+import { NpFlex1 } from '../../flex'
 
 const tableRef = ref()
 const tableProps = reactive<NpTableProps>({

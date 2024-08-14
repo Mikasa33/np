@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { NpFormProps } from '@rezero/np'
-import { NpForm } from '@rezero/np'
 import { NButton, NInputNumber } from 'naive-ui'
 import { reactive, ref } from 'vue'
+import type { NpFormProps } from '..'
+import { NpForm } from '..'
 
 const formModel = ref({})
 const formProps = reactive<NpFormProps>({

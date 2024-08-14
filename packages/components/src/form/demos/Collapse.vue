@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { NpFormProps } from '@rezero/np'
-import { NButton, NpForm } from '@rezero/np'
 import { computed, reactive, ref } from 'vue'
+import type { NpFormProps } from '..'
+import { NpForm } from '..'
 
 const formModel = ref({
   collapsed: true,
@@ -11,7 +11,7 @@ const formProps1 = reactive<NpFormProps>({
   labelWidth: 100,
   giSpan: 12,
   gridProps: {
-    collapsed: computed(() => formModel.value.collapsed),
+    collapsed: computed(() => formModel.value.collapsed) as any,
   },
   items: [
     {

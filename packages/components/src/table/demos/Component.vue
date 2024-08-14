@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import type { NpTableProps } from '@rezero/np'
-import { NpTable } from '@rezero/np'
+import type { NpTableProps } from '..'
+import { NpTable } from '..'
+import { NpViewTime } from '../../view'
 
 const tableProps = reactive<NpTableProps>({
   immediate: true,
@@ -27,21 +28,23 @@ const tableProps = reactive<NpTableProps>({
     {
       key: 'age',
       title: '年龄',
+      component: 'NpViewTag',
+      componentProps: {
+        type: 'success',
+      },
     },
     {
       key: 'birthday',
       title: '出生日期',
-      // 优先级低于插槽
-      component: 'NpViewTime',
+      component: NpViewTime,
+      componentProps: {
+        format: 'YYYY-MM-DD',
+      },
     },
   ],
 })
 </script>
 
 <template>
-  <NpTable v-bind="tableProps">
-    <template #column-birthday="{ key, row }">
-      {{ row.birthday === 1041350400000 ? '列插槽' : '' }} {{ row[key] }}
-    </template>
-  </NpTable>
+  <NpTable v-bind="tableProps" />
 </template>
