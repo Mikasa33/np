@@ -12,7 +12,7 @@ hero:
       link: /components/form
     - theme: alt
       text: Github
-      link: https://github.com/rezero-dev/np
+      link: https://github.com/mikasa33/np
 
 features:
   - title: 简单易用

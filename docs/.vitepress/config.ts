@@ -77,12 +77,12 @@ export default defineConfig({
       next: '下一页',
     },
     editLink: {
-      pattern: 'https://github.com/rezero-dev/np/tree/main/docs/:path',
+      pattern: 'https://mikasa33.github.io/np/tree/main/docs/:path',
       text: '在 GitHub 上编辑此页面',
     },
     footer: {
       message: '',
-      copyright: `版权所有 © 2024-${new Date().getFullYear()} Re:Zero`,
+      copyright: `版权所有 © 2024-${new Date().getFullYear()} Mikasa33`,
     },
     langMenuLabel: '多语言',
     lastUpdated: {
@@ -122,7 +122,7 @@ export default defineConfig({
     },
     sidebarMenuLabel: '菜单',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/rezero-dev/np' },
+      { icon: 'github', link: 'https://github.com/mikasa33/np' },
     ],
   },
 
