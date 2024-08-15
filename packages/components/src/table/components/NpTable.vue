@@ -7,30 +7,18 @@ import { reactiveOmit } from '@vueuse/core'
 import type { NpTableColumnProps, NpTableProps } from '../types/props'
 import { components } from '../configs/components'
 import type { NpTableSlots } from '../types/slots'
-import { useSlotsFilter } from '../../_composables/useSlot'
+import { useSlotsFilter } from '../../_composables/useSlotsFilter'
 
 const props = withDefaults(defineProps<NpTableProps>(), {
-  /**
-   * 需要展示的列，默认空数组
-   */
   columns: () => [],
-  /**
-   * 替代请求数据中的 data 字段名，默认 data
-   */
   dataField: 'data',
-  /**
-   * 分页 props，默认 true
-   */
   pagination: true,
-  /**
-   * 替代请求数据中的 total 字段名，默认 total
-   */
   totalField: 'total',
 })
 const slots = defineSlots<NpTableSlots>()
-const tableProps = reactiveOmit(props, 'checkedRowKeys', 'columns', 'dataField', 'immediate', 'loading', 'pagination', 'rowKey', 'totalField', 'onRequest')
-const checkedRowKeys = defineModel<Array<number | string>>('checkedRowKeys', { default: reactive([]) })
+const checkedRowKeys = defineModel<Array<number | string>>('checkedRowKeys', { default: () => ([]) })
 const loading = defineModel<boolean>('loading', { default: false })
+const tableProps = reactiveOmit(props, 'checkedRowKeys', 'columns', 'dataField', 'immediate', 'loading', 'pagination', 'rowKey', 'totalField', 'onRequest')
 const data = ref<any[]>([])
 const { slotKeys } = useSlotsFilter((key: string) => key.includes('column-'))
 

@@ -8,9 +8,9 @@ export interface NpFormSlots {
   /**
    * 表单项内容
    */
-  [key: `item-${string}`]: (props: { props: NpFormItemProps, path: string, model: Record<string, any> }) => VNodeChild
+  [key: `item-${string}`]: (props: { props: NpFormItemProps, path: string, value: Record<string, any> }) => VNodeChild
   /**
    * 栅格后缀内容
    */
-  suffix?: () => VNodeChild
+  'gi-suffix'?: ({ overflow }: { overflow: boolean }) => VNodeChild
 }

@@ -5,7 +5,7 @@ import type { NpFormProps } from '..'
 import { NpForm } from '..'
 
 const formRef = ref()
-const formModel = ref({})
+const formValue = ref({})
 const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
   v => ({
     label: v,
@@ -49,7 +49,7 @@ const formProps = reactive<NpFormProps>({
   <NpForm
     ref="formRef"
     v-bind="formProps"
-    v-model:model="formModel"
+    v-model:value="formValue"
   />
   <NFlex justify="end">
     <NButton @click="formRef.restoreValidation()">
@@ -62,5 +62,5 @@ const formProps = reactive<NpFormProps>({
       验证
     </NButton>
   </NFlex>
-  <pre>{{ formModel }}</pre>
+  <pre>{{ formValue }}</pre>
 </template>

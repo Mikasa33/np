@@ -7,28 +7,21 @@ import { NForm, NFormItemGi, NGi, NGrid } from 'naive-ui'
 import { reactiveOmit, useArrayFilter } from '@vueuse/core'
 import type { NpFormItemProps, NpFormProps } from '../types/props'
 import { components } from '../configs/components'
-import { useModel } from '../composables/useModel'
+import { useValue } from '../composables/useValue'
+import type { NpFormSlots } from '../types/slots'
 
 const props = withDefaults(defineProps<NpFormProps>(), {
-  /**
-   * 栅格占据的列数，默认 24
-   */
   giSpan: 24,
-  /**
-   * 表单项，默认空数组
-   */
   items: () => [],
-  /**
-   * 标签显示的位置，默认居左
-   */
   labelPlacement: 'left',
 })
-const model = defineModel<any>('model', { default: reactive({}) })
+const slots = defineSlots<NpFormSlots>()
+const value = defineModel<any>('value', { default: () => ({}) })
 const formItems = useArrayFilter(props.items, (item: NpFormItemProps) => !!item.path)
 const slotItems = useArrayFilter(props.items, (item: NpFormItemProps) => !!item.path || !!item.slot)
-const { resetModel } = useModel(props, model, formItems)
+const { reset: resetValue } = useValue(props, value, formItems)
 const formRef = ref<FormInst>()
-const formProps = reactiveOmit(props, 'defaultValues', 'giSpan', 'gridProps', 'items', 'model')
+const formProps = reactiveOmit(props, 'defaultValues', 'giSpan', 'gridProps', 'items', 'value')
 /**
  * 初始化表单项 props
  * @param item 表单项 props
@@ -53,7 +46,7 @@ function renderComponent(item: NpFormItemProps) {
  * 重置表单数据和校验状态
  */
 function reset() {
-  resetModel()
+  resetValue()
   restoreValidation()
 }
 /**
@@ -74,14 +67,14 @@ function restoreValidation() {
  * 获取表项中收集到的值的对象
  * @param path 将值收集到外层表单 model 对象的路径
  */
-function getModel(path?: string) {
+function getValue(path?: string) {
   if (path) {
-    return model.value[path]
+    return value.value[path]
   }
-  return model.value
+  return value.value
 }
 defineExpose({
-  getModel,
+  getValue,
   reset,
   restoreValidation,
   validate,
@@ -92,7 +85,7 @@ defineExpose({
   <NForm
     ref="formRef"
     v-bind="formProps"
-    :model
+    :model="value"
   >
     <!-- TODO: inline mode -->
     <NGrid v-bind="gridProps">
@@ -107,7 +100,7 @@ defineExpose({
           :name="`item-${item.path}`"
           :props="item"
           :path="item.path!"
-          :model
+          :value
         />
         <!-- 表单项 slot 属性插槽 -->
         <slot
@@ -115,19 +108,19 @@ defineExpose({
           :name="`item-${item.slot}`"
           :props="item"
           :path="item.path!"
-          :model
+          :value
         />
         <!-- 表单项组件 -->
         <Component
           :is="renderComponent(item)"
           v-else
-          v-model:value="model[item.path!]"
+          v-model:value="value[item.path!]"
           v-bind="item.componentProps"
         />
       </NFormItemGi>
       <!-- 栅格后缀插槽 -->
       <NGi
-        v-if="$slots['gi-suffix']"
+        v-if="slots['gi-suffix']"
         :span="giSuffixSpan ?? giSpan"
         suffix
         #="{ overflow }"

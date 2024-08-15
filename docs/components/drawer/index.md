@@ -1,24 +1,24 @@
-# 展示标签 View Tag
+# 抽屉 Drawer
 
-一个格式化并展示标签的小组件。
+我感觉和 Modal 功能差不太多，位置有点差别。
 
 ## 演示
 
 ### 基础
 
-格式化并展示标签。
+基础抽屉用法。
 
-<ViewTag />
+<DrawerBasic />
 
 ::: details 查看代码
-<<< @/../packages/components/src/view/demos/Tag.vue
+<<< @/../packages/components/src/drawer/demos/Basic.vue
 :::
 
 ## API
 
-### ViewTag Props
+### Drawer Props
 
-支持 [NTag](https://www.naiveui.com/zh-CN/light/components/tag#Tag-Props) 所有属性。
+支持 [NDrawer](https://www.naiveui.com/zh-CN/light/components/drawer#Drawer-Props) 所有属性。
 
 | 名称    | 说明                       | 类型            | 默认值  |
 | ------- | -------------------------- | --------------- | ------- |

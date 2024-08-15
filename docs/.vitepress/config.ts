@@ -26,7 +26,15 @@ export default defineConfig({
           collapsed: false,
           base: '/components',
           items: [
-            { link: '/form/', text: '表单 Form' },
+            { text: '表单 Form', link: '/form/' },
+            {
+              text: '搜索 Search',
+              base: '/components/search',
+              items: [
+                { text: '搜索表单 Search Form', link: '/search-form' },
+                { text: '搜索关键词 Search Keyword', link: '/search-keyword' },
+              ],
+            },
           ],
         },
         {
@@ -34,14 +42,7 @@ export default defineConfig({
           collapsed: false,
           base: '/components',
           items: [
-            {
-              text: '表格 Table',
-              link: '/',
-              base: '/components/table',
-              items: [
-                { text: '表格搜索 Table Search', link: '/table-search' },
-              ],
-            },
+            { text: '表格 Table', link: '/table/' },
             { text: '树 Tree', link: '/tree/' },
             {
               text: '展示 View',
@@ -51,6 +52,15 @@ export default defineConfig({
                 { text: '展示时间 View Time', link: '/view-time' },
               ],
             },
+          ],
+        },
+        {
+          text: '反馈组件',
+          collapsed: false,
+          base: '/components',
+          items: [
+            { text: '抽屉 Drawer', link: '/drawer/' },
+            { text: '模态框 Modal', link: '/modal/' },
           ],
         },
         {

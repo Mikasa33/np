@@ -5,10 +5,10 @@ import type { NpFormItemProps, NpFormProps } from '../types/props'
 /**
  * 表单数据
  * @param props 表单属性
- * @param model 表单数据
+ * @param value 表单数据
  * @param items 表单项
  */
-export function useModel(props: NpFormProps, model: Ref<any>, items: MaybeRefOrGetter<NpFormItemProps[]>) {
+export function useValue(props: NpFormProps, value: Ref<any>, items: MaybeRefOrGetter<NpFormItemProps[]>) {
   // 默认数据
   const defaultValues = computed<any>(() => {
     const defaultValues = props.defaultValues ?? {}
@@ -22,28 +22,28 @@ export function useModel(props: NpFormProps, model: Ref<any>, items: MaybeRefOrG
   /**
    * 初始化表单数据
    */
-  function initModel() {
+  function init() {
     for (const item of toValue(items)) {
-      if (!model.value[item.path!]) {
-        model.value[item.path!] = defaultValues.value[item.path!] ?? null
+      if (!value.value[item.path!]) {
+        value.value[item.path!] = defaultValues.value[item.path!] ?? null
       }
     }
   }
   /**
    * 重置表单值
    */
-  function resetModel() {
+  function reset() {
     for (const item of toValue(items)) {
-      model.value[item.path!] = defaultValues.value[item.path!] ?? null
+      value.value[item.path!] = defaultValues.value[item.path!] ?? null
     }
   }
   onMounted(() => {
     // 初始化表单数据
-    initModel()
+    init()
   })
   return {
     defaultValues,
-    model,
-    resetModel,
+    value,
+    reset,
   }
 }

@@ -100,10 +100,3 @@ export type NpTableColumnComponentType =
   | 'NpViewTag'
   | 'NpViewTime'
   | Component
-
-/**
- * 表格搜索 props
- */
-export interface NpTableSearchProps {
-
-}

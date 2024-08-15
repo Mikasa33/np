@@ -3,7 +3,7 @@ import { computed, reactive, ref } from 'vue'
 import type { NpFormProps } from '..'
 import { NpForm } from '..'
 
-const formModel = ref({
+const formValue = ref({
   collapsed: true,
   suffix: true,
 })
@@ -11,7 +11,7 @@ const formProps1 = reactive<NpFormProps>({
   labelWidth: 100,
   giSpan: 12,
   gridProps: {
-    collapsed: computed(() => formModel.value.collapsed) as any,
+    collapsed: computed(() => formValue.value.collapsed) as any,
   },
   items: [
     {
@@ -52,10 +52,10 @@ const formProps2 = reactive<NpFormProps>({
 <template>
   <NpForm
     v-bind="formProps2"
-    v-model:model="formModel"
+    v-model:value="formValue"
   />
   <NpForm v-bind="formProps1">
-    <template v-if="formModel.suffix" #gi-suffix="{ overflow }">
+    <template v-if="formValue.suffix" #gi-suffix="{ overflow }">
       <div class="h-34px flex-y-center justify-end">
         {{ overflow ? '存在溢出' : '不存在溢出' }}
       </div>

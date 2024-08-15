@@ -38,17 +38,17 @@ export interface NpFormProps {
    */
   labelPlacement?: 'left' | 'top'
   /**
-   * 获取表项中收集到的值的对象
-   */
-  model?: Record<string, any>
-  /**
    * 验证表项的规则
    */
   rules?: FormRules
   /**
+   * 获取表项中收集到的值的对象
+   */
+  value?: Record<string, any>
+  /**
    * 表项中收集到的值的对象改变时触发的回调函数
    */
-  onUpdateModel?: (model: any) => void
+  onUpdateValue?: (value: any) => void
 }
 
 /**

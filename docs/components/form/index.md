@@ -71,15 +71,17 @@
 
 ### Form Props
 
-支持 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Props) 所有属性。
+支持 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Props) 除 `model` 外的所有属性。
 
 | 名称            | 说明                                               | 类型                   | 默认值      |
 | --------------- | -------------------------------------------------- | ---------------------- | ----------- |
 | default-values  | 默认值                                             | `object`               | `{}`        |
 | gi-span         | 栅格占据的列数，为 `0` 的时候会隐藏                | `number \| string`     | `24`        |
+| gi-suffix-span  | 栅格后缀占据的列数，默认为 `gi-span` 的值          | `number \| string`     | `24`        |
 | grid-props      | 栅格 props                                         | `NGridProps`           | `undefined` |
 | items           | 表单项，属性参考 [FormItem Props](#formitem-props) | `NpFormItemProps`      | `[]`        |
-| on-update:model | 表项中收集到的值的对象改变时触发的回调函数         | `(model: any) => void` | `undefined` |
+| value           | 获取表项中收集到的值的对象                         | `object`               | `{}`        |
+| on-update:value | 表项中收集到的值的对象改变时触发的回调函数         | `(value: any) => void` | `undefined` |
 
 ### FormItem Props
 
@@ -119,7 +121,7 @@ type NpFormItemComponentType =
 
 | 名称     | 说明                                                                   | 类型                     |
 | -------- | ---------------------------------------------------------------------- | ------------------------ |
-| getModel | 获取表项中收集到的值的对象，如果传递了 `path` 则获取对象中对应路径的值 | `(path?: string) => any` |
+| getValue | 获取表项中收集到的值的对象，如果传递了 `path` 则获取对象中对应路径的值 | `(path?: string) => any` |
 | reset    | 重置表单数据和校验状态                                                 | `() => void`             |
 
 ### Form Slots

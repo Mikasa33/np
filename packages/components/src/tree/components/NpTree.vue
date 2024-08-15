@@ -6,39 +6,21 @@ import { computed, h, onMounted, reactive, ref } from 'vue'
 import { isArray } from 'lodash-es'
 import type { NpTreeProps } from '../types/props'
 import type { NpTreeSlots } from '../types/slots'
-import { useSlotsFilter } from '../../_composables/useSlot'
+import { useSlotsFilter } from '../../_composables/useSlotsFilter'
 
 const props = withDefaults(defineProps<NpTreeProps>(), {
-  /**
-   * 替代 TreeOption 中的 children 字段名，默认 children
-   */
   childrenField: 'children',
-  /**
-   * 替代 TreeOption 中的 disabled 字段名
-   */
   disabledField: 'disabled',
-  /**
-   * 是否支持键盘操作，默认 true
-   */
   keyboard: true,
-  /**
-   * 替代 TreeOption 中的 key 字段名，默认 key
-   */
   keyField: 'key',
-  /**
-   * 替代 TreeOption 中的 label 字段名，默认 label
-   */
   labelField: 'label',
-  /**
-   * 节点是否可以被选中，默认 true
-   */
   selectable: true,
 })
 const slots = defineSlots<NpTreeSlots>()
-const checkedKeys = defineModel<Array<number | string>>('checkedKeys', { default: reactive([]) })
-const expandedKeys = defineModel<Array<number | string>>('expandedKeys', { default: reactive([]) })
+const checkedKeys = defineModel<Array<number | string>>('checkedKeys', { default: () => ([]) })
+const expandedKeys = defineModel<Array<number | string>>('expandedKeys', { default: () => ([]) })
 const loading = defineModel<boolean>('loading', { default: false })
-const selectedKeys = defineModel<Array<number | string>>('selectedKeys', { default: reactive([]) })
+const selectedKeys = defineModel<Array<number | string>>('selectedKeys', { default: () => ([]) })
 const treeProps = reactiveOmit(props, 'checkedKeys', 'expandedKeys', 'selectedKeys')
 const data = ref<any[]>([])
 const { slotKeys } = useSlotsFilter((key: string) => key.includes('label-'))

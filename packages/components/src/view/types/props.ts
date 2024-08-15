@@ -72,11 +72,11 @@ export interface NpViewTagProps {
  */
 export interface NpViewTimeProps {
   /**
-   * 时间值
-   */
-  value?: string | number | Date | dayjs.Dayjs
-  /**
    * 格式化规则
    */
   format?: string
+  /**
+   * 时间值
+   */
+  value?: string | number | Date | dayjs.Dayjs
 }

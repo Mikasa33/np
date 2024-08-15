@@ -4,7 +4,7 @@ import { defineComponent, h, markRaw, reactive, ref } from 'vue'
 import type { NpFormProps } from '..'
 import { NpForm } from '..'
 
-const formModel = ref({})
+const formValue = ref({})
 const formProps = reactive<NpFormProps>({
   labelWidth: 100,
   items: [
@@ -41,7 +41,7 @@ const formProps = reactive<NpFormProps>({
 <template>
   <NpForm
     v-bind="formProps"
-    v-model:model="formModel"
+    v-model:value="formValue"
   />
-  <pre>{{ formModel }}</pre>
+  <pre>{{ formValue }}</pre>
 </template>

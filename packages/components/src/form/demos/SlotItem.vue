@@ -4,7 +4,7 @@ import { reactive, ref } from 'vue'
 import type { NpFormProps } from '..'
 import { NpForm } from '..'
 
-const formModel = ref({})
+const formValue = ref({})
 const formProps = reactive<NpFormProps>({
   labelWidth: 100,
   items: [
@@ -30,10 +30,10 @@ const formProps = reactive<NpFormProps>({
 <template>
   <NpForm
     v-bind="formProps"
-    v-model:model="formModel"
+    v-model:value="formValue"
   >
-    <template #item-slot="{ path, model }">
-      <NInputNumber v-model:value="model[path]" />
+    <template #item-slot="{ path, value }">
+      <NInputNumber v-model:value="value[path]" />
     </template>
     <template #item-slot2>
       <NButton type="primary">
@@ -41,5 +41,5 @@ const formProps = reactive<NpFormProps>({
       </NButton>
     </template>
   </NpForm>
-  <pre>{{ formModel }}</pre>
+  <pre>{{ formValue }}</pre>
 </template>
