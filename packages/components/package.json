@@ -1,7 +1,7 @@
 {
   "name": "@mikasa33/np",
   "type": "module",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "packageManager": "pnpm@9.6.0",
   "description": "Naive UI Pro",
   "author": "Mikasa33",
