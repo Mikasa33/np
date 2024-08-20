@@ -18,6 +18,7 @@ export type FormItemComponentType =
   | 'NSwitch'
   | 'NTimePicker'
   | 'NTreeSelect'
+  | 'NpSelect'
   | Component
 
 export interface FormSlots {
