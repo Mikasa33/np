@@ -14,13 +14,13 @@ const value = defineModel<Array<string | number> | string | number | null>('valu
 const loading = defineModel<boolean>('loading', { default: false })
 const options = defineModel<Array<SelectOption | SelectGroupOption>>('options', { default: () => [] })
 
-const pickedSelectProps = reactiveOmit(props, 'immediate', 'lazy', 'loading', 'value', 'onRequest')
+const pickedSelectProps = reactiveOmit(props, 'immediate', 'loading', 'value', 'onRequest')
 
 const requested = ref(false)
 
 function handleUpdateShow(show: boolean) {
-  // 显示菜单 && 延迟加载 && 没有请求
-  if (show && props.lazy && !requested.value) {
+  // 显示菜单 && 没有请求
+  if (show && props.onRequest && !requested.value) {
     requested.value = true
     refresh()
   }
@@ -43,8 +43,8 @@ function refresh(params?: Record<string, any>) {
   request(params)
 }
 
-// 立即执行 && 不是延迟加载
-if (props.immediate && !props.lazy) {
+// 立即执行
+if (props.immediate) {
   refresh()
 }
 

@@ -18,10 +18,10 @@
 
 选择器还可以延迟加载选项。
 
-<SelectLazy />
+<SelectImmediate />
 
 ::: details 查看代码
-<<< ./demos/Lazy.vue
+<<< ./demos/Immediate.vue
 :::
 
 ## API
@@ -30,8 +30,7 @@
 
 支持 [NSelect](https://www.naiveui.com/zh-CN/light/components/select#Select-Props) 所有属性。
 
-| 名称       | 说明                   | 类型                                                                                    | 默认值      |
-| ---------- | ---------------------- | --------------------------------------------------------------------------------------- | ----------- |
-| immediate  | 是否立即请求数据       | `boolean`                                                                               | `false`     |
-| lazy       | 是否延迟请求数据       | `boolean`                                                                               | `false`     |
-| on-request | 异步请求数据的回调函数 | `(params: Record<string, any>) => Promise<Array<NSelectOption \| NSelectGroupOption>>>` | `undefined` |
+| 名称       | 说明                                           | 类型                                                                                    | 默认值      |
+| ---------- | ---------------------------------------------- | --------------------------------------------------------------------------------------- | ----------- |
+| immediate  | 是否立即请求数据，默认为打开选项菜单才开始请求 | `boolean`                                                                               | `false`     |
+| on-request | 异步请求数据的回调函数                         | `(params: Record<string, any>) => Promise<Array<NSelectOption \| NSelectGroupOption>>>` | `undefined` |

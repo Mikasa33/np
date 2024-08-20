@@ -4,7 +4,6 @@ import { NpSelect } from '@mikasa33/np'
 import type { SelectOption } from 'naive-ui'
 
 const selectProps: SelectProps = {
-  immediate: true,
   onRequest: (): Promise<SelectOption[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {

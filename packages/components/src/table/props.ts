@@ -14,6 +14,6 @@ export const tableProps = Object.assign({}, omit(dataTableProps, 'columns', 'pag
     default: true,
   },
   totalField: makeStringProp('total'),
-  onRequest: makeFunctionProp<(params: Record<string, any>) => Promise<any>>(),
+  onRequest: Function as PropType<(params: Record<string, any>) => Promise<any>>,
   onUpdateLoading: makeFunctionProp<(loading: boolean) => void>(),
 })
