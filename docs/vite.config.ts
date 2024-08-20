@@ -20,9 +20,6 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '@np': fileURLToPath(
-        new URL('../packages/components/src', import.meta.url),
-      ),
       '@vitepress': fileURLToPath(new URL('./.vitepress', import.meta.url)),
     },
   },

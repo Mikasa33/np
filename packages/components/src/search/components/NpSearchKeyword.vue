@@ -15,11 +15,11 @@ const emits = defineEmits<{
   /**
    * 输入框值改变时触发
    */
-  search: [value?: NpSearchKeywordProps['value'], field?: NpSearchKeywordProps['field']]
+  search: [value: string | null, field: string | number | null]
 }>()
-const value = defineModel<NpSearchKeywordProps['value']>('value')
-const field = defineModel<NpSearchKeywordProps['field']>('field')
-const inputProps = reactiveOmit(props, 'fieldOptions')
+const value = defineModel<string | null>('value', { default: null })
+const field = defineModel<string | number | null>('field', { default: null })
+const inputProps = reactiveOmit(props, 'fieldOptions', 'fieldClass')
 const selectField = computed(() => props.fieldOptions.length)
 watch(
   () => props.fieldOptions,
@@ -45,18 +45,19 @@ watchDebounced(
 </script>
 
 <template>
-  <NInputGroup>
+  <NInputGroup class="w-auto">
     <NSelect
       v-if="selectField"
       v-model:value="field"
       :options="fieldOptions"
-      :class="selectClass"
+      :class="fieldClass"
       class="w-128px"
     />
     <NInput
       v-bind="inputProps"
       v-model:value="value"
       :class="inputClass"
+      class="w-200px"
     >
       <template #prefix>
         <slot

@@ -2,12 +2,12 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@np": ["../packages/components/src"],
       "@vitepress/*": ["./.vitepress/*"]
     }
   },
   "include": [
     "**/*",
-    ".vitepress/**/*"
+    ".vitepress/**/*",
+    "node_modules/@mikasa33/np/**/*"
   ]
 }

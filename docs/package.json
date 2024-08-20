@@ -11,6 +11,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@mikasa33/np": "workspace:*",
     "@vicons/ionicons5": "^0.12.0",
     "naive-ui": "^2.39.0",
     "vue": "^3.4.29"

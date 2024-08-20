@@ -1,2 +1,7 @@
-export { default as NpForm } from './components/NpForm.vue'
-export type { NpFormProps, NpFormItemProps, NpFormItemComponentType } from './types/props'
+import { withInstall } from '../utils'
+import _Form from './Form.vue'
+
+export const NpForm = withInstall(_Form)
+export default _Form
+export { formProps, formItemProps } from './props'
+export type { FormProps, FormItemProps, FormItemComponentType, FormSlots } from './types'

@@ -22,11 +22,12 @@ export default defineConfig({
     sidebar: {
       '/components': [
         {
-          text: '数据录入组件',
+          text: '数据录入',
           collapsed: false,
           base: '/components',
           items: [
             { text: '表单 Form', link: '/form/' },
+            { text: '选择器 Select', link: '/select/' },
             {
               text: '搜索 Search',
               base: '/components/search',
@@ -38,24 +39,18 @@ export default defineConfig({
           ],
         },
         {
-          text: '数据展示组件',
+          text: '数据展示',
           collapsed: false,
           base: '/components',
           items: [
             { text: '表格 Table', link: '/table/' },
             { text: '树 Tree', link: '/tree/' },
-            {
-              text: '展示 View',
-              base: '/components/view',
-              items: [
-                { text: '展示标签 View Tag', link: '/view-tag' },
-                { text: '展示时间 View Time', link: '/view-time' },
-              ],
-            },
+            { text: '展示标签 View Tag', link: '/view-tag' },
+            { text: '展示时间 View Time', link: '/view-time' },
           ],
         },
         {
-          text: '反馈组件',
+          text: '反馈',
           collapsed: false,
           base: '/components',
           items: [
@@ -64,18 +59,20 @@ export default defineConfig({
           ],
         },
         {
-          text: '布局组件',
+          text: '布局',
           collapsed: false,
           base: '/components',
           items: [
             { text: '弹性布局 Flex', link: '/flex/' },
           ],
         },
-      ],
-      '/blog/': [
         {
-          text: '使用 Vite 开发组件库',
-          link: '/blog/develop-component-library-with-vite',
+          text: '高级',
+          collapsed: false,
+          base: '/components',
+          items: [
+            { text: '高级表格 Adv Table', link: '/adv-table/' },
+          ],
         },
       ],
     },

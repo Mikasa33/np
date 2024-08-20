@@ -11,5 +11,5 @@
 <FlexBasic />
 
 ::: details 查看代码
-<<< @/../packages/components/src/flex/demos/Basic.vue
+<<< ./demos/Basic.vue
 :::

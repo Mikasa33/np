@@ -46,6 +46,8 @@ export default defineConfig({
       entryRoot: './src',
       // 输出目录
       outDir: 'es',
+      // 将动态引入转换为静态
+      staticImport: true,
     }),
     UnoCSS(),
   ],

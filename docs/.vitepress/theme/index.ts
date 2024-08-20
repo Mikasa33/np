@@ -3,7 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import { NConfigProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
 import { useRoute } from 'vitepress'
-import { registerComponents } from '../components'
+import { registerComponents } from '../demos'
 import 'virtual:uno.css'
 
 const { Layout } = DefaultTheme

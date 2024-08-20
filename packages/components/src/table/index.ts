@@ -1,3 +1,7 @@
-export { default as NpTable } from './components/NpTable.vue'
-export type { NpTableProps, NpTableColumnProps, NpTableColumnComponentType } from './types/props'
-export type { NpTableSlots } from './types/slots'
+import { withInstall } from '../utils'
+import _Table from './Table.vue'
+
+export const NpTable = withInstall(_Table)
+export default _Table
+export { tableProps } from './props'
+export type { TableProps, TableColumnProps, TableColumnComponentType, TableSlots } from './types'

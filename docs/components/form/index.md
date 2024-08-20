@@ -2,9 +2,6 @@
 
 收集、验证信息。
 
-> [!WARNING]
-> 目前 NaiveUI 的组件属性没有完全支持，工作量有点大，持续完善中...
-
 ## 演示
 
 ### 基础
@@ -14,17 +11,17 @@
 <FormBasic />
 
 ::: details 查看代码
-<<< @/../packages/components/src/form/demos/Basic.vue
+<<< ./demos/Basic.vue
 :::
 
 ### 默认值
 
-设置表单默认值，优先级 `item.defaultValue` > `form.defaultValues`。
+设置表单默认值，当 `value[path]` 为 `undefined` 时才会设置默认值，优先级 `item.defaultValue` > `form.defaultValues`。
 
 <FormDefaultValue />
 
 ::: details 查看代码
-<<< @/../packages/components/src/form/demos/DefaultValue.vue
+<<< ./demos/DefaultValue.vue
 :::
 
 ### 栅格布局
@@ -34,7 +31,7 @@
 <FormGrid />
 
 ::: details 查看代码
-<<< @/../packages/components/src/form/demos/DefaultValue.vue
+<<< ./demos/DefaultValue.vue
 :::
 
 ### 折叠
@@ -44,7 +41,7 @@
 <FormCollapse />
 
 ::: details 查看代码
-<<< @/../packages/components/src/form/demos/Collapse.vue
+<<< ./demos/Collapse.vue
 :::
 
 ### 表单项组件
@@ -54,17 +51,17 @@
 <FormComponent />
 
 ::: details 查看代码
-<<< @/../packages/components/src/form/demos/Component.vue
+<<< ./demos/Component.vue
 :::
 
 ### 表单项插槽
 
-使用插槽自定义表单项。优先级 `slot` > `component`。
+使用插槽自定义表单项，优先级 `slot` > `component`。
 
 <FormSlotItem />
 
 ::: details 查看代码
-<<< @/../packages/components/src/form/demos/SlotItem.vue
+<<< ./demos/SlotItem.vue
 :::
 
 ## API
@@ -73,33 +70,33 @@
 
 支持 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Props) 除 `model` 外的所有属性。
 
-| 名称            | 说明                                               | 类型                   | 默认值      |
-| --------------- | -------------------------------------------------- | ---------------------- | ----------- |
-| default-values  | 默认值                                             | `object`               | `{}`        |
-| gi-span         | 栅格占据的列数，为 `0` 的时候会隐藏                | `number \| string`     | `24`        |
-| gi-suffix-span  | 栅格后缀占据的列数，默认为 `gi-span` 的值          | `number \| string`     | `24`        |
-| grid-props      | 栅格 props                                         | `NGridProps`           | `undefined` |
-| items           | 表单项，属性参考 [FormItem Props](#formitem-props) | `NpFormItemProps`      | `[]`        |
-| value           | 获取表项中收集到的值的对象                         | `object`               | `{}`        |
-| on-update:value | 表项中收集到的值的对象改变时触发的回调函数         | `(value: any) => void` | `undefined` |
+| 名称            | 说明                                                             | 类型                   | 默认值      |
+| --------------- | ---------------------------------------------------------------- | ---------------------- | ----------- |
+| default-values  | 默认值                                                           | `object`               | `{}`        |
+| gi-span         | 栅格占据的列数，为 `0` 的时候会隐藏                              | `number \| string`     | `24`        |
+| gi-suffix-span  | 栅格后缀占据的列数，默认为 `gi-span` 的值                        | `number \| string`     | `undefined` |
+| grid-props      | 栅格 props，`label-placement` 为 `'top'` 时，`x-gap` 默认为 `16` | `NGridProps`           | `undefined` |
+| items           | 表单项，属性参考 [FormItem Props](#formitem-props)               | `FormItemProps`        | `[]`        |
+| value           | 获取表项中收集到的值的对象                                       | `object`               | `{}`        |
+| on-update:value | 表项中收集到的值的对象改变时触发的回调函数                       | `(value: any) => void` | `undefined` |
 
 ### FormItem Props
 
 支持 [NFormItem && NFormItemGi](https://www.naiveui.com/zh-CN/light/components/form#FormItem-Props) 所有属性。
 
-| 名称            | 说明                                                                       | 类型                      | 默认值      |
-| --------------- | -------------------------------------------------------------------------- | ------------------------- | ----------- |
-| component       | 组件或组件名称，类型参考 [FormItemComponent Type](#formitemcomponent-type) | `NpFormItemComponentType` | `undefined` |
-| default-value   | 默认值                                                                     | `any`                     | `null`      |
-| component-props | 组件 props                                                                 | `any`                     | `undefined` |
-| slot            | 插槽名称，优先级小于 `path` 属性对应的插槽                                 | `string`                  | `undefined` |
+| 名称            | 说明                                                                       | 类型                    | 默认值      |
+| --------------- | -------------------------------------------------------------------------- | ----------------------- | ----------- |
+| component       | 组件或组件名称，类型参考 [FormItemComponent Type](#formitemcomponent-type) | `FormItemComponentType` | `undefined` |
+| component-props | 组件 props                                                                 | `any`                   | `undefined` |
+| default-value   | 默认值                                                                     | `any`                   | `null`      |
+| slot            | 插槽名称，优先级小于 `path` 属性对应的插槽                                 | `string`                | `undefined` |
 
 ### FormItemComponent Type
 
 ```ts
 import type { Component } from 'vue'
 
-type NpFormItemComponentType =
+type FormItemComponentType =
   | 'NAutoComplete'
   | 'NCascader'
   | 'NColorPicker'
@@ -119,14 +116,14 @@ type NpFormItemComponentType =
 
 支持 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Methods) 所有方法。
 
-| 名称     | 说明                                                                   | 类型                     |
-| -------- | ---------------------------------------------------------------------- | ------------------------ |
-| getValue | 获取表项中收集到的值的对象，如果传递了 `path` 则获取对象中对应路径的值 | `(path?: string) => any` |
-| reset    | 重置表单数据和校验状态                                                 | `() => void`             |
+| 名称     | 说明                                                                 | 类型                     |
+| -------- | -------------------------------------------------------------------- | ------------------------ |
+| getValue | 获取表项中收集到的值的对象，如果传递 `path` 则获取对象中对应路径的值 | `(path?: string) => any` |
+| reset    | 重置为默认值，并还原到未校验的状态                                   | `() => void`             |
 
 ### Form Slots
 
-| 名称                 | 说明         | 参数                                                                     |
-| -------------------- | ------------ | ------------------------------------------------------------------------ |
-| item-$\{path\|slot\} | 表单项内容   | `({ props: NpFormItemProps, path: string, model: Record<string, any> })` |
-| gi-suffix            | 栅格后缀内容 | `({ overflow: boolean })`                                                |
+| 名称                 | 说明         | 参数                                                                   |
+| -------------------- | ------------ | ---------------------------------------------------------------------- |
+| item-$\{path\|slot\} | 表单项内容   | `({ props: FormItemProps, path: string, model: Record<string, any> })` |
+| gi-suffix            | 栅格后缀内容 | `({ overflow: boolean })`                                              |

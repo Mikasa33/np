@@ -18,7 +18,7 @@
 :::
 
 ::: details 查看代码
-<<< @/../packages/components/src/table/demos/Basic.vue
+<<< ./demos/Basic.vue
 :::
 
 ### 选中行
@@ -30,7 +30,7 @@
 :::
 
 ::: details 查看代码
-<<< @/../packages/components/src/table/demos/CheckedRow.vue
+<<< ./demos/CheckedRow.vue
 :::
 
 ### 分页
@@ -42,7 +42,7 @@
 :::
 
 ::: details 查看代码
-<<< @/../packages/components/src/table/demos/Pagination.vue
+<<< ./demos/Pagination.vue
 :::
 
 ### 禁用分页
@@ -54,7 +54,7 @@
 :::
 
 ::: details 查看代码
-<<< @/../packages/components/src/table/demos/DisabledPagination.vue
+<<< ./demos/DisabledPagination.vue
 :::
 
 ### 列组件
@@ -66,7 +66,7 @@
 :::
 
 ::: details 查看代码
-<<< @/../packages/components/src/table/demos/Component.vue
+<<< ./demos/Component.vue
 :::
 
 ### 列插槽
@@ -78,7 +78,7 @@
 :::
 
 ::: details 查看代码
-<<< @/../packages/components/src/table/demos/SlotColumn.vue
+<<< ./demos/SlotColumn.vue
 :::
 
 ### 头部插槽
@@ -90,7 +90,7 @@
 :::
 
 ::: details 查看代码
-<<< @/../packages/components/src/table/demos/SlotHeader.vue
+<<< ./demos/SlotHeader.vue
 :::
 
 ## API
@@ -99,16 +99,15 @@
 
 支持 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Props) 除 `remote` 外的所有属性。
 
-| 名称                       | 说明                                                 | 类型                                            | 默认值      |
-| -------------------------- | ---------------------------------------------------- | ----------------------------------------------- | ----------- |
-| data-field                 | 替代请求数据中的 `data` 字段名                       | `string`                                        | `data`      |
-| immediate                  | 是否立即请求数据                                     | `boolean`                                       | `false`     |
-| pagination                 | 是否显示分页，支持传入对象自定义分页配置             | `boolean \| NPaginationProps`                   | `true`      |
-| row-key                    | 通过行数据创建行的 key（如果你不想给每一行加上 key） | `(row: any) => number \| string`                | `row.id`    |
-| total-field                | 替代请求数据中的 `total` 字段名                      | `string`                                        | `total`     |
-| on-update:checked-row-keys | `checked-row-keys` 值改变时触发的回调函数            | `(keys: Array<number \| string>) => void`       | `undefined` |
-| on-request                 | 异步请求数据的回调函数                               | `(params: Record<string, any>) => Promise<any>` | `undefined` |
-| on-update:loading          | `loading` 状态改变时触发的回调函数                   | `(loading: boolean) => void`                    | `undefined` |
+| 名称              | 说明                                                 | 类型                                            | 默认值      |
+| ----------------- | ---------------------------------------------------- | ----------------------------------------------- | ----------- |
+| data-field        | 替代请求数据中的 `data` 字段名                       | `string`                                        | `data`      |
+| immediate         | 是否立即请求数据                                     | `boolean`                                       | `false`     |
+| pagination        | 是否显示分页，支持传入对象自定义分页配置             | `boolean \| NPaginationProps`                   | `true`      |
+| row-key           | 通过行数据创建行的 key（如果你不想给每一行加上 key） | `(row: any) => number \| string`                | `row.id`    |
+| total-field       | 替代请求数据中的 `total` 字段名                      | `string`                                        | `total`     |
+| on-request        | 异步请求数据的回调函数                               | `(params: Record<string, any>) => Promise<any>` | `undefined` |
+| on-update:loading | `loading` 状态改变时触发的回调函数                   | `(loading: boolean) => void`                    | `undefined` |
 
 ### TableColumn Props
 

@@ -39,7 +39,7 @@
     "es"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "pnpm build --watch",
     "build": "vue-tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

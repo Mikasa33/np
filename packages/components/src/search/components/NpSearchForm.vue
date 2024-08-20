@@ -38,7 +38,7 @@ function handleClickCollaspe() {
 </script>
 
 <template>
-  <NpForm
+  <!-- <NpForm
     ref="formRef"
     v-bind="formProps"
     v-model:value="value"
@@ -75,5 +75,6 @@ function handleClickCollaspe() {
         </NButton>
       </NFlex>
     </template>
-  </NpForm>
+  </NpForm> -->
+  <div>123</div>
 </template>

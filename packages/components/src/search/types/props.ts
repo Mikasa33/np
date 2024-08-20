@@ -1,5 +1,5 @@
 import type { SelectGroupOption, SelectOption } from 'naive-ui'
-import type { NpFormProps } from '../../form'
+import type { FormProps } from '../../form'
 
 /**
  * 搜索表单 props
@@ -12,11 +12,11 @@ export interface NpSearchFormProps {
   /**
    * 表单 props
    */
-  formProps?: NpFormProps
+  formProps?: FormProps
   /**
    * 获取表项中收集到的值的对象
    */
-  value?: NpFormProps['value']
+  value: FormProps['value']
   /**
    * 表项中收集到的值的对象改变时触发的回调函数
    */
@@ -36,9 +36,17 @@ export interface NpSearchKeywordProps {
    */
   debounce?: number
   /**
+   * 是否禁用
+   */
+  disabled?: boolean
+  /**
    * 搜索字段的值
    */
   field?: string | number | null
+  /**
+   * 自定义搜索字段选择器的类名
+   */
+  fieldClass?: string
   /**
    * 配置搜索字段选项内容
    */
@@ -56,9 +64,9 @@ export interface NpSearchKeywordProps {
    */
   placeholder?: string
   /**
-   * 自定义选择器的类名
+   * 是否只读
    */
-  selectClass?: string
+  readonly?: boolean
   /**
    * 文本输入的值
    */
@@ -66,7 +74,7 @@ export interface NpSearchKeywordProps {
   /**
    * 输入框值改变时触发
    */
-  onSearch?: (options: { value?: string | number | null, field?: string | null }) => void
+  onSearch?: (value: string | null, field: string | number | null) => void
   /**
    * 字段选择框值改变时触发
    */
