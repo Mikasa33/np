@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { DataTableColumns, PaginationProps } from 'naive-ui'
-import { NDataTable, NFlex } from 'naive-ui'
+import type { DataTableColumns, DataTableProps, PaginationProps } from 'naive-ui'
+import { NDataTable, NFlex, dataTableProps } from 'naive-ui'
 import { computed, h, ref } from 'vue'
-import { cloneDeep, isArray, isString } from 'lodash-es'
-import { reactiveOmit } from '@vueuse/core'
-import { useSlotsFilter } from '../_composables/useSlotsFilter'
+import { cloneDeep, isArray, isObject, isString } from 'lodash-es'
+import { useSlotsFilter } from '../composables/useSlotsFilter'
+import { pickProps } from '../utils'
+import { useRequest } from '../composables/useRequest'
 import { components } from './components'
 import { tableProps } from './props'
 import type { TableColumnProps, TableSlots } from './types'
@@ -17,11 +18,11 @@ const props = defineProps(tableProps)
 const slots = defineSlots<TableSlots>()
 
 const checkedRowKeys = defineModel<Array<number | string>>('checkedRowKeys', { default: () => ([]) })
+const data = defineModel<Array<Record<string, any>>>('data', { default: () => [] })
 const loading = defineModel<boolean>('loading', { default: false })
 
-const pickedTableProps = reactiveOmit(props, 'checkedRowKeys', 'columns', 'dataField', 'immediate', 'loading', 'pagination', 'onRequest')
+const pickedTableProps = pickProps<DataTableProps>(props, dataTableProps)
 
-const data = ref<any[]>([])
 const { slotKeys } = useSlotsFilter((key: string) => key.includes('column-'))
 const columns = computed(() => {
   const columns = cloneDeep(props.columns ?? [])
@@ -65,18 +66,47 @@ const pagination = computed(() => {
     showSizePicker: true,
     ...(props.pagination as any),
     page,
-    onUpdatePage(page: number) {
-      (props.pagination as any).onUpdatePage?.(page)
-      paginationRef.value.page = page
-      refresh()
-    },
-    onUpdatePageSize(pageSize: number) {
-      (props.pagination as any).onUpdatePageSize?.(pageSize)
-      paginationRef.value.pageSize = pageSize
-      reload()
-    },
+    onUpdatePage,
+    onUpdatePageSize,
   }
 })
+const requestParams = computed(() => {
+  const { pageSize, page } = paginationRef.value
+  return {
+    pageSize,
+    page,
+  }
+})
+const { execute } = useRequest(
+  (params: Record<string, any>) => props.onRequest!({ ...requestParams.value, ...params }),
+  {
+    data,
+    immediate: props.immediate,
+    loading,
+    hook: (data: any) => {
+      if (isArray(data)) {
+        return data
+      }
+      else if (isObject(data)) {
+        paginationRef.value.itemCount = (data as any)?.[props.totalField]
+        return (data as any)?.[props.dataField]
+      }
+      return []
+    },
+  },
+)
+
+function onUpdatePage(page: number) {
+  (props.pagination as any).onUpdatePage?.(page)
+  paginationRef.value.page = page
+  execute()
+}
+
+function onUpdatePageSize(pageSize: number) {
+  (props.pagination as any).onUpdatePageSize?.(pageSize)
+  paginationRef.value.pageSize = pageSize
+  reload()
+}
 
 function rowKey(row: any) {
   if (props.rowKey) {
@@ -97,38 +127,9 @@ function renderComponent(column: TableColumnProps, row: any) {
   )
 }
 
-const requestParams = computed(() => {
-  const { pageSize, page } = paginationRef.value
-  return {
-    pageSize,
-    page,
-  }
-})
-
-async function request(params?: Record<string, any>) {
-  loading.value = true
-  try {
-    const res: any = await props.onRequest?.({ ...requestParams.value, ...params })
-    if (isArray(res)) {
-      data.value = res
-    }
-    else {
-      data.value = res?.[props.dataField]
-      paginationRef.value.itemCount = res?.[props.totalField]
-    }
-  }
-  finally {
-    loading.value = false
-  }
-}
-
-function refresh() {
-  request()
-}
-
 function reload(params?: Record<string, any>) {
   paginationRef.value.page = 1
-  request(params)
+  execute(params)
 }
 
 function getCheckedRowKeys(): Array<number | string> {
@@ -143,16 +144,11 @@ function getPagination(): boolean | PaginationProps {
   return pagination.value
 }
 
-// 立即请求数据
-if (props.immediate) {
-  refresh()
-}
-
 defineExpose({
   getCheckedRowKeys,
   getLoading,
   getPagination,
-  refresh,
+  refresh: execute,
   reload,
 })
 </script>

@@ -10,10 +10,12 @@ export const tableProps = Object.assign({}, omit(dataTableProps, 'columns', 'pag
   dataField: makeStringProp('data'),
   immediate: Boolean,
   pagination: {
-    type: [Boolean, Object] as PropType<boolean | PaginationProps>,
+    // 类型搞不定，先这样吧
+    type: [Boolean, Object] as PropType<boolean | any>,
     default: true,
   },
   totalField: makeStringProp('total'),
   onRequest: Function as PropType<(params: Record<string, any>) => Promise<any>>,
+  onUpdateData: makeFunctionProp<(options: Array<Record<string, any>>) => void>(),
   onUpdateLoading: makeFunctionProp<(loading: boolean) => void>(),
 })

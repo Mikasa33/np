@@ -17,6 +17,8 @@ export default defineConfig({
       // 确保外部化处理那些你不想打包进库的依赖
       external: [
         '@vueuse/core',
+        'dayjs',
+        'lodash-es',
         'naive-ui',
         'vue',
       ],

@@ -1,4 +1,5 @@
 import type { PropType } from 'vue'
+import { reactivePick } from '@vueuse/core'
 
 export const unknownProp = null as unknown as PropType<unknown>
 
@@ -53,7 +54,11 @@ export function makeObjectProp<T>(defaultVal = () => ({})) {
 
 export function makeStringProp<T>(defaultVal: T) {
   return {
-    type: String as unknown as PropType<T>,
+    type: String,
     default: defaultVal,
   }
+}
+
+export function pickProps<T = any>(props: any, pk: any) {
+  return reactivePick(props, ...Object.keys(pk)) as T
 }

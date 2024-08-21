@@ -1,2 +1,7 @@
-// export { default as NpAdvTable } from './components/NpAdvTable.vue'
-// export type { NpAdvTableProps } from './types/props'
+import { withInstall } from '../utils'
+import _AdvTable from './AdvTable.vue'
+
+export const NpAdvTable = withInstall(_AdvTable)
+export default _AdvTable
+export { advTableProps } from './props'
+export type { AdvTableProps, AdvTableSlots } from './types'

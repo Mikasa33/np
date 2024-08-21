@@ -4,9 +4,6 @@
 
 如果只是想渲染一个表格，建议直接使用 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table) 或 [NTable](https://www.naiveui.com/zh-CN/light/components/table)。
 
-> [!WARNING]
-> 目前 NaiveUI 的组件属性没有完全支持，工作量有点大，持续完善中...
-
 ## 演示
 
 ### 基础

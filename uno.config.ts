@@ -4,12 +4,12 @@ import { defineConfig, presetIcons, presetUno, transformerVariantGroup } from 'u
 export default defineConfig({
   content: {
     filesystem: [
-      'node_modules/@rezero/np/es/**/*.js',
+      'node_modules/@mikasa33/np/es/**/*.js',
     ],
     pipeline: {
       include: [
         /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|ts)($|\?)/,
-        'node_modules/@rezero/np/es/**/*.js',
+        'node_modules/@mikasa33/np/es/**/*.js',
       ],
     },
   },

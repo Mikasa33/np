@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { FormInst } from 'naive-ui'
-import { NForm, NFormItemGi, NGi, NGrid } from 'naive-ui'
+import type { FormInst, FormProps } from 'naive-ui'
+import { NForm, NFormItemGi, NGi, NGrid, formItemGiProps, formProps as nFormProps } from 'naive-ui'
 import { ref } from 'vue'
 import { reactiveOmit, useArrayFilter } from '@vueuse/core'
 import { get, isString, omit } from 'lodash-es'
 import type { FormValidateCallback, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
+import { pickProps } from '../utils'
 import type { FormItemProps, FormSlots } from './types'
 import { useValue } from './use-value'
 import { components } from './components'
@@ -19,7 +20,7 @@ const slots = defineSlots<FormSlots>()
 
 const value = defineModel<Record<string, any>>('value', { default: () => ({}) })
 
-const pickedFormProps = reactiveOmit(props, 'defaultValues', 'giSpan', 'giSuffixSpan', 'gridProps', 'items', 'value', 'onUpdateValue')
+const pickedFormProps = pickProps<FormProps>(props, nFormProps)
 
 const formRef = ref<FormInst>()
 const formItems = useArrayFilter(props.items!, (item: FormItemProps) => !!item.path)
@@ -38,8 +39,9 @@ function mergeGridProps() {
 }
 
 function mergeFormItemGiProps(item: FormItemProps) {
+  const pickedProps = pickProps<FormItemProps>(item, formItemGiProps)
   return {
-    ...omit(item, ['component', 'componentProps', 'defaultValue', 'slot']),
+    ...pickedProps,
     // 栅格占据的列数，默认为 24
     span: item.span ?? props.giSpan,
   }

@@ -2,7 +2,9 @@
 import type { SelectProps } from '@mikasa33/np'
 import { NpSelect } from '@mikasa33/np'
 import type { SelectOption } from 'naive-ui'
+import { ref } from 'vue'
 
+const value = ref()
 const selectProps: SelectProps = {
   onRequest: (): Promise<SelectOption[]> => {
     return new Promise((resolve) => {
@@ -29,5 +31,9 @@ const selectProps: SelectProps = {
 </script>
 
 <template>
-  <NpSelect v-bind="selectProps" />
+  <NpSelect
+    v-model:value="value"
+    v-bind="selectProps"
+  />
+  <pre>已选值：{{ value }}</pre>
 </template>

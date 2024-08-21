@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { SelectGroupOption, SelectOption } from 'naive-ui'
-import { NSelect } from 'naive-ui'
-import { reactiveOmit, useToggle } from '@vueuse/core'
+import type { SelectGroupOption, SelectOption, SelectProps } from 'naive-ui'
+import { NSelect, selectProps as nSelectProps } from 'naive-ui'
 import { isArray } from 'lodash-es'
 import { ref } from 'vue'
+import { pickProps } from '../utils'
+import { useRequest } from '../composables/useRequest'
 import { selectProps } from './props'
 import type { SelectSlots } from './types'
 
@@ -14,42 +15,29 @@ const value = defineModel<Array<string | number> | string | number | null>('valu
 const loading = defineModel<boolean>('loading', { default: false })
 const options = defineModel<Array<SelectOption | SelectGroupOption>>('options', { default: () => [] })
 
-const pickedSelectProps = reactiveOmit(props, 'immediate', 'loading', 'value', 'onRequest')
+const pickedSelectProps = pickProps<SelectProps>(props, nSelectProps)
 
-const requested = ref(false)
+const { requested, execute } = useRequest(props.onRequest, {
+  data: options,
+  immediate: props.immediate,
+  loading,
+  hook: (data: any) => {
+    if (isArray(data)) {
+      return data
+    }
+    return []
+  },
+})
 
 function handleUpdateShow(show: boolean) {
   // 显示菜单 && 没有请求
   if (show && props.onRequest && !requested.value) {
-    requested.value = true
-    refresh()
+    execute()
   }
-}
-
-async function request(params?: Record<string, any>) {
-  loading.value = true
-  try {
-    const res: any = await props.onRequest?.({ ...params })
-    if (isArray(res)) {
-      options.value = res
-    }
-  }
-  finally {
-    loading.value = false
-  }
-}
-
-function refresh(params?: Record<string, any>) {
-  request(params)
-}
-
-// 立即执行
-if (props.immediate) {
-  refresh()
 }
 
 defineExpose({
-  refresh,
+  refresh: execute,
 })
 </script>
 

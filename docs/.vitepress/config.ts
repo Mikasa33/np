@@ -27,15 +27,8 @@ export default defineConfig({
           base: '/components',
           items: [
             { text: '表单 Form', link: '/form/' },
+            { text: '搜索关键词 Search Keyword', link: '/search-keyword/' },
             { text: '选择器 Select', link: '/select/' },
-            {
-              text: '搜索 Search',
-              base: '/components/search',
-              items: [
-                { text: '搜索表单 Search Form', link: '/search-form' },
-                { text: '搜索关键词 Search Keyword', link: '/search-keyword' },
-              ],
-            },
           ],
         },
         {
@@ -45,8 +38,8 @@ export default defineConfig({
           items: [
             { text: '表格 Table', link: '/table/' },
             { text: '树 Tree', link: '/tree/' },
-            { text: '展示标签 View Tag', link: '/view-tag' },
-            { text: '展示时间 View Time', link: '/view-time' },
+            { text: '展示标签 View Tag', link: '/view-tag/' },
+            { text: '展示时间 View Time', link: '/view-time/' },
           ],
         },
         {
