@@ -12,11 +12,6 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '组件', link: '/components/form', activeMatch: '/components' },
-      {
-        text: '博客',
-        link: '/blog/develop-component-library-with-vite',
-        activeMatch: '/blog',
-      },
     ],
 
     sidebar: {

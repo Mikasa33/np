@@ -1,12 +1,7 @@
-import { cardProps, modalProps as nModalProps } from 'naive-ui'
-import { makeFunctionProp, makeNumberProp, truthProp } from '../utils'
+import { drawerProps as nDrawerProps } from 'naive-ui'
+import { makeNumericProp } from '../utils'
+import { innerPopupCardProps, popupCardProps } from '../popup-card'
 
-export const modalProps = Object.assign({}, cardProps, nModalProps, {
-  autoFocus: Boolean,
-  bordered: Boolean,
-  closable: truthProp,
-  fullscreen: Boolean,
-  fullscreenable: truthProp,
-  width: makeNumberProp(500),
-  onUpdateFullscreen: makeFunctionProp<(fullscreen: boolean) => void>(),
+export const modalProps = Object.assign({}, popupCardProps, nDrawerProps, innerPopupCardProps, {
+  width: makeNumericProp(500),
 })

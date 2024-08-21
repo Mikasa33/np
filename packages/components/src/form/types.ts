@@ -23,5 +23,5 @@ export type FormItemComponentType =
 
 export interface FormSlots {
   [key: `item-${string}`]: (props: { props: FormItemProps, path: string, value: Record<string, any> }) => VNodeChild
-  'gi-suffix': (props: { overflow: boolean }) => VNodeChild
+  'gi-suffix'?: (props: { overflow: boolean }) => VNodeChild
 }

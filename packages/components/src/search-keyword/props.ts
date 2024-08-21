@@ -1,4 +1,4 @@
-import type { SelectGroupOption, SelectOption } from 'naive-ui'
+import type { SelectOption } from 'naive-ui'
 import { inputProps } from 'naive-ui'
 import type { PropType } from 'vue'
 import { makeArrayProp, makeNumberProp, makeStringProp, numericProp, truthProp } from '../utils'

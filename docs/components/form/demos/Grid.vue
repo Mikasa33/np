@@ -12,6 +12,7 @@ const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
 )
 const formProps: FormProps = {
   giSpan: 12,
+  xGap: 16,
   items: [
     {
       path: 'input',

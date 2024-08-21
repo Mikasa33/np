@@ -1,15 +1,36 @@
 <script setup lang="ts">
 import type { AdvTableProps } from '@mikasa33/np'
 import { NpAdvTable } from '@mikasa33/np'
+import { NButton } from 'naive-ui'
 
 const advTableProps: AdvTableProps = {
+  filterProps: {
+
+  },
+  filterFormProps: {
+    items: [
+      {
+        path: 'age',
+        label: '年龄',
+        component: 'NInputNumber',
+        componentProps: {
+          class: 'w-full',
+        },
+      },
+      {
+        path: 'address',
+        label: '地址',
+        component: 'NInput',
+      },
+    ],
+  },
   searchProps: {
     fieldOptions: [
       { value: 'name', label: '姓名' },
       { value: 'age', label: '年龄' },
       { value: 'address', label: '地址' },
     ],
-    fieldClass: '!w-100px',
+    fieldClass: '!w-80px',
   },
   immediate: true,
   pagination: true,
@@ -41,5 +62,14 @@ const advTableProps: AdvTableProps = {
 </script>
 
 <template>
-  <NpAdvTable v-bind="advTableProps" />
+  <NpAdvTable v-bind="advTableProps">
+    <template #action>
+      <NButton type="primary">
+        按钮 1
+      </NButton>
+      <NButton type="error">
+        按钮 2
+      </NButton>
+    </template>
+  </NpAdvTable>
 </template>

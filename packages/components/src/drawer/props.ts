@@ -1,12 +1,7 @@
-import { cardProps, drawerProps as nDrawerProps } from 'naive-ui'
-import { makeFunctionProp, makeNumericProp, truthProp } from '../utils'
+import { drawerProps as nDrawerProps } from 'naive-ui'
+import { makeNumericProp } from '../utils'
+import { innerPopupCardProps, popupCardProps } from '../popup-card'
 
-export const drawerProps = Object.assign({}, cardProps, nDrawerProps, {
-  autoFocus: Boolean,
-  bordered: Boolean,
-  closable: truthProp,
-  fullscreen: Boolean,
-  fullscreenable: truthProp,
-  width: makeNumericProp(500),
-  onUpdateFullscreen: makeFunctionProp<(fullscreen: boolean) => void>(),
+export const drawerProps = Object.assign({}, popupCardProps, nDrawerProps, innerPopupCardProps, {
+  width: makeNumericProp(300),
 })

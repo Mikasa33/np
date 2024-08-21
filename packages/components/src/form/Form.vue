@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { FormInst, FormProps } from 'naive-ui'
-import { NForm, NFormItemGi, NGi, NGrid, formItemGiProps, formProps as nFormProps } from 'naive-ui'
+import type { FormInst, FormProps, GridProps } from 'naive-ui'
+import { NForm, NFormItemGi, NGi, NGrid, formItemGiProps, gridProps, formProps as nFormProps } from 'naive-ui'
 import { ref } from 'vue'
-import { reactiveOmit, useArrayFilter } from '@vueuse/core'
-import { get, isString, omit } from 'lodash-es'
+import { useArrayFilter } from '@vueuse/core'
+import { get, isString } from 'lodash-es'
 import type { FormValidateCallback, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
 import { pickProps } from '../utils'
 import type { FormItemProps, FormSlots } from './types'
@@ -21,22 +21,12 @@ const slots = defineSlots<FormSlots>()
 const value = defineModel<Record<string, any>>('value', { default: () => ({}) })
 
 const pickedFormProps = pickProps<FormProps>(props, nFormProps)
+const pickedGridProps = pickProps<GridProps>(props, gridProps)
 
 const formRef = ref<FormInst>()
 const formItems = useArrayFilter(props.items!, (item: FormItemProps) => !!item.path)
 const slotItems = useArrayFilter(props.items!, (item: FormItemProps) => !!item.path || !!item.slot)
 const { reset: resetValue } = useValue(props, value, formItems)
-
-function mergeGridProps() {
-  // 表单标签显示的位置为 top 时，xGap 默认为 16
-  if (props.labelPlacement === 'top') {
-    return {
-      xGap: 16,
-      ...props.gridProps,
-    }
-  }
-  return props.gridProps
-}
 
 function mergeFormItemGiProps(item: FormItemProps) {
   const pickedProps = pickProps<FormItemProps>(item, formItemGiProps)
@@ -87,7 +77,7 @@ defineExpose({
     v-bind="pickedFormProps"
     :model="value"
   >
-    <NGrid v-bind="mergeGridProps()">
+    <NGrid v-bind="pickedGridProps">
       <NFormItemGi
         v-for="item in slotItems"
         :key="item.path"

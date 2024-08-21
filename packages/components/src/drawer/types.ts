@@ -1,9 +1,9 @@
-import type { ExtractPublicPropTypes, VNodeChild } from 'vue'
+import type { ExtractPublicPropTypes } from 'vue'
+import type { PopupCardSlots } from '../popup-card'
 import type { drawerProps } from './props'
 
 export type DrawerProps = ExtractPublicPropTypes<typeof drawerProps>
 
-export interface DrawerSlots {
-  'default'?: () => VNodeChild
-  'header-extra'?: () => VNodeChild
+export interface DrawerSlots extends PopupCardSlots {
+
 }

@@ -59,7 +59,7 @@ watchDebounced(
       v-bind="inputProps"
       v-model:value="value"
       :class="inputClass"
-      class="w-200px"
+      class="!w-200px"
     >
       <template #prefix>
         <slot

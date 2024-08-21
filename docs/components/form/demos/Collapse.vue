@@ -23,13 +23,9 @@ const formProps: FormProps = {
   ],
 }
 const formProps2: FormProps = reactive({
+  collapsed: computed(() => formValue.value.collapsed),
   giSpan: 12,
-  gridProps: computed(() => {
-    return {
-      collapsed: formValue.value.collapsed,
-      xGap: 12,
-    }
-  }),
+  xGap: 12,
   items: [
     {
       path: 'input1',

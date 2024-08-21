@@ -27,5 +27,5 @@
 | closable             | 是否允许关闭                                  | `boolean`                       | `true`      |
 | fullscreen           | 是否全屏抽屉                                  | `boolean`                       | `false`     |
 | fullscreenable       | 是否允许全屏                                  | `boolean`                       | `true`      |
-| width                | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 | `number \| string`              | `500`       |
+| width                | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 | `number \| string`              | `300`       |
 | on-update-fullscreen | 切换全屏的回调函数                            | `(fullscreen: boolean) => void` | `undefined` |

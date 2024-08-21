@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import type dayjs from 'dayjs'
-import { makeStringProp } from '../utils/props'
+import { makeStringProp } from '../utils'
 
 export const viewTimeProps = Object.assign({}, {
   format: makeStringProp('YYYY-MM-DD HH:mm:ss'),
