@@ -83,17 +83,17 @@ defineExpose({
         :key="item.path"
         v-bind="mergeFormItemGiProps(item)"
       >
-        <!-- 表单项 path 属性插槽，优先级最高 -->
+        <!-- 优先级 slot > path -->
         <slot
-          v-if="slots[`item-${item.path}`]"
-          :name="`item-${item.path}`"
+          v-if="slots[`item-${item.slot}`]"
+          :name="`item-${item.slot}`"
           :props="item"
           :path="item.path!"
           :value
         />
         <slot
-          v-else-if="slots[`item-${item.slot}`]"
-          :name="`item-${item.slot}`"
+          v-else-if="slots[`item-${item.path}`]"
+          :name="`item-${item.path}`"
           :props="item"
           :path="item.path!"
           :value

@@ -8,7 +8,6 @@ const theme = ref<GlobalTheme | null>(null)
 </script>
 
 <template>
-  <!-- 设置 global-style 是为了解决在文档中的报错问题，平时可以正常使用 -->
   <NpConfigProvider :global-style="false" :theme>
     <NCard>
       <NFlex>

@@ -114,6 +114,7 @@
 | --------------- | ----------------------------------------------------------------------------- | ---------------------------- | ----------- |
 | component       | 组件或组件名称，类型参考 [TableColumnComponent Type](#formitemcomponent-type) | `NpTableColumnComponentType` | `undefined` |
 | component-props | 组件 props                                                                    | `any`                        | `undefined` |
+| slot            | 插槽名称，优先级大于 `key` 属性对应的插槽                                     | `string`                     | `undefined` |
 
 ### TableColumnComponent Type
 

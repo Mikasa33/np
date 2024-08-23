@@ -16,7 +16,7 @@ export const formProps = Object.assign({}, gridProps, omit(nFormProps, 'model'),
 
 export const formItemProps = Object.assign({}, formItemGiProps, {
   component: [String, Function] as PropType<FormItemComponentType>,
-  componentProps: makeObjectProp(),
+  componentProps: makeObjectProp<any>(),
   defaultValue: Object as PropType<any>,
   slot: String,
 })

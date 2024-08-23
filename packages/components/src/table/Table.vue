@@ -31,12 +31,25 @@ const columns = computed(() => {
     if (!key && !slot) {
       continue
     }
-    const slotKey: string = `column-${slot ?? key}`
+
+    function renderColumn(slotKey: string) {
+      if (slotKeys.value.includes(slotKey)) {
+        column.render = (row: any, index: number) => (slots as any)[slotKey]?.({ key, row, index })
+        return true
+      }
+      return false
+    }
+
     // 插槽，优先级最高，slot > key
-    if (slotKeys.value.includes(slotKey)) {
-      column.render = (row: any, index: number) => (slots as any)[slotKey]?.({ key, row, index })
+    let slotKey: string = `column-${slot}`
+    if (renderColumn(slotKey)) {
       continue
     }
+    slotKey = `column-${key}`
+    if (renderColumn(slotKey)) {
+      continue
+    }
+
     // 自定义组件
     if (component) {
       column.render = (row: any) => renderComponent(column, row)
