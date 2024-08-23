@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { AdvTableProps } from '@mikasa33/np'
 import { NpAdvTable } from '@mikasa33/np'
-import { ref } from 'vue'
+import { NButton } from 'naive-ui'
+import { h, ref } from 'vue'
 
 const advTableRef = ref()
 const advTableProps: AdvTableProps = {
@@ -31,6 +32,11 @@ const advTableProps: AdvTableProps = {
     { key: 'age', title: '年龄' },
     { key: 'address', title: '地址' },
   ],
+  // 优先级不如 slot
+  columnActions: [
+    h(NButton, { tertiary: true, size: 'small' }, () => '组件'),
+    'delete',
+  ],
 }
 </script>
 
@@ -39,11 +45,9 @@ const advTableProps: AdvTableProps = {
     ref="advTableRef"
     v-bind="advTableProps"
   >
-    <template #action>
-      action slot
-    </template>
-    <template #search>
-      search slot
+    <!-- 优先级最高 -->
+    <template #column-action="{ row, index }">
+      {{ index === 0 ? row : '...' }}
     </template>
   </NpAdvTable>
 </template>

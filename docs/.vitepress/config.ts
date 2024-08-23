@@ -44,6 +44,7 @@ export default defineConfig({
           items: [
             { text: '抽屉 Drawer', link: '/drawer/' },
             { text: '模态框 Modal', link: '/modal/' },
+            { text: '弹出信息 Popover', link: '/popover/' },
           ],
         },
         {
@@ -52,6 +53,14 @@ export default defineConfig({
           base: '/components',
           items: [
             { text: '弹性布局 Flex', link: '/flex/' },
+          ],
+        },
+        {
+          text: '配置',
+          collapsed: false,
+          base: '/components',
+          items: [
+            { text: '全局化配置 Config Provider', link: '/config-provider/' },
           ],
         },
         {

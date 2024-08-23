@@ -4,4 +4,4 @@ import _AdvTable from './AdvTable.vue'
 export const NpAdvTable = withInstall(_AdvTable)
 export default _AdvTable
 export { advTableProps } from './props'
-export type { AdvTableProps, AdvTableSlots } from './types'
+export type { AdvTableProps, AdvTableFilterPresetType, AdvTableSlots } from './types'

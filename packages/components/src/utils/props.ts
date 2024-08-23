@@ -17,10 +17,10 @@ export function makeRequiredProp<T>(type: T) {
   }
 }
 
-export function makeArrayProp<T>() {
+export function makeArrayProp<T>(defaultVal = [] as T[]) {
   return {
     type: Array as PropType<T[]>,
-    default: () => [],
+    default: () => defaultVal,
   }
 }
 
@@ -45,10 +45,10 @@ export function makeNumericProp<T>(defaultVal: T) {
   }
 }
 
-export function makeObjectProp<T>(defaultVal = () => ({})) {
+export function makeObjectProp<T>(defaultVal = {} as T) {
   return {
     type: Object as PropType<T>,
-    default: defaultVal,
+    default: () => defaultVal,
   }
 }
 

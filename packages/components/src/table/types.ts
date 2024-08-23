@@ -12,30 +12,23 @@ export interface TableColumnProps<T = InternalRowData> {
   colSpan?: (rowData: T, rowIndex: number) => number | never
   component?: TableColumnComponentType
   componentProps?: any
+  defaultFilterOptionValues?: FilterOptionValue[] | null
+  defaultFilterOptionValue?: FilterOptionValue | null
+  filterMultiple?: boolean
+  defaultSortOrder?: SortOrder
   disabled?: (row: T) => boolean
   ellipsis?: Ellipsis
   ellipsisComponent?: 'ellipsis' | 'performant-ellipsis'
   expandable?: Expandable<T>
-  fixed?: 'left' | 'right'
-  title?: TableColumnTitle | TableColumnGroupTitle | TableExpandColumnTitle
-  titleColSpan?: number
-  type?: never | 'expand' | 'selection'
-  key: ColumnKey
-  tree?: boolean
-  sorter?: boolean | Sorter<T> | 'default' | never
-  defaultSortOrder?: SortOrder
-  sortOrder?: SortOrder
-  resizable?: boolean
-  minWidth?: string | number
-  maxWidth?: string | number
   filter?: 'default' | boolean | Filter<T> | never
   filterOptions?: FilterOption[] | never
   filterOptionValues?: FilterOptionValue[] | null | never
   filterOptionValue?: FilterOptionValue | null | never
   filterMode?: 'or' | 'and'
-  defaultFilterOptionValues?: FilterOptionValue[] | null
-  defaultFilterOptionValue?: FilterOptionValue | null
-  filterMultiple?: boolean
+  fixed?: 'left' | 'right'
+  key: ColumnKey
+  maxWidth?: string | number
+  minWidth?: string | number
   multiple?: boolean
   options?: DataTableSelectionOptions<T>
   render?: (rowData: T, rowIndex: number) => VNodeChild
@@ -45,8 +38,16 @@ export interface TableColumnProps<T = InternalRowData> {
   renderSorter?: RenderSorter
   renderSorterIcon?: RenderSorterIcon
   renderFilterMenu?: RenderFilterMenu
+  resizable?: boolean
   rowSpan?: (rowData: T, rowIndex: number) => number | never
+  slot?: string
+  sorter?: boolean | Sorter<T> | 'default' | never
+  sortOrder?: SortOrder
+  title?: TableColumnTitle | TableColumnGroupTitle | TableExpandColumnTitle
   titleAlign?: 'left' | 'center' | 'right'
+  titleColSpan?: number
+  type?: never | 'expand' | 'selection'
+  tree?: boolean
   width?: number | string
 }
 

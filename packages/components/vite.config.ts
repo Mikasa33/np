@@ -44,6 +44,8 @@ export default defineConfig({
     Dts({
       // 将 '.vue.d.ts' 文件名转换为 '.d.ts'
       cleanVueFileName: true,
+      // 将源码里的 .d.ts 文件复制到 `outDir`
+      copyDtsFiles: true,
       // 入口文件的根路径
       entryRoot: './src',
       // 输出目录

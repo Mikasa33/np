@@ -27,12 +27,12 @@ const { slotKeys } = useSlotsFilter((key: string) => key.includes('column-'))
 const columns = computed(() => {
   const columns = cloneDeep(props.columns ?? [])
   for (const column of columns) {
-    const { key, component } = column
-    if (!key) {
+    const { key, slot, component } = column
+    if (!key && !slot) {
       continue
     }
-    const slotKey: string = `column-${key}`
-    // 插槽，优先级最高
+    const slotKey: string = `column-${slot ?? key}`
+    // 插槽，优先级最高，slot > key
     if (slotKeys.value.includes(slotKey)) {
       column.render = (row: any, index: number) => (slots as any)[slotKey]?.({ key, row, index })
       continue

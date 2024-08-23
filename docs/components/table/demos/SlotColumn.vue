@@ -21,7 +21,10 @@ const tableProps = reactive<TableProps>({
   },
   columns: [
     { key: 'name', title: '姓名' },
-    { key: 'age', title: '年龄' },
+    {
+      title: '年龄',
+      slot: 'ageeee',
+    },
     {
       key: 'birthday',
       title: '出生日期',
@@ -34,6 +37,9 @@ const tableProps = reactive<TableProps>({
 
 <template>
   <NpTable v-bind="tableProps">
+    <template #column-ageeee="{ row }">
+      slot {{ row.age }}
+    </template>
     <template #column-birthday="{ key, row }">
       {{ row.birthday === 1041350400000 ? '列插槽' : '' }} {{ row[key] }}
     </template>

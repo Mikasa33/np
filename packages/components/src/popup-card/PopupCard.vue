@@ -45,7 +45,7 @@ function handleConfirm() {
   <NCard
     ref="cardRef"
     v-bind="cardProps"
-    :content-class="`${cardProps?.contentClass ?? ''} overflow-hidden !px-0`"
+    :content-class="`${cardProps?.contentClass ?? ''} overflow-hidden !p-0`"
     :class="{
       '!rounded-none': fullscreen,
     }"
@@ -58,23 +58,25 @@ function handleConfirm() {
         justify="end"
         size="small"
       >
-        <PopupCardIconBtn v-if="fullscreenable">
+        <PopupCardIconBtn
+          v-if="fullscreenable"
+          @click="handleToggleFullscreen"
+        >
           <div
             :class="fullscreen ? 'i-icon-park-outline-off-screen' : 'i-icon-park-outline-full-screen'"
             class="text-16px"
-            @click="handleToggleFullscreen"
           />
         </PopupCardIconBtn>
-        <PopupCardIconBtn v-if="closable">
-          <div
-            class="i-icon-park-outline-close text-16px"
-            @click="handleCancel"
-          />
+        <PopupCardIconBtn
+          v-if="closable"
+          @click="handleCancel"
+        >
+          <div class="i-icon-park-outline-close text-16px" />
         </PopupCardIconBtn>
       </NFlex>
     </template>
 
-    <NScrollbar content-class="px-24px">
+    <NScrollbar content-class="px-24px pb-20px">
       <slot />
     </NScrollbar>
 
