@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { ConfigProviderProps } from 'naive-ui'
 import {
   NConfigProvider,
@@ -44,7 +44,7 @@ const ProviderContent = defineComponent({
     registerNaiveTools()
   },
   render() {
-    return h('div')
+    return <div />
   },
 })
 </script>

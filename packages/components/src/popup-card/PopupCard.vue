@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { CardProps } from 'naive-ui'
 import { NButton, NCard, NFlex, NScrollbar, cardProps as nCardProps } from 'naive-ui'
 import { omit } from 'lodash-es'
 import { useFullscreen } from '@vueuse/core'
+import type { Slots } from 'vue'
 import { ref } from 'vue'
 import { pickProps } from '../utils'
 import { popupCardProps } from './props'
 import type { PopupCardSlots } from './types'
-import PopupCardIconBtn from './PopupCardIconBtn.vue'
 
 defineOptions({
   name: 'NpPopupCard',
@@ -39,6 +39,17 @@ function handleCancel() {
 function handleConfirm() {
   emits('confirm')
 }
+
+function IconBtn(_: any, { slots }: { slots: Slots }) {
+  return (
+    <NButton
+      quaternary
+      class="!h-24px !w-24px !p-0"
+    >
+      {slots.default?.()}
+    </NButton>
+  )
+}
 </script>
 
 <template>
@@ -58,7 +69,7 @@ function handleConfirm() {
         justify="end"
         size="small"
       >
-        <PopupCardIconBtn
+        <IconBtn
           v-if="fullscreenable"
           @click="handleToggleFullscreen"
         >
@@ -66,13 +77,13 @@ function handleConfirm() {
             :class="fullscreen ? 'i-icon-park-outline-off-screen' : 'i-icon-park-outline-full-screen'"
             class="text-16px"
           />
-        </PopupCardIconBtn>
-        <PopupCardIconBtn
+        </IconBtn>
+        <IconBtn
           v-if="closable"
           @click="handleCancel"
         >
           <div class="i-icon-park-outline-close text-16px" />
-        </PopupCardIconBtn>
+        </IconBtn>
       </NFlex>
     </template>
 

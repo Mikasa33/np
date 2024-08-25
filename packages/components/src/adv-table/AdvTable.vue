@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { computed, h, ref } from 'vue'
 import { NButton, NFlex, NTooltip } from 'naive-ui'
 import { isString, omit } from 'lodash-es'
@@ -34,16 +34,25 @@ const columns = computed(() => {
       key: 'action',
       title: '操作',
       render(row: any) {
-        return h(NFlex, {}, () => props.columnActions.map((item) => {
-          if (isString(item)) {
-            return h(
-              NButton,
-              { type: item === 'edit' ? 'primary' : item === 'delete' ? 'error' : 'default', tertiary: true, size: 'small', onClick: () => emits(item as any, row) },
-              () => item === 'edit' ? '编辑' : item === 'delete' ? '删除' : '操作',
-            )
-          }
-          return item
-        }))
+        return (
+          <NFlex>
+            {props.columnActions.map((item) => {
+              if (isString(item)) {
+                return (
+                  <NButton
+                    type={item === 'edit' ? 'primary' : item === 'delete' ? 'error' : 'default'}
+                    tertiary
+                    size="small"
+                    onClick={() => emits(item as any, row)}
+                  >
+                    {item === 'edit' ? '编辑' : item === 'delete' ? '删除' : '操作'}
+                  </NButton>
+                )
+              }
+              return item
+            })}
+          </NFlex>
+        )
       },
     },
   ]
@@ -52,6 +61,7 @@ const columns = computed(() => {
 const { slotKeys } = useSlotsFilter((key: string) => key.includes('column-'))
 
 const tableRef = ref()
+const formRef = ref()
 
 const filterShow = ref(false)
 const loading = ref(false)
@@ -63,6 +73,14 @@ const filterValue = ref<any>({})
 
 async function onRequest(params: Record<string, any>) {
   return props?.onRequest?.({ ...params, ...filterValue.value, ...searchValue.value })
+}
+
+function handleCancel() {
+  filterShow.value = false
+}
+
+function handleReset() {
+  formRef.value.reset()
 }
 
 function handleSearch() {
@@ -77,43 +95,64 @@ function handleClickFilterBtn() {
 }
 
 function Btn() {
-  return h(
-    NButton,
-    {
-      ...props.filterBtnProps,
-      class: '!h-34px !w-34px !p-0',
-      onClick: handleClickFilterBtn,
-    },
-    () => h('div', { class: 'i-icon-park-outline-filter' }),
+  return (
+    <NButton
+      {...props.filterBtnProps}
+      class="!h-34px !w-34px !p-0"
+      onClick={handleClickFilterBtn}
+    >
+      <div class="i-icon-park-outline-filter" />
+    </NButton>
   )
 }
 
 function Form() {
-  return h(
-    NpForm,
-    {
-      ...props.filterFormProps,
-      showFeedback: false,
-      yGap: props.filterFormProps.yGap ?? 16,
-      value: filterValue.value,
-      onUpdateValue: (val: any) => filterValue.value = val,
-    },
+  return (
+    <NpForm
+      ref={formRef}
+      {...props.filterFormProps}
+      showFeedback={false}
+      yGap={props.filterFormProps.yGap ?? 16}
+      value={filterValue.value}
+      onUpdateValue={(val: any) => filterValue.value = val}
+    />
+  )
+}
+
+function PopupCardBtns() {
+  return (
+    <NFlex justify="end">
+      <NButton onClick={handleCancel}>
+        取消
+      </NButton>
+      <NButton onClick={handleReset}>
+        重置
+      </NButton>
+      <NButton
+        type="primary"
+        onClick={handleSearch}
+      >
+        确认
+      </NButton>
+    </NFlex>
   )
 }
 
 function FilterBtn() {
   if (props.filterPreset === 'popover') {
-    return h(
-      NpPopover,
-      {
-        title,
-        ...props.filterPopupProps,
-        trigger: 'click',
-      },
-      {
-        default: Form,
-        trigger: Btn,
-      },
+    return (
+      <NpPopover
+        v-model:show={filterShow.value}
+        title={title}
+        {...props.filterPopupProps}
+        trigger="click"
+        v-slots={{
+          trigger: () => Btn(),
+          footer: PopupCardBtns,
+        }}
+      >
+        {Form()}
+      </NpPopover>
     )
   }
   return Btn()
@@ -133,44 +172,42 @@ defineExpose({
     :on-request
   >
     <template
-      v-if="(searchable || filterable || slots.action || slots.search || slots.header)"
+      v-if="(searchable || filterable || slots.action || slots.search)"
       #header
     >
-      <slot
-        v-if="slots.header"
-        name="header"
+      <slot name="action" />
+      <NpFlex1 />
+      <slot name="search" />
+      <NpSearchKeyword
+        v-if="searchable"
+        v-bind="(searchProps as any)"
+        v-model:value="searchValue.keyword"
+        v-model:field="searchValue.field"
+        :disabled="loading"
+        @search="handleSearch"
       />
-      <template v-else>
-        <slot name="action" />
-        <NpFlex1 />
-        <slot name="search" />
-        <NpSearchKeyword
-          v-if="searchable"
-          v-bind="(searchProps as any)"
-          v-model:value="searchValue.keyword"
-          v-model:field="searchValue.field"
-          :disabled="loading"
-          @search="handleSearch"
-        />
-        <template v-if="filterable">
-          <NTooltip v-bind="filterTooltipProps">
-            <template #trigger>
-              <div>
-                <FilterBtn />
-              </div>
-            </template>
-            {{ filterTooltipText }}
-          </NTooltip>
-          <Component
-            :is="filterPreset === 'drawer' ? NpDrawer : filterPreset === 'modal' ? NpModal : null"
-            v-model:show="filterShow"
-            :title
-            v-bind="(filterPopupProps as any)"
-            @confirm="handleSearch"
-          >
-            <Form />
-          </Component>
-        </template>
+      <template v-if="filterable">
+        <NTooltip v-bind="filterTooltipProps">
+          <template #trigger>
+            <div>
+              <FilterBtn />
+            </div>
+          </template>
+          {{ filterTooltipText }}
+        </NTooltip>
+        <Component
+          :is="filterPreset === 'drawer' ? NpDrawer : filterPreset === 'modal' ? NpModal : null"
+          v-model:show="filterShow"
+          :title
+          v-bind="(filterPopupProps as any)"
+          @confirm="handleSearch"
+        >
+          <Form />
+
+          <template #footer>
+            <PopupCardBtns />
+          </template>
+        </Component>
       </template>
     </template>
 

@@ -15,7 +15,7 @@ const props = defineProps(popoverProps)
 const emits = defineEmits<{
   confirm: []
 }>()
-defineSlots<PopoverSlots>()
+const slots = defineSlots<PopoverSlots>()
 
 const show = defineModel<boolean>('show')
 const fullscreen = defineModel<boolean>('fullscreen')
@@ -45,8 +45,21 @@ function handleConfirm() {
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >
-      <slot name="header-extra" />
+      <template
+        v-if="slots['header-extra']"
+        #header-extra
+      >
+        <slot name="header-extra" />
+      </template>
+
       <slot />
+
+      <template
+        v-if="slots.footer"
+        #footer
+      >
+        <slot name="footer" />
+      </template>
     </NpPopupCard>
 
     <template #trigger>

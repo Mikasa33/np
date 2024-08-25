@@ -6,7 +6,7 @@ export type AdvTableProps = ExtractPublicPropTypes<typeof advTableProps>
 
 export type AdvTableFilterPresetType = 'drawer' | 'modal' | 'popover'
 
-export interface AdvTableSlots extends TableSlots {
+export interface AdvTableSlots extends Omit<TableSlots, 'header'> {
   action?: () => VNodeChild
   search?: () => VNodeChild
 }

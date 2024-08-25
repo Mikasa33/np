@@ -15,7 +15,7 @@ const props = defineProps(drawerProps)
 const emits = defineEmits<{
   confirm: []
 }>()
-defineSlots<DrawerSlots>()
+const slots = defineSlots<DrawerSlots>()
 
 const show = defineModel<boolean>('show')
 const fullscreen = defineModel<boolean>('fullscreen')
@@ -43,8 +43,21 @@ function handleConfirm() {
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >
-      <slot name="header-extra" />
+      <template
+        v-if="slots['header-extra']"
+        #header-extra
+      >
+        <slot name="header-extra" />
+      </template>
+
       <slot />
+
+      <template
+        v-if="slots.footer"
+        #footer
+      >
+        <slot name="footer" />
+      </template>
     </NpPopupCard>
   </NDrawer>
 </template>

@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import VueJsx from '@vitejs/plugin-vue-jsx'
 import Dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
 
@@ -41,6 +42,7 @@ export default defineConfig({
 
   plugins: [
     Vue(),
+    VueJsx(),
     Dts({
       // 将 '.vue.d.ts' 文件名转换为 '.d.ts'
       cleanVueFileName: true,

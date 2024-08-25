@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { NDatePicker, NTimePicker } from 'naive-ui'
-import { defineComponent, h, markRaw, ref } from 'vue'
+import { defineComponent, markRaw, ref } from 'vue'
 import type { FormProps } from '@mikasa33/np'
 import { NpForm } from '@mikasa33/np'
 
@@ -28,7 +28,7 @@ const formProps: FormProps = {
     {
       path: 'custom2',
       label: '渲然函数组件',
-      component: (props: any) => h(NTimePicker, props),
+      component: (props: any) => <NTimePicker {...props} />,
       componentProps: {
         isHourDisabled: (hour: number) => hour % 2 === 0,
       },

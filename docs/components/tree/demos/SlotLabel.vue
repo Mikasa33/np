@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="tsx">
 import { h, reactive } from 'vue'
 import type { TreeOption } from 'naive-ui'
 import type { TreeProps } from '@mikasa33/np'
@@ -33,7 +33,7 @@ const treeProps = reactive<TreeProps>({
   },
   // 优先级低于插槽
   renderLabel: ({ option }: { option: TreeOption }) => {
-    return h('span', option.key !== '2' ? option.label : 'renderLabel')
+    return <span>{ option.key !== '2' ? option.label : 'renderLabel' }</span>
   },
 })
 </script>

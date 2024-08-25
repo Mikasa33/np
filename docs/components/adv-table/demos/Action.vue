@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { AdvTableProps } from '@mikasa33/np'
 import { NpAdvTable } from '@mikasa33/np'
 import { NButton } from 'naive-ui'
@@ -34,7 +34,8 @@ const advTableProps: AdvTableProps = {
   ],
   // 优先级不如 slot
   columnActions: [
-    h(NButton, { tertiary: true, size: 'small' }, () => '组件'),
+    <NButton tertiary size="small">编辑</NButton>,
+    <NButton tertiary size="small">组件</NButton>,
     'delete',
   ],
 }
