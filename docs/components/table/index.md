@@ -4,6 +4,10 @@
 
 如果只是想渲染一个表格，建议直接使用 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table) 或 [NTable](https://www.naiveui.com/zh-CN/light/components/table)。
 
+::: warning 需使用 flex 布局
+`flex-height` 默认为 `true`，表格主体的高度自动适应整个表格区域的高度。
+:::
+
 ## 演示
 
 ### 基础
@@ -94,7 +98,7 @@
 
 ### Table Props
 
-支持 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Props) 除 `remote` 外的所有属性。
+支持 [NDataTable](https://www.naiveui.com/zh-CN/light/components/data-table#DataTable-Props) 除 `flex-height` 和 `remote` 外的所有属性。
 
 | 名称              | 说明                                                 | 类型                                            | 默认值      |
 | ----------------- | ---------------------------------------------------- | ----------------------------------------------- | ----------- |

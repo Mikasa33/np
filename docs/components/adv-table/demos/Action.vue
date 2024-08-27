@@ -42,13 +42,15 @@ const advTableProps: AdvTableProps = {
 </script>
 
 <template>
-  <NpAdvTable
-    ref="advTableRef"
-    v-bind="advTableProps"
-  >
-    <!-- 优先级最高 -->
-    <template #column-action="{ row, index }">
-      {{ index === 0 ? row : '...' }}
-    </template>
-  </NpAdvTable>
+  <div class="h-300px">
+    <NpAdvTable
+      ref="advTableRef"
+      v-bind="advTableProps"
+    >
+      <!-- 优先级最高 -->
+      <template #column-action="{ row, index }">
+        {{ index === 0 ? row : '...' }}
+      </template>
+    </NpAdvTable>
+  </div>
 </template>

@@ -53,13 +53,13 @@ watchDebounced(
       v-model:value="field"
       :options="fieldOptions"
       :class="fieldClass"
-      class="w-128px"
+      class="w-100px"
     />
     <NInput
       v-bind="inputProps"
       v-model:value="value"
       :class="inputClass"
-      class="!w-200px"
+      class="!w-180px"
     >
       <template #prefix>
         <slot

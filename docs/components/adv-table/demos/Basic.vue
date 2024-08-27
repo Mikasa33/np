@@ -35,15 +35,17 @@ const advTableProps: AdvTableProps = {
 </script>
 
 <template>
-  <NpAdvTable
-    ref="advTableRef"
-    v-bind="advTableProps"
-  >
-    <template #action>
-      action slot
-    </template>
-    <template #search>
-      search slot
-    </template>
-  </NpAdvTable>
+  <div class="h-300px">
+    <NpAdvTable
+      ref="advTableRef"
+      v-bind="advTableProps"
+    >
+      <template #action>
+        action slot
+      </template>
+      <template #search>
+        search slot
+      </template>
+    </NpAdvTable>
+  </div>
 </template>

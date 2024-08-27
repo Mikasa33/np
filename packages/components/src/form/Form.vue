@@ -4,9 +4,9 @@ import { NForm, NFormItemGi, NGi, NGrid, formItemGiProps, gridProps, formProps a
 import { ref } from 'vue'
 import { useArrayFilter } from '@vueuse/core'
 import { get, isString } from 'lodash-es'
-import type { FormValidateCallback, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
+import type { FormValidateCallback, FormValidationError, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
 import { pickProps } from '../utils'
-import type { FormItemProps, FormSlots } from './types'
+import type { FormInstance, FormItemProps, FormSlots } from './types'
 import { useValue } from './use-value'
 import { components } from './components'
 import { formProps } from './props'
@@ -59,11 +59,11 @@ function restoreValidation() {
   return formRef.value?.restoreValidation()
 }
 
-function validate(callback?: FormValidateCallback, shouldRuleBeApplied?: ShouldRuleBeApplied): any {
-  return formRef.value?.validate(callback, shouldRuleBeApplied)
+function validate(callback?: FormValidateCallback, shouldRuleBeApplied?: ShouldRuleBeApplied): Promise<any> {
+  return formRef.value?.validate(callback, shouldRuleBeApplied) as any
 }
 
-defineExpose({
+defineExpose<FormInstance>({
   getValue,
   reset,
   restoreValidation,

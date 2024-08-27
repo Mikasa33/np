@@ -68,6 +68,7 @@ export default defineConfig({
           collapsed: false,
           base: '/components',
           items: [
+            { text: '高级表单 Adv Form', link: '/adv-form/' },
             { text: '高级表格 Adv Table', link: '/adv-table/' },
           ],
         },

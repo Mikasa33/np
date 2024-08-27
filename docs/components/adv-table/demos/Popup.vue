@@ -66,23 +66,25 @@ const advTableProps: AdvTableProps = reactive({
 </script>
 
 <template>
-  <NpAdvTable
-    ref="advTableRef"
-    v-bind="advTableProps"
-    :filter-preset="preset"
-  >
-    <template #action>
-      <NRadioGroup v-model:value="preset">
-        <NRadio value="drawer">
-          Drawer
-        </NRadio>
-        <NRadio value="modal">
-          Modal
-        </NRadio>
-        <NRadio value="popover">
-          Popover
-        </NRadio>
-      </NRadioGroup>
-    </template>
-  </NpAdvTable>
+  <div class="h-300px">
+    <NpAdvTable
+      ref="advTableRef"
+      v-bind="advTableProps"
+      :filter-preset="preset"
+    >
+      <template #action>
+        <NRadioGroup v-model:value="preset">
+          <NRadio value="drawer">
+            Drawer
+          </NRadio>
+          <NRadio value="modal">
+            Modal
+          </NRadio>
+          <NRadio value="popover">
+            Popover
+          </NRadio>
+        </NRadioGroup>
+      </template>
+    </NpAdvTable>
+  </div>
 </template>

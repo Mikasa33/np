@@ -38,5 +38,6 @@ const tableProps = reactive<TableProps>({
   <NpTable
     ref="tableRef"
     v-bind="tableProps"
+    class="h-230px"
   />
 </template>

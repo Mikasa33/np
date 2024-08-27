@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DataTableColumns, DataTableProps, PaginationProps } from 'naive-ui'
-import { NDataTable, NFlex, dataTableProps } from 'naive-ui'
+import { NDataTable, NFlex, NScrollbar, dataTableProps } from 'naive-ui'
 import { computed, h, ref } from 'vue'
 import { cloneDeep, isArray, isObject, isString } from 'lodash-es'
 import { useSlotsFilter } from '../composables/useSlotsFilter'
@@ -167,7 +167,7 @@ defineExpose({
 </script>
 
 <template>
-  <div>
+  <div class="wh-full flex flex-col">
     <!-- 头部插槽 -->
     <NFlex
       v-if="slots.header"
@@ -181,10 +181,12 @@ defineExpose({
       v-model:checked-row-keys="checkedRowKeys"
       :data
       :columns
+      flex-height
       :loading
       :pagination
       remote
       :row-key="rowKey"
+      class="flex-1"
     />
   </div>
 </template>

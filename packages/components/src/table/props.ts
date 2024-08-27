@@ -4,7 +4,7 @@ import { omit } from 'lodash-es'
 import { makeFunctionProp, makeStringProp } from '../utils'
 import type { TableColumnProps } from './types'
 
-export const tableProps = Object.assign({}, omit(dataTableProps, 'columns', 'pagination', 'remote'), {
+export const tableProps = Object.assign({}, omit(dataTableProps, 'columns', 'flex-height', 'pagination', 'remote'), {
   columns: Array as PropType<TableColumnProps[]>,
   dataField: makeStringProp('data'),
   immediate: Boolean,

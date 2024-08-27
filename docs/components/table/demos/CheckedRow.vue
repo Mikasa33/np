@@ -33,6 +33,7 @@ const tableProps = reactive<TableProps>({
   <NpTable
     v-bind="tableProps"
     v-model:checked-row-keys="checkedRowKeys"
+    class="h-230px"
   />
   <pre>{{ checkedRowKeys }}</pre>
 </template>

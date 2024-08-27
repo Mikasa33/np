@@ -18,7 +18,6 @@ const emits = defineEmits<{
 const slots = defineSlots<ModalSlots>()
 
 const show = defineModel<boolean>('show')
-const fullscreen = defineModel<boolean>('fullscreen')
 
 const pickedModalProps = pickProps<ModalProps>(props, nModalProps)
 const pickedCardProps = pickProps<CardProps>(props, omit(nCardProps, 'closable'))
@@ -40,7 +39,6 @@ function handleConfirm() {
   >
     <NpPopupCard
       v-bind="pickedCardProps"
-      v-model:fullscreen="fullscreen"
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >

@@ -34,6 +34,7 @@ const keyword = ref('')
   <NpTable
     ref="tableRef"
     v-bind="tableProps"
+    class="h-230px"
   >
     <template #header>
       <NButton type="primary">

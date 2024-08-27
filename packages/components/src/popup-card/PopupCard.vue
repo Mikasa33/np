@@ -20,17 +20,10 @@ const emits = defineEmits<{
 }>()
 const slots = defineSlots<PopupCardSlots>()
 
-const fullscreen = defineModel<boolean>('fullscreen')
-
 const cardProps = pickProps<CardProps>(props, omit(nCardProps, 'closable'))
 
 const cardRef = ref()
-const { toggle } = useFullscreen(cardRef)
-
-function handleToggleFullscreen() {
-  fullscreen.value = !fullscreen.value
-  toggle()
-}
+const { isFullscreen, toggle: toggleFullscreen } = useFullscreen(cardRef)
 
 function handleCancel() {
   emits('cancel')
@@ -58,7 +51,7 @@ function IconBtn(_: any, { slots }: { slots: Slots }) {
     v-bind="cardProps"
     :content-class="`${cardProps?.contentClass ?? ''} overflow-hidden !p-0`"
     :class="{
-      '!rounded-none': fullscreen,
+      '!rounded-none': isFullscreen,
     }"
     class="h-full"
   >
@@ -71,10 +64,10 @@ function IconBtn(_: any, { slots }: { slots: Slots }) {
       >
         <IconBtn
           v-if="fullscreenable"
-          @click="handleToggleFullscreen"
+          @click="toggleFullscreen"
         >
           <div
-            :class="fullscreen ? 'i-icon-park-outline-off-screen' : 'i-icon-park-outline-full-screen'"
+            :class="isFullscreen ? 'i-icon-park-outline-off-screen' : 'i-icon-park-outline-full-screen'"
             class="text-16px"
           />
         </IconBtn>

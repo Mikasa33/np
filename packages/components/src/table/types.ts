@@ -1,5 +1,6 @@
 import type { Component, ExtractPublicPropTypes, HTMLAttributes, VNodeChild } from 'vue'
 import type { ColumnKey, DataTableSelectionOptions, Ellipsis, Expandable, Filter, FilterOption, FilterOptionValue, InternalRowData, RenderExpand, RenderFilter, RenderFilterIcon, RenderFilterMenu, RenderSorter, RenderSorterIcon, SortOrder, Sorter, TableBaseColumn, TableColumnGroupTitle, TableColumnTitle, TableExpandColumnTitle } from 'naive-ui/es/data-table/src/interface'
+import type { PaginationProps } from 'naive-ui'
 import type { tableProps } from './props'
 
 export type TableProps = ExtractPublicPropTypes<typeof tableProps>
@@ -59,4 +60,12 @@ export type TableColumnComponentType =
 export interface TableSlots {
   header?: () => VNodeChild
   [key: `column-${string}`]: (props: { key: string, row: any, index: number }) => VNodeChild
+}
+
+export interface TableInstance {
+  getCheckedRowKeys: () => string[]
+  getLoading: () => boolean
+  getPagination: () => boolean | PaginationProps
+  refresh: () => void
+  reload: (params?: Record<string, any>) => void
 }

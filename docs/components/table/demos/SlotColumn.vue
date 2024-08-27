@@ -37,7 +37,10 @@ const tableProps = reactive<TableProps>({
 </script>
 
 <template>
-  <NpTable v-bind="tableProps">
+  <NpTable
+    v-bind="tableProps"
+    class="h-230px"
+  >
     <!-- 插槽优先级 slot > key -->
     <template #column-age="{ row }">
       age {{ row.age }}

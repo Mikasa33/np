@@ -1,7 +1,8 @@
 <script setup lang="tsx">
-import { computed, h, ref } from 'vue'
-import { NButton, NFlex, NTooltip } from 'naive-ui'
-import { isString, omit } from 'lodash-es'
+import { computed, ref } from 'vue'
+import { NButton, NCard, NEl, NFlex, NTooltip } from 'naive-ui'
+import { isNil, isString } from 'lodash-es'
+import { useFullscreen } from '../composables/useFullscreen'
 import { NpTable, tableProps as npTableProps } from '../table'
 import { NpFlex1 } from '../flex'
 import { NpSearchKeyword } from '../search-keyword'
@@ -11,7 +12,7 @@ import { NpForm } from '../form'
 import { NpModal } from '../modal'
 import { NpPopover } from '../popover'
 import { useSlotsFilter } from '../composables/useSlotsFilter'
-import type { AdvTableSlots } from './types'
+import type { AdvTableInstance, AdvTableSlots } from './types'
 import { advTableProps } from './props'
 
 defineOptions({
@@ -60,9 +61,11 @@ const columns = computed(() => {
 
 const { slotKeys } = useSlotsFilter((key: string) => key.includes('column-'))
 
+const wrapRef = ref()
 const tableRef = ref()
 const formRef = ref()
 
+const { isFullscreen, toggle: toggleFullscreen } = useFullscreen(wrapRef)
 const filterShow = ref(false)
 const loading = ref(false)
 const searchValue = ref<any>({
@@ -71,8 +74,22 @@ const searchValue = ref<any>({
 })
 const filterValue = ref<any>({})
 
+function getMergeParams(params: Record<string, any>) {
+  const result = {
+    ...params,
+    ...filterValue.value,
+  }
+  if (isNil(searchValue.value.keyword) || searchValue.value.keyword === '') {
+    return result
+  }
+  return {
+    ...result,
+    ...searchValue.value,
+  }
+}
+
 async function onRequest(params: Record<string, any>) {
-  return props?.onRequest?.({ ...params, ...filterValue.value, ...searchValue.value })
+  return props?.onRequest?.(getMergeParams(params))
 }
 
 function handleCancel() {
@@ -94,16 +111,35 @@ function handleClickFilterBtn() {
   }
 }
 
-function Btn() {
+function Btn(props: { icon: string, onClick: () => void }) {
   return (
     <NButton
-      {...props.filterBtnProps}
       class="!h-34px !w-34px !p-0"
       onClick={handleClickFilterBtn}
     >
-      <div class="i-icon-park-outline-filter" />
+      <div class={props.icon} />
     </NButton>
   )
+}
+
+function FilterBtn(innerProps: { icon: string, onClick: () => void }) {
+  if (props.filterPreset === 'popover') {
+    return (
+      <NpPopover
+        v-model:show={filterShow.value}
+        title={title}
+        {...props.filterPopupProps}
+        trigger="click"
+        v-slots={{
+          trigger: () => Btn(innerProps),
+          footer: PopupCardBtns,
+        }}
+      >
+        {Form()}
+      </NpPopover>
+    )
+  }
+  return Btn(innerProps)
 }
 
 function Form() {
@@ -138,88 +174,122 @@ function PopupCardBtns() {
   )
 }
 
-function FilterBtn() {
-  if (props.filterPreset === 'popover') {
-    return (
-      <NpPopover
-        v-model:show={filterShow.value}
-        title={title}
-        {...props.filterPopupProps}
-        trigger="click"
-        v-slots={{
-          trigger: () => Btn(),
-          footer: PopupCardBtns,
-        }}
-      >
-        {Form()}
-      </NpPopover>
-    )
-  }
-  return Btn()
-}
-
-defineExpose({
+defineExpose<AdvTableInstance>({
   ...tableRef.value,
 })
 </script>
 
 <template>
-  <NpTable
-    ref="tableRef"
-    v-bind="tableProps"
-    v-model:loading="loading"
-    :columns
-    :on-request
+  <NEl
+    ref="wrapRef"
+    class="z-1000 wh-full flex flex-1"
+    :class="{
+      'px-24px py-20px': isFullscreen,
+    }"
+    :style="{
+      backgroundColor: 'var(--card-color)',
+    }"
   >
-    <template
-      v-if="(searchable || filterable || slots.action || slots.search)"
-      #header
+    <NpTable
+      ref="tableRef"
+      v-bind="tableProps"
+      v-model:loading="loading"
+      :columns
+      flex-height
+      :on-request
+      class="flex-1"
     >
-      <slot name="action" />
-      <NpFlex1 />
-      <slot name="search" />
-      <NpSearchKeyword
-        v-if="searchable"
-        v-bind="(searchProps as any)"
-        v-model:value="searchValue.keyword"
-        v-model:field="searchValue.field"
-        :disabled="loading"
-        @search="handleSearch"
-      />
-      <template v-if="filterable">
-        <NTooltip v-bind="filterTooltipProps">
-          <template #trigger>
-            <div>
-              <FilterBtn />
-            </div>
-          </template>
-          {{ filterTooltipText }}
-        </NTooltip>
-        <Component
-          :is="filterPreset === 'drawer' ? NpDrawer : filterPreset === 'modal' ? NpModal : null"
-          v-model:show="filterShow"
-          :title
-          v-bind="(filterPopupProps as any)"
-          @confirm="handleSearch"
+      <template
+        v-if="(searchable || filterable || refreshable || fullscreenable || slots.action || slots.search)"
+        #header
+      >
+        <NFlex
+          align="center"
+          :wrap="false"
         >
-          <Form />
+          <slot name="action" />
+        </NFlex>
 
-          <template #footer>
-            <PopupCardBtns />
+        <NpFlex1 />
+
+        <NFlex
+          align="center"
+          :wrap="false"
+        >
+          <slot name="search" />
+
+          <NpSearchKeyword
+            v-if="searchable"
+            v-bind="(searchProps as any)"
+            v-model:value="searchValue.keyword"
+            v-model:field="searchValue.field"
+            :disabled="loading"
+            @search="handleSearch"
+          />
+
+          <template v-if="filterable">
+            <NTooltip>
+              <template #trigger>
+                <div>
+                  <FilterBtn
+                    icon="i-icon-park-outline-filter"
+                    :on-click="handleClickFilterBtn"
+                  />
+                </div>
+              </template>
+              筛选
+            </NTooltip>
+            <Component
+              :is="filterPreset === 'drawer' ? NpDrawer : filterPreset === 'modal' ? NpModal : null"
+              v-model:show="filterShow"
+              :title
+              v-bind="(filterPopupProps as any)"
+              @confirm="handleSearch"
+            >
+              <Form />
+
+              <template #footer>
+                <PopupCardBtns />
+              </template>
+            </Component>
           </template>
-        </Component>
-      </template>
-    </template>
 
-    <template
-      v-for="slot in slotKeys"
-      :key="slot"
-      #[slot]="slotProps"
-    >
-      <slot
-        v-bind="slotProps"
-        :name="(slot as any)"
-      />
-    </template>
-  </NpTable>
+          <template v-if="refreshable">
+            <NTooltip>
+              <template #trigger>
+                <Btn
+                  icon="i-icon-park-outline-refresh"
+                  :on-click="() => tableRef.refresh()"
+                />
+              </template>
+              刷新
+            </NTooltip>
+          </template>
+
+          <template v-if="fullscreenable">
+            <NTooltip>
+              <template #trigger>
+                <Btn
+                  :icon="isFullscreen ? 'i-icon-park-outline-off-screen' : 'i-icon-park-outline-full-screen'"
+                  :on-click="toggleFullscreen"
+                />
+              </template>
+              {{ isFullscreen ? '还原' : '全屏' }}
+            </NTooltip>
+          </template>
+        </NFlex>
+      </template>
+
+      <template
+        v-for="slot in slotKeys"
+        :key="slot"
+        #[slot]="slotProps"
+      >
+        <slot
+          v-bind="slotProps"
+          :name="(slot as any)"
+        />
+      </template>
+    </NpTable>
+  </NEl>
 </template>

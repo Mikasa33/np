@@ -70,14 +70,15 @@
 
 支持 [NGrid](https://www.naiveui.com/zh-CN/light/components/grid#Grid-Props) 和 [NForm](https://www.naiveui.com/zh-CN/light/components/form#Form-Props) 除 `model` 外的所有属性。
 
-| 名称            | 说明                                               | 类型                   | 默认值      |
-| --------------- | -------------------------------------------------- | ---------------------- | ----------- |
-| default-values  | 默认值                                             | `object`               | `{}`        |
-| gi-span         | 栅格占据的列数，为 `0` 的时候会隐藏                | `number \| string`     | `24`        |
-| gi-suffix-span  | 栅格后缀占据的列数，默认为 `gi-span` 的值          | `number \| string`     | `undefined` |
-| items           | 表单项，属性参考 [FormItem Props](#formitem-props) | `FormItemProps`        | `[]`        |
-| value           | 获取表项中收集到的值的对象                         | `object`               | `{}`        |
-| on-update:value | 表项中收集到的值的对象改变时触发的回调函数         | `(value: any) => void` | `undefined` |
+| 名称                   | 说明                                               | 类型                                   | 默认值      |
+| ---------------------- | -------------------------------------------------- | -------------------------------------- | ----------- |
+| default-values         | 默认值                                             | `object`                               | `{}`        |
+| gi-span                | 栅格占据的列数，为 `0` 的时候会隐藏                | `number \| string`                     | `24`        |
+| gi-suffix-span         | 栅格后缀占据的列数，默认为 `gi-span` 的值          | `number \| string`                     | `undefined` |
+| items                  | 表单项，属性参考 [FormItem Props](#formitem-props) | `FormItemProps`                        | `[]`        |
+| require-mark-placement | 必填星号的位置                                     | `'left' \| 'right' \| 'right-hanging'` | `'left'`    |
+| value                  | 获取表项中收集到的值的对象                         | `object`                               | `{}`        |
+| on-update:value        | 表项中收集到的值的对象改变时触发的回调函数         | `(value: any) => void`                 | `undefined` |
 
 ### FormItem Props
 
