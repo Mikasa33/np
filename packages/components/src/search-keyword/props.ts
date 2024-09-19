@@ -1,6 +1,6 @@
 import type { SelectOption } from 'naive-ui'
-import { inputProps } from 'naive-ui'
 import type { PropType } from 'vue'
+import { inputProps } from 'naive-ui'
 import { makeArrayProp, makeNumberProp, makeStringProp, numericProp, truthProp } from '../utils'
 
 export const searchKeywordProps = Object.assign({}, inputProps, {

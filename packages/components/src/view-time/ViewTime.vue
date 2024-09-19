@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import dayjs from 'dayjs'
-import { viewTimeProps } from './props'
 import type { ViewTimeSlots } from './types'
+import dayjs from 'dayjs'
+import { computed } from 'vue'
+import { viewTimeProps } from './props'
 
 const props = defineProps(viewTimeProps)
 defineSlots<ViewTimeSlots>()

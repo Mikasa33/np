@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { NFlex } from 'naive-ui'
 import { NpViewTag } from '@mikasa33/np'
+import { NFlex } from 'naive-ui'
 
 const value = 'male'
 const options = [

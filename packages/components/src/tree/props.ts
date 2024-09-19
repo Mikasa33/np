@@ -1,6 +1,6 @@
 import type { TreeOption } from 'naive-ui'
-import { treeProps as nTreeProps } from 'naive-ui'
 import type { PropType } from 'vue'
+import { treeProps as nTreeProps } from 'naive-ui'
 import { makeFunctionProp } from '../utils'
 
 export const treeProps = Object.assign({}, nTreeProps, {

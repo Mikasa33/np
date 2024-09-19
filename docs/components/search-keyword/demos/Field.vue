@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { NpSearchKeyword } from '@mikasa33/np'
 import type { SearchKeywordProps } from '@mikasa33/np'
+import { NpSearchKeyword } from '@mikasa33/np'
+import { ref } from 'vue'
 
 const params = ref({
   value: null,

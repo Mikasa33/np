@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
 import type { TableProps } from '@mikasa33/np'
 import { NpTable } from '@mikasa33/np'
+import { reactive } from 'vue'
 
 const tableProps = reactive<TableProps>({
   immediate: true,

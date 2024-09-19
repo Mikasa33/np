@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { NButton, NFlex } from 'naive-ui'
-import { ref } from 'vue'
 import type { FormProps } from '@mikasa33/np'
 import { NpForm } from '@mikasa33/np'
+import { NButton, NFlex } from 'naive-ui'
+import { ref } from 'vue'
 
 const formRef = ref()
 const formValue = ref({})

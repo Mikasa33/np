@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
 import type { TableProps } from '@mikasa33/np'
 import { NpTable } from '@mikasa33/np'
+import { reactive, ref } from 'vue'
 
 const checkedRowKeys = ref<number[]>([])
 const tableProps = reactive<TableProps>({

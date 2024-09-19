@@ -2,7 +2,7 @@
 import type { AdvTableProps } from '@mikasa33/np'
 import { NpAdvTable } from '@mikasa33/np'
 import { NButton } from 'naive-ui'
-import { h, ref } from 'vue'
+import { ref } from 'vue'
 
 const advTableRef = ref()
 const advTableProps: AdvTableProps = {

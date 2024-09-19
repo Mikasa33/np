@@ -1,10 +1,10 @@
 import type { PropType } from 'vue'
-import { formProps } from '../form'
-import { type ModalProps, modalProps } from '../modal'
 import type { DrawerProps } from '../drawer'
-import { makeNumericProp, makeObjectProp } from '../utils'
-import { popupCardProps } from '../popup-card'
+import type { ModalProps } from '../modal'
 import type { AdvFormPopupPresetType } from './types'
+import { formProps } from '../form'
+import { popupCardProps } from '../popup-card'
+import { makeNumericProp, makeObjectProp } from '../utils'
 
 export const advFormProps = Object.assign({}, formProps, {
   popupProps: makeObjectProp<DrawerProps | ModalProps>(),

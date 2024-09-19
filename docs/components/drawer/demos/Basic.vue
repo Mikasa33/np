@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { NButton } from 'naive-ui'
 import type { DrawerProps } from '@mikasa33/np'
 import { NpDrawer } from '@mikasa33/np'
+import { NButton } from 'naive-ui'
+import { ref } from 'vue'
 
 const show = ref(false)
 const drawerProps: DrawerProps = {

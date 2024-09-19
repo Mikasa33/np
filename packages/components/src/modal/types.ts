@@ -1,4 +1,4 @@
-import type { ExtractPublicPropTypes, VNodeChild } from 'vue'
+import type { ExtractPublicPropTypes } from 'vue'
 import type { PopupCardSlots } from '../popup-card'
 import type { modalProps } from './props'
 

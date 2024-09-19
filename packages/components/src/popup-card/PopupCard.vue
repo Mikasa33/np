@@ -1,13 +1,13 @@
 <script setup lang="tsx">
 import type { CardProps } from 'naive-ui'
-import { NButton, NCard, NFlex, NScrollbar, cardProps as nCardProps } from 'naive-ui'
-import { omit } from 'lodash-es'
-import { useFullscreen } from '@vueuse/core'
 import type { Slots } from 'vue'
+import type { PopupCardSlots } from './types'
+import { useFullscreen } from '@vueuse/core'
+import { omit } from 'lodash-es'
+import { NButton, NCard, cardProps as nCardProps, NFlex, NScrollbar } from 'naive-ui'
 import { ref } from 'vue'
 import { pickProps } from '../utils'
 import { popupCardProps } from './props'
-import type { PopupCardSlots } from './types'
 
 defineOptions({
   name: 'NpPopupCard',

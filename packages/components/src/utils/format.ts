@@ -1,4 +1,4 @@
-import { isNil } from 'lodash-es'
+import { isFunction, isNil } from 'lodash-es'
 
 export type Numeric = number | string
 
@@ -12,4 +12,11 @@ export function addUnit(value?: Numeric): string | undefined {
     return isNumeric(value) ? `${value}px` : String(value)
   }
   return undefined
+}
+
+export function getMaybeFuncValue(val: any, params: any) {
+  if (isFunction(val)) {
+    return val(params)
+  }
+  return val
 }

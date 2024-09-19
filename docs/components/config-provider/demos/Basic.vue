@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { NpConfigProvider } from '@mikasa33/np'
 import type { GlobalTheme } from 'naive-ui'
+import { NpConfigProvider } from '@mikasa33/np'
+import { darkTheme, NButton, NCard, NFlex } from 'naive-ui'
 import { ref } from 'vue'
-import { NButton, NCard, NFlex, darkTheme } from 'naive-ui'
 
 const theme = ref<GlobalTheme | null>(null)
 </script>

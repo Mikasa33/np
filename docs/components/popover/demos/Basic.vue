@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { NButton } from 'naive-ui'
 import type { PopoverProps } from '@mikasa33/np'
 import { NpPopover } from '@mikasa33/np'
+import { NButton } from 'naive-ui'
 
 const popoverProps: PopoverProps = {
   title: '标题信息',

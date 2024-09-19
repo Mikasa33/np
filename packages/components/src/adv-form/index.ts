@@ -4,4 +4,4 @@ import _AdvForm from './AdvForm.vue'
 export const NpAdvForm = withInstall(_AdvForm)
 export default _AdvForm
 export { advFormProps } from './props'
-export type { AdvFormProps, AdvFormSlots } from './types'
+export type { AdvFormPopupPresetType, AdvFormProps, AdvFormSlots } from './types'

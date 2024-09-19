@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { CardProps, ModalProps } from 'naive-ui'
-import { NModal, cardProps as nCardProps, modalProps as nModalProps } from 'naive-ui'
-import { omit } from 'lodash-es'
-import { addUnit, pickProps } from '../utils'
-import { NpPopupCard } from '../popup-card'
 import type { ModalSlots } from './types'
+import { omit } from 'lodash-es'
+import { cardProps as nCardProps, NModal, modalProps as nModalProps } from 'naive-ui'
+import { NpPopupCard } from '../popup-card'
+import { addUnit, pickProps } from '../utils'
 import { modalProps } from './props'
 
 defineOptions({
@@ -35,7 +35,7 @@ function handleConfirm() {
   <NModal
     v-bind="pickedModalProps"
     v-model:show="show"
-    :style="{ width: addUnit(width) }"
+    :style="{ width: addUnit(props.width) }"
   >
     <NpPopupCard
       v-bind="pickedCardProps"

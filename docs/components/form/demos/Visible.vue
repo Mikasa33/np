@@ -5,9 +5,7 @@ import { NButton, NFlex } from 'naive-ui'
 import { ref } from 'vue'
 
 const formRef = ref()
-const formValue = ref({
-  textarea: '多行文本框默认值',
-})
+const formValue = ref({})
 const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
   v => ({
     label: v,
@@ -17,10 +15,17 @@ const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
 const formProps: FormProps = {
   items: [
     {
+      path: 'show',
+      label: '是否显示',
+      component: 'NSwitch',
+      defaultValue: true,
+    },
+    {
       path: 'input',
       label: '输入框',
       component: 'NInput',
       defaultValue: '输入框默认值',
+      show: ({ value }: any) => value.show,
     },
     {
       path: 'textarea',
@@ -29,6 +34,7 @@ const formProps: FormProps = {
       componentProps: {
         type: 'textarea',
       },
+      show: ({ value }: any) => value.show,
     },
     {
       path: 'select',
@@ -37,6 +43,7 @@ const formProps: FormProps = {
       componentProps: {
         options: formOptions,
       },
+      show: false,
     },
   ],
   labelPlacement: 'left',
@@ -56,9 +63,6 @@ const formProps: FormProps = {
     v-model:value="formValue"
   />
   <NFlex justify="end">
-    <NButton @click="formRef.reset()">
-      重置数据
-    </NButton>
     <NButton @click="formRef.restoreValidation()">
       清空验证
     </NButton>
@@ -69,5 +73,4 @@ const formProps: FormProps = {
       验证
     </NButton>
   </NFlex>
-  <pre>{{ formValue }}</pre>
 </template>

@@ -1,18 +1,18 @@
 <script setup lang="tsx">
-import { computed, ref } from 'vue'
-import { NButton, NCard, NEl, NFlex, NTooltip } from 'naive-ui'
+import type { AdvTableInstance, AdvTableSlots } from './types'
 import { isNil, isString } from 'lodash-es'
+import { NButton, NEl, NFlex, NTooltip } from 'naive-ui'
+import { computed, ref } from 'vue'
 import { useFullscreen } from '../composables/useFullscreen'
-import { NpTable, tableProps as npTableProps } from '../table'
-import { NpFlex1 } from '../flex'
-import { NpSearchKeyword } from '../search-keyword'
-import { pickProps } from '../utils'
+import { useSlotsFilter } from '../composables/useSlotsFilter'
 import { NpDrawer } from '../drawer'
+import { NpFlex1 } from '../flex'
 import { NpForm } from '../form'
 import { NpModal } from '../modal'
 import { NpPopover } from '../popover'
-import { useSlotsFilter } from '../composables/useSlotsFilter'
-import type { AdvTableInstance, AdvTableSlots } from './types'
+import { NpSearchKeyword } from '../search-keyword'
+import { NpTable, tableProps as npTableProps } from '../table'
+import { pickProps } from '../utils'
 import { advTableProps } from './props'
 
 defineOptions({
@@ -46,7 +46,7 @@ const columns = computed(() => {
                     size="small"
                     onClick={() => emits(item as any, row)}
                   >
-                    {item === 'edit' ? '编辑' : item === 'delete' ? '删除' : '操作'}
+                    {item === 'edit' ? '编辑' : item === 'delete' ? '删除' : '查看'}
                   </NButton>
                 )
               }
@@ -111,27 +111,28 @@ function handleClickFilterBtn() {
   }
 }
 
-function Btn(props: { icon: string, onClick: () => void }) {
+function Btn({ icon, onClick, ...props }: { icon: string, onClick: () => void }) {
   return (
     <NButton
+      {...props}
       class="!h-34px !w-34px !p-0"
-      onClick={handleClickFilterBtn}
+      onClick={onClick}
     >
-      <div class={props.icon} />
+      <div class={icon} />
     </NButton>
   )
 }
 
-function FilterBtn(innerProps: { icon: string, onClick: () => void }) {
+function FilterBtn(innerProps: any) {
   if (props.filterPreset === 'popover') {
     return (
       <NpPopover
-        v-model:show={filterShow.value}
         title={title}
-        {...props.filterPopupProps}
+        {...props.filterPopupProps as any}
+        v-model:show={filterShow.value}
         trigger="click"
         v-slots={{
-          trigger: () => Btn(innerProps),
+          trigger: Btn(innerProps),
           footer: PopupCardBtns,
         }}
       >
@@ -233,12 +234,13 @@ defineExpose<AdvTableInstance>({
                 <div>
                   <FilterBtn
                     icon="i-icon-park-outline-filter"
-                    :on-click="handleClickFilterBtn"
+                    @click="handleClickFilterBtn"
                   />
                 </div>
               </template>
               筛选
             </NTooltip>
+
             <Component
               :is="filterPreset === 'drawer' ? NpDrawer : filterPreset === 'modal' ? NpModal : null"
               v-model:show="filterShow"
@@ -259,7 +261,7 @@ defineExpose<AdvTableInstance>({
               <template #trigger>
                 <Btn
                   icon="i-icon-park-outline-refresh"
-                  :on-click="() => tableRef.refresh()"
+                  @click="() => tableRef.refresh()"
                 />
               </template>
               刷新
@@ -271,7 +273,7 @@ defineExpose<AdvTableInstance>({
               <template #trigger>
                 <Btn
                   :icon="isFullscreen ? 'i-icon-park-outline-off-screen' : 'i-icon-park-outline-full-screen'"
-                  :on-click="toggleFullscreen"
+                  @click="toggleFullscreen"
                 />
               </template>
               {{ isFullscreen ? '还原' : '全屏' }}

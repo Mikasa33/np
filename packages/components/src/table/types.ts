@@ -1,6 +1,6 @@
-import type { Component, ExtractPublicPropTypes, HTMLAttributes, VNodeChild } from 'vue'
-import type { ColumnKey, DataTableSelectionOptions, Ellipsis, Expandable, Filter, FilterOption, FilterOptionValue, InternalRowData, RenderExpand, RenderFilter, RenderFilterIcon, RenderFilterMenu, RenderSorter, RenderSorterIcon, SortOrder, Sorter, TableBaseColumn, TableColumnGroupTitle, TableColumnTitle, TableExpandColumnTitle } from 'naive-ui/es/data-table/src/interface'
 import type { PaginationProps } from 'naive-ui'
+import type { ColumnKey, DataTableSelectionOptions, Ellipsis, Expandable, Filter, FilterOption, FilterOptionValue, InternalRowData, RenderExpand, RenderFilter, RenderFilterIcon, RenderFilterMenu, RenderSorter, RenderSorterIcon, Sorter, SortOrder, TableBaseColumn, TableColumnGroupTitle, TableColumnTitle, TableExpandColumnTitle } from 'naive-ui/es/data-table/src/interface'
+import type { Component, ExtractPublicPropTypes, HTMLAttributes, VNodeChild } from 'vue'
 import type { tableProps } from './props'
 
 export type TableProps = ExtractPublicPropTypes<typeof tableProps>

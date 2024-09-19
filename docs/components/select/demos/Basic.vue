@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { SelectProps } from '@mikasa33/np'
-import { NpSelect } from '@mikasa33/np'
 import type { SelectOption } from 'naive-ui'
+import { NpSelect } from '@mikasa33/np'
 import { ref } from 'vue'
 
 const value = ref()

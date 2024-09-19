@@ -1,15 +1,12 @@
-import type { Component, PropType } from 'vue'
-import type { DrawerProps } from '../drawer'
+import type { DrawerProps, DropdownDividerOption, DropdownGroupOption, DropdownOption, DropdownRenderOption, ModalProps, PopoverProps } from 'naive-ui'
+import type { PropType } from 'vue'
+import type { AdvTableFilterPresetType } from '../adv-table'
 import type { FormProps } from '../form'
-import type { ModalProps } from '../modal'
-import type { PopoverProps } from '../popover'
 import type { SearchKeywordProps } from '../search-keyword'
-import type { AdvTableFilterPresetType } from './types'
-import { tableProps } from '../table'
+import { treeProps } from '../tree'
 import { makeArrayProp, makeObjectProp, truthProp } from '../utils'
 
-export const advTableProps = Object.assign({}, tableProps, {
-  columnActions: makeArrayProp<string | Component>(['edit', 'delete']),
+export const advTreeProps = Object.assign({}, treeProps, {
   filterable: Boolean,
   filterFormProps: makeObjectProp<FormProps>(),
   filterPopupProps: makeObjectProp<DrawerProps | ModalProps | PopoverProps>(),
@@ -17,7 +14,7 @@ export const advTableProps = Object.assign({}, tableProps, {
     type: String as PropType<AdvTableFilterPresetType>,
     default: 'drawer',
   },
-  fullscreenable: truthProp,
+  nodeActions: makeArrayProp<string | DropdownOption | DropdownGroupOption | DropdownDividerOption | DropdownRenderOption>(['edit', 'delete']),
   refreshable: truthProp,
   searchable: Boolean,
   searchProps: makeObjectProp<SearchKeywordProps>(),

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { CardProps, PopoverProps } from 'naive-ui'
-import { NPopover, cardProps as nCardProps, popoverProps as nPopoverProps } from 'naive-ui'
-import { omit } from 'lodash-es'
-import { pickProps } from '../utils'
-import { NpPopupCard } from '../popup-card'
 import type { PopoverSlots } from './types'
+import { omit } from 'lodash-es'
+import { cardProps as nCardProps, NPopover, popoverProps as nPopoverProps } from 'naive-ui'
+import { NpPopupCard } from '../popup-card'
+import { pickProps } from '../utils'
 import { popoverProps } from './props'
 
 defineOptions({

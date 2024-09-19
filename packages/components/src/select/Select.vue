@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import type { SelectGroupOption, SelectOption, SelectProps } from 'naive-ui'
-import { NSelect, selectProps as nSelectProps } from 'naive-ui'
-import { isArray } from 'lodash-es'
-import { ref } from 'vue'
-import { pickProps } from '../utils'
-import { useRequest } from '../composables/useRequest'
-import { selectProps } from './props'
 import type { SelectSlots } from './types'
+import { isArray } from 'lodash-es'
+import { NSelect, selectProps as nSelectProps } from 'naive-ui'
+import { useRequest } from '../composables/useRequest'
+import { pickProps } from '../utils'
+import { selectProps } from './props'
 
 const props = defineProps(selectProps)
 defineSlots<SelectSlots>()

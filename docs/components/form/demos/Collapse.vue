@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
 import type { FormProps } from '@mikasa33/np'
 import { NpForm } from '@mikasa33/np'
+import { computed, reactive, ref } from 'vue'
 
 const formValue = ref({
   collapsed: true,

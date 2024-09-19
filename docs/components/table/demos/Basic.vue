@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { NButton } from 'naive-ui'
 import type { TableProps } from '@mikasa33/np'
 import { NpTable } from '@mikasa33/np'
+import { NButton } from 'naive-ui'
+import { reactive, ref } from 'vue'
 
 const tableRef = ref()
 const tableProps = reactive<TableProps>({

@@ -1,5 +1,5 @@
-import type { Component, ExtractPublicPropTypes, VNodeChild } from 'vue'
 import type { FormValidateCallback, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
+import type { Component, ExtractPublicPropTypes, VNodeChild } from 'vue'
 import type { formItemProps, formProps } from './props'
 
 export type FormProps = ExtractPublicPropTypes<typeof formProps>

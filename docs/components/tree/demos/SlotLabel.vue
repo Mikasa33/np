@@ -1,8 +1,8 @@
 <script setup lang="tsx">
-import { h, reactive } from 'vue'
-import type { TreeOption } from 'naive-ui'
 import type { TreeProps } from '@mikasa33/np'
+import type { TreeOption } from 'naive-ui'
 import { NpTree } from '@mikasa33/np'
+import { reactive } from 'vue'
 
 const treeProps = reactive<TreeProps>({
   blockLine: true,

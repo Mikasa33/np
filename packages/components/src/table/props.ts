@@ -1,8 +1,8 @@
-import { dataTableProps } from 'naive-ui'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
-import { makeFunctionProp, makeStringProp } from '../utils'
 import type { TableColumnProps } from './types'
+import { omit } from 'lodash-es'
+import { dataTableProps } from 'naive-ui'
+import { makeFunctionProp, makeStringProp } from '../utils'
 
 export const tableProps = Object.assign({}, omit(dataTableProps, 'columns', 'flex-height', 'pagination', 'remote'), {
   columns: Array as PropType<TableColumnProps[]>,

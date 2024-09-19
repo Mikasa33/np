@@ -1,9 +1,9 @@
-import type { FormProps } from 'naive-ui'
-import { formItemGiProps, gridProps, formProps as nFormProps } from 'naive-ui'
+import type { FormItemGiProps, FormProps } from 'naive-ui'
 import type { PropType } from 'vue'
-import { omit } from 'lodash-es'
-import { makeArrayProp, makeFunctionProp, makeNumericProp, makeObjectProp, makeStringProp, numericProp } from '../utils'
 import type { FormItemComponentType, FormItemProps } from './types'
+import { omit } from 'lodash-es'
+import { formItemGiProps, gridProps, formProps as nFormProps } from 'naive-ui'
+import { makeArrayProp, makeFunctionProp, makeNumericProp, makeObjectProp, makeStringProp, numericProp } from '../utils'
 
 export const formProps = Object.assign({}, gridProps, omit(nFormProps, 'model'), {
   defaultValues: makeObjectProp<Record<string, any>>(),
@@ -19,5 +19,6 @@ export const formItemProps = Object.assign({}, formItemGiProps, {
   component: [String, Function] as PropType<FormItemComponentType>,
   componentProps: makeObjectProp<any>(),
   defaultValue: Object as PropType<any>,
+  show: [Boolean, Function] as PropType<boolean | ((params: { value: object, path: string }) => boolean)>,
   slot: String,
 })

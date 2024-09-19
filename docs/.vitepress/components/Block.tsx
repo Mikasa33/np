@@ -1,5 +1,5 @@
-import { defineComponent } from 'vue'
 import { NCard } from 'naive-ui'
+import { defineComponent } from 'vue'
 import ConfigProvider from './ConfigProvider.vue'
 
 export function Block(Component: any) {

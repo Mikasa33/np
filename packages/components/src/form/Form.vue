@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { FormInst, FormProps, GridProps } from 'naive-ui'
-import { NForm, NFormItemGi, NGi, NGrid, formItemGiProps, gridProps, formProps as nFormProps } from 'naive-ui'
-import { ref } from 'vue'
-import { useArrayFilter } from '@vueuse/core'
-import { get, isString } from 'lodash-es'
-import type { FormValidateCallback, FormValidationError, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
-import { pickProps } from '../utils'
+import type { FormValidateCallback, ShouldRuleBeApplied } from 'naive-ui/es/form/src/interface'
 import type { FormInstance, FormItemProps, FormSlots } from './types'
-import { useValue } from './use-value'
+import { useArrayFilter } from '@vueuse/core'
+import { cloneDeep, get, isString } from 'lodash-es'
+import { formItemGiProps, gridProps, NForm, NFormItemGi, formProps as nFormProps, NGi, NGrid } from 'naive-ui'
+import { computed, ref, watch } from 'vue'
+import { getMaybeFuncValue, pickProps } from '../utils'
 import { components } from './components'
 import { formProps } from './props'
+import { useValue } from './use-value'
 
 defineOptions({
   name: 'NpForm',
@@ -24,8 +24,9 @@ const pickedFormProps = pickProps<FormProps>(props, nFormProps)
 const pickedGridProps = pickProps<GridProps>(props, gridProps)
 
 const formRef = ref<FormInst>()
-const formItems = useArrayFilter(props.items!, (item: FormItemProps) => !!item.path)
-const slotItems = useArrayFilter(props.items!, (item: FormItemProps) => !!item.path || !!item.slot)
+const formItems = useArrayFilter(props.items!, (item: FormItemProps) => !!item.path && (getMaybeFuncValue(item.show, { value: value.value, path: item.path }) ?? true))
+const slotItems = useArrayFilter(props.items!, (item: FormItemProps) => (!!item.path || !!item.slot) && (getMaybeFuncValue(item.show, { value: value.value, path: item.path }) ?? true))
+
 const { reset: resetValue } = useValue(props, value, formItems)
 
 function mergeFormItemGiProps(item: FormItemProps) {

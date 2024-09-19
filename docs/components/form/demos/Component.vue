@@ -1,8 +1,8 @@
 <script setup lang="tsx">
-import { NDatePicker, NTimePicker } from 'naive-ui'
-import { defineComponent, markRaw, ref } from 'vue'
 import type { FormProps } from '@mikasa33/np'
 import { NpForm } from '@mikasa33/np'
+import { NDatePicker, NTimePicker } from 'naive-ui'
+import { defineComponent, markRaw, ref } from 'vue'
 
 const formValue = ref({})
 const formProps: FormProps = {

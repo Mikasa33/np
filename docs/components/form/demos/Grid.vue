@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { FormProps } from '@mikasa33/np'
 import { NpForm } from '@mikasa33/np'
+import { ref } from 'vue'
 
 const formValue = ref({})
 const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(

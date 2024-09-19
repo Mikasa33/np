@@ -1,8 +1,8 @@
-import { defineComponent, h, inject } from 'vue'
-import DefaultTheme from 'vitepress/theme'
-import { NConfigProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
+import { NConfigProvider } from 'naive-ui'
 import { useRoute } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import { defineComponent, h, inject } from 'vue'
 import { registerComponents } from '../demos'
 import 'virtual:uno.css'
 

@@ -64,6 +64,12 @@
 <<< ./demos/SlotItem.vue
 :::
 
+### 表单项显示隐藏
+
+控制表单项的显示或隐藏。
+
+<FormVisible />
+
 ## API
 
 ### Form Props
@@ -84,12 +90,13 @@
 
 支持 [NFormItem && NFormItemGi](https://www.naiveui.com/zh-CN/light/components/form#FormItem-Props) 所有属性。
 
-| 名称            | 说明                                                                       | 类型                    | 默认值      |
-| --------------- | -------------------------------------------------------------------------- | ----------------------- | ----------- |
-| component       | 组件或组件名称，类型参考 [FormItemComponent Type](#formitemcomponent-type) | `FormItemComponentType` | `undefined` |
-| component-props | 组件 props                                                                 | `any`                   | `undefined` |
-| default-value   | 默认值                                                                     | `any`                   | `null`      |
-| slot            | 插槽名称，优先级大于 `path` 属性对应的插槽                                 | `string`                | `undefined` |
+| 名称            | 说明                                                                       | 类型                                                                       | 默认值      |
+| --------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
+| component       | 组件或组件名称，类型参考 [FormItemComponent Type](#formitemcomponent-type) | `FormItemComponentType`                                                    | `undefined` |
+| component-props | 组件 props                                                                 | `any`                                                                      | `undefined` |
+| default-value   | 默认值                                                                     | `any`                                                                      | `null`      |
+| show            | 是否显示                                                                   | `boolean \| ({ value, item }: { value: object, path: string }) => boolean` | `true`      |
+| slot            | 插槽名称，优先级大于 `path` 属性对应的插槽                                 | `string`                                                                   | `undefined` |
 
 ### FormItemComponent Type
 

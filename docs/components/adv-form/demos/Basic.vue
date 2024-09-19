@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { AdvFormProps } from '@mikasa33/np'
+import type { AdvFormPopupPresetType, AdvFormProps } from '@mikasa33/np'
 import { NpAdvForm } from '@mikasa33/np'
-import { nextTick, ref } from 'vue'
 import { NButton, NFlex } from 'naive-ui'
+import { nextTick, ref } from 'vue'
 
 const show = ref(false)
 const value = ref({})
-const preset = ref('')
+const preset = ref<AdvFormPopupPresetType>(undefined)
 const formOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
   v => ({
     label: v,
@@ -48,14 +48,13 @@ const advFormProps: AdvFormProps = {
   },
 }
 
-async function handleOpen(type: 'drawer' | 'modal') {
+async function handleOpen(type: AdvFormPopupPresetType) {
   preset.value = type
   await nextTick()
   show.value = true
 }
 
-function handleConfirm(value: Record<string, any>) {
-  console.log(value)
+function handleConfirm(_: Record<string, any>) {
   show.value = false
 }
 </script>

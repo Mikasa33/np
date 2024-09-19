@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { DataTableColumns, DataTableProps, PaginationProps } from 'naive-ui'
-import { NDataTable, NFlex, NScrollbar, dataTableProps } from 'naive-ui'
-import { computed, h, ref } from 'vue'
+import type { TableColumnProps, TableSlots } from './types'
 import { cloneDeep, isArray, isObject, isString } from 'lodash-es'
+import { dataTableProps, NDataTable, NFlex } from 'naive-ui'
+import { computed, h, ref } from 'vue'
+import { useRequest } from '../composables/useRequest'
 import { useSlotsFilter } from '../composables/useSlotsFilter'
 import { pickProps } from '../utils'
-import { useRequest } from '../composables/useRequest'
 import { components } from './components'
 import { tableProps } from './props'
-import type { TableColumnProps, TableSlots } from './types'
 
 defineOptions({
   name: 'NpForm',

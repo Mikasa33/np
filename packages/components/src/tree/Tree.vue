@@ -1,13 +1,12 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { TreeOption, TreeProps } from 'naive-ui'
-import { NEmpty, NSpin, NTree, treeProps as nTreeProps } from 'naive-ui'
-import { ref } from 'vue'
+import type { TreeSlots } from './types'
 import { isArray } from 'lodash-es'
+import { NEmpty, NFlex, NSpin, NTree, treeProps as nTreeProps } from 'naive-ui'
+import { useRequest } from '../composables/useRequest'
 import { useSlotsFilter } from '../composables/useSlotsFilter'
 import { pickProps } from '../utils'
-import { useRequest } from '../composables/useRequest'
 import { treeProps } from './props'
-import type { TreeSlots } from './types'
 
 defineOptions({
   name: 'NpTree',
@@ -51,35 +50,75 @@ function renderLabel(node: { option: TreeOption, checked: boolean, selected: boo
   return node.option[props.labelField]
 }
 
+function renderPrefix(node: { option: TreeOption, checked: boolean, selected: boolean }) {
+  const slotKey = slotKeys.value.find((key: string) => key.replace('prefix-', '') === node.option.key)
+  // 插槽，优先级最高
+  if (slotKey) {
+    return (slots as any)[slotKey](node)
+  }
+  // 节点前缀内容的渲染函数
+  if (props.renderPrefix) {
+    return props.renderPrefix(node)
+  }
+  // 节点前缀内容
+  return node.option.prefix
+}
+
+function renderSuffix(node: { option: TreeOption, checked: boolean, selected: boolean }) {
+  const slotKey = slotKeys.value.find((key: string) => key.replace('suffix-', '') === node.option.key)
+  // 插槽，优先级最高
+  if (slotKey) {
+    return (slots as any)[slotKey](node)
+  }
+  // 节点后缀内容的渲染函数
+  if (props.renderSuffix) {
+    return props.renderSuffix(node)
+  }
+  // 节点后缀内容
+  return node.option.suffix
+}
+
 defineExpose({
-  refresh: execute,
+  reload: execute,
 })
 </script>
 
 <template>
-  <NSpin
-    :show="loading"
-    size="small"
-  >
-    <NTree
-      v-bind="pickedTreeProps"
-      v-model:checked-keys="checkedKeys"
-      v-model:expanded-keys="expandedKeys"
-      v-model:selected-keys="selectedKeys"
-      v-model:data="data"
-      :render-label="renderLabel"
-      :class="{ 'opacity-50 pointer-events-none': loading }"
+  <div class="wh-full flex flex-col">
+    <!-- 头部插槽 -->
+    <NFlex
+      v-if="slots.header"
+      align="center"
+      class="mb-8px"
     >
-      <!-- 树组件无数据时的插槽 -->
-      <template #empty>
-        <div :class="{ 'opacity-0': loading }">
-          <slot
-            v-if="slots.empty"
-            name="empty"
-          />
-          <NEmpty v-else />
-        </div>
-      </template>
-    </NTree>
-  </NSpin>
+      <slot name="header" />
+    </NFlex>
+    <NSpin
+      :show="loading"
+      size="small"
+    >
+      <NTree
+        v-bind="pickedTreeProps"
+        v-model:checked-keys="checkedKeys"
+        v-model:expanded-keys="expandedKeys"
+        v-model:selected-keys="selectedKeys"
+        v-model:data="data"
+        :render-label="renderLabel"
+        :render-prefix="renderPrefix"
+        :render-suffix="renderSuffix"
+        :class="{ 'opacity-50 pointer-events-none': loading }"
+      >
+        <!-- 树组件无数据时的插槽 -->
+        <template #empty>
+          <div :class="{ 'opacity-0': loading }">
+            <slot
+              v-if="slots.empty"
+              name="empty"
+            />
+            <NEmpty v-else />
+          </div>
+        </template>
+      </NTree>
+    </NSpin>
+  </div>
 </template>

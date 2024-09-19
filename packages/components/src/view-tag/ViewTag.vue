@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { SelectOption, TagProps } from 'naive-ui'
+import type { ViewTagSlots } from './types'
 import { NTag, tagProps as nTagProps } from 'naive-ui'
+import { computed } from 'vue'
 import { pickProps } from '../utils'
 import { viewTagProps } from './props'
-import type { ViewTagSlots } from './types'
 
 const props = defineProps(viewTagProps)
 defineSlots<ViewTagSlots>()

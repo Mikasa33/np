@@ -70,6 +70,7 @@ export default defineConfig({
           items: [
             { text: '高级表单 Adv Form', link: '/adv-form/' },
             { text: '高级表格 Adv Table', link: '/adv-table/' },
+            { text: '高级树 Adv Tree', link: '/adv-tree/' },
           ],
         },
       ],
