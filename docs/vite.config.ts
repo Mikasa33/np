@@ -1,8 +1,8 @@
 import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
-import { postcssIsolateStyles } from 'vitepress'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import UnoCSS from 'unocss/vite'
+import { defineConfig } from 'vite'
+import { postcssIsolateStyles } from 'vitepress'
 
 // https://vitejs.dev/config/
 export default defineConfig({

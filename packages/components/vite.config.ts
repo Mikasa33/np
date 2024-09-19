@@ -1,9 +1,9 @@
 import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
-import Dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
+import { defineConfig } from 'vite'
+import Dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
